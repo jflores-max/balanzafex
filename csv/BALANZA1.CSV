@@ -1,0 +1,13 @@
+Name;SQL Data Type;Dimension;Column Store Data Type;Key;Not Null;Default;Comment
+Code;NVARCHAR;50;STRING;X(1);X;;
+Name;NVARCHAR;100;STRING;;X;;
+U_Nro_Ticket;NVARCHAR;10;STRING;;;;
+U_Nro_Orden;NVARCHAR;10;STRING;;;;
+U_Peso_Total;DECIMAL;21,6;FIXED;;;;
+U_Cliente;NVARCHAR;75;STRING;;;;
+U_Fecha;TIMESTAMP;;LONGDATE;;;;
+U_Hora;SMALLINT;;INT;;;;
+U_ID;INTEGER;;INT;;;;
+U_Tipo_Doc;NVARCHAR;30;STRING;;;;
+U_Despachador;NVARCHAR;50;STRING;;;;
+U_Observacion;NVARCHAR;100;STRING;;;;

@@ -1,0 +1,168 @@
+/*Estilo especial para los botones tipo file by abisoft */
+/*https://github.com/amnersaucedososa*/
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  }
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: pointer;
+    display: block;
+}
+.btn-my-button{
+    margin-top: 5px;
+    background: #5bc0de;
+    color: #fff;
+    width: 100%;
+}
+.btn-my-button:hover{
+    color: #fff;
+}
+
+
+
+
+
+
+.selectbox { width:100%; display:inline-block;}
+.selectbox-title.form-control { padding-left: 16px;}
+.selectbox-content { border:1px solid #d5d5d5; max-height:205px; overflow:auto; display:none; border-top: none;}
+.selectbox-content ul { list-style:none; margin:0px; padding:0px; cursor: pointer;  position: relative; }
+.selectbox-content ul li { padding-top:10px; width:100%; display:inline-block;}
+.selectbox-content ul li:last-child { border-bottom:none;}
+.selectbox-content ul li:first-child { border-top:none;}
+.selectbox-content .input-group {padding: 5px;}
+.loadbutton {
+    padding: 10px;
+}
+.loadbutton .btn-primary {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+.ul-list label {
+    padding-left: 20px;
+}
+#box {
+    height: 34px;
+}
+/***** INPUT FORM STYLES *****/
+.form-horizontal .control-label {
+  text-align: left; }
+
+.control-label-pad .control-label {
+  padding-top: 0px; }
+
+.form-control {
+  border-radius: 0;
+  border: 1px solid #d5d5d5;
+  background-color: white;
+  height: 38px;
+  color: #555555;
+  -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0);
+  box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0); }
+  .form-control:focus {
+    border-color: #fbc52d;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(251, 197, 45, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(251, 197, 45, 0.6); }
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+  background-color: #dddddd; }
+  .form-control[disabled]:focus, .form-control[readonly]:focus, fieldset[disabled] .form-control:focus {
+    border: none;
+    box-shadow: none; }
+
+.input-group-addon {
+  border-radius: 0;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1;
+  color: #091d3a;
+  background-color: #e6e6e6;
+  border: 1px solid #d5d5d5; }
+
+.form-group .control-label {
+  color: #535353; }
+
+/*select style*/
+.selectwrap {
+  position: relative;
+  float: left;
+  width: 100%; }
+  .selectwrap:after {
+    content: "\f0d7";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    text-align: center;
+    line-height: 36px;
+    position: absolute;
+    width: 26px;
+    height: 36px;
+    background: white;
+    right: 1px;
+    top: 1px;
+    pointer-events: none; }
+
+/***** CUSTOM CHECKBOX STYLES *****/
+.custom-checkbox-label .checkbox-pad {
+  padding-top: 7px; }
+
+.custom-checkbox label {
+  font-weight: normal; }
+
+.checkbox-custom {
+  opacity: 0;
+  position: absolute;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0px;
+  cursor: pointer; }
+
+.checkbox-custom-label {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0px;
+  cursor: pointer;
+  position: relative; }
+
+.checkbox-custom + .checkbox-custom-label:before {
+  content: '';
+  background: white;
+  display: inline-block;
+  vertical-align: middle;
+  width: 18px;
+  height: 18px;
+  padding: 0px;
+  text-align: center;
+  border: 1px solid #fbc52d;
+  border-radius: 0px;
+  margin-bottom: 4px;
+  margin-right: 10px; }
+.checkbox-custom:checked + .checkbox-custom-label:before {
+  content: "\f00c";
+  font-family: 'FontAwesome';
+  color: #fbc52d;
+  font-size: 12px;
+  font-weight: 100;
+  line-height: 5px;
+  padding-top: 6px; }
+.checkbox-custom:focus + .checkbox-custom-label {
+  outline: 0px solid #dddddd; }
+
+
+
+

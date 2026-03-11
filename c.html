@@ -1,0 +1,3058 @@
+<main>
+  <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper" style="background: var(--theme-color)">
+        <a id="title" class="brand-logo" style="left: .5em;"></a>
+        <ul class="right">
+          <li id="exit" class="tooltip" data-position="left" data-tooltip="Cerrar"><a id="go_back"><i
+                class="material-icons">close</i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+
+
+
+  <div id="main" class="row" style="padding-bottom: 4em;">
+    <input id="id" type="hidden" class="form" value="0">
+    <input id="docnum_f" type="hidden">
+    <input id="docentry_f" type="hidden">
+    <input id="docnum_p" type="hidden">
+    <input id="docentry_p" type="hidden">
+    <input id="docnum_e" type="hidden">
+    <input id="docentry_e" type="hidden">
+
+    <input id="top" type="hidden" value="0">
+
+    <div class="row" style="padding: .5em">
+      <div class="col s4">
+        <div class="input-field col s6"><input id="fecha1" type="text" class="form" autocomplete="off" disabled><label
+            for="fecha" class="label">PRIMER PESAJE</label></div>
+        <div class="input-field col s6"><input id="fecha2" type="text" class="form" autocomplete="off" disabled><label
+            for="hora" class="label">SEGUNDO PESAJE</label></div>
+        <div class="input-field col s6"><input id="usuario" type="text" class="form" autocomplete="off" disabled><label
+            for="usuario" class="label">USUARIO</label></div>
+      </div>
+      <div class="col s4"></div>
+      <div class="col s4">
+        <div class="input-field col s6"><input id="sucursal" type="text" class="form" autocomplete="off" disabled><label
+            for="sucursal" class="label">SUCURSAL</label></div>
+        <div class="input-field col s6">
+          <select id="estado" class="nat form" disabled>
+            <option value="1">INICIAL</option>
+            <option value="2">FINALIZADO</option>
+            <option value="4">PENDIENTE</option>
+          </select>
+          <label>ESTADO</label>
+        </div>
+        <div class="input-field col s6"></div>
+        <div class="input-field col s6"><input id="ticket" type="text" class="form" autocomplete="off" disabled><label
+            for="ticket" class="label">TICKET</label></div>
+      </div>
+      <div class="col s12" style="height: 1px;background: rgba(0,0,0,.14);"></div>
+
+
+
+      <div class="col s6 card">
+        <span class="card-title col s12">SERVICIO</span>
+        <div class="input-field col s12">
+          <!-- <form action="otros.php" method="post"  target="_blank"  id="regi" name="regi"> -->
+          <form action="otros.php" method="post" id="regi" name="regi">
+            <input type="text" style="display:none" name="code" id="code" value="0" />
+
+          </form>
+
+          <select id="origen" class="nat form">
+            <option value="CONTADO">CONTADO</option>
+            <option value="CREDITO">CREDITO</option>
+            <option value="CONTADO">REEMPLAZO TICKET CONTADO</option>
+            <option value="OTROS">OTROS SERVICIOS</option>
+          </select>
+          <label>TIPO DE SERVICIO</label>
+        </div>
+        <div id="documentos" class="input-field col s4"></div>
+      </div>
+
+
+
+
+      <div class="col s6 card" id="campo_nit">
+        <span class="card-title col s12">NIT NUMERO DE IDENTIFICACION</span>
+        <div class="input-field col s12">
+          <select id="tipo_docc" class="nat form">
+            <option value="1">CI CEDULA DE INDENTIDAD</option>
+            <option value="2">CEX CEDULA DE INDENTIDAD DE EXTRANJERO</option>
+            <option value="3">PAS PASAPORTE</option>
+            <option value="4">OD OTRO DOCUMENTO DE INDENTIDAD</option>
+            <option value="5">NIT NUMERO DE IDENTIFICACION TRIBUTARIA</option>
+            <option value="6">SIN NIT</option>
+
+
+
+
+
+          </select>
+          <label>TIPO DE DOCUMENTO</label>
+        </div>
+        <div class="input-field col s4"></div>
+      </div>
+
+
+      <div class="col s12 card">
+        <span class="card-title col s12">VEHICULO</span>
+        <div class="input-field col s2"><input id="placa" type="text" maxlength="9" class="form autocomplete"
+            autocomplete="off" placeholder="Ingresar"><label for="placa" class="label">PLACA</label></div>
+        <div class="input-field col s2"><input id="marca" maxlength="14" type="text" class="form" autocomplete="off"
+            placeholder="Ingresar"><label for="marca" class="label">MARCA</label></div>
+        <div class="input-field col s2"><input id="color" maxlength="14" type="text" class="form" autocomplete="off"
+            placeholder="Ingresar"><label for="color" class="label">COLOR</label></div>
+        <div class="input-field col s3"><input id="conductor" type="text" class="form" autocomplete="off" maxlength="34"
+            placeholder="Ingresar"><label for="conductor" class="label">CONDUCTOR</label></div>
+        <div class="input-field col s2"><input id="ci_conductor" type="text" class="form" autocomplete="off"
+            maxlength="15" placeholder="Ingresar"><label for="ci_conductor" class="label">CI.</label></div>
+        <div class="input-field col s1"><input id="ci_exp" type="text" class="form" autocomplete="off" maxlength="5"
+            placeholder="Ingresar"><label for="ci_exp" class="label">EXP.</label></div>
+      </div>
+
+      <div class="col s12 card" id="sectorFactura">
+        <span class="card-title col s12">FACTURA</span>
+        <div class="input-field col s3"><input id="nit" type="text" class="form autocomplete" autocomplete="off"
+            maxlength="14" placeholder="Ingresar"><label for="nit" class="label">NIT</label></div>
+        <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off"
+            maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>
+      </div>
+
+      <div class="col s12 card">
+        <span class="card-title col s12">PESAJE</span>
+        <div class="col s4">
+          <div class="input-field col s6"><input id="peso1" type="text" class="form int" autocomplete="off" readonly><label
+              for="peso1" class="label">PESO TARA (KG)</label></div>
+          <button id="getPeso1" class="waves-effect btn" style="margin-top: 1.5em;">Obtener</button>
+        </div>
+        <div class="col s4">
+          <div class="input-field col s6"><input id="peso2" type="text" class="form int" autocomplete="off" readonly><label
+              for="peso2" class="label">PESO BRUTO (KG)</label></div>
+          <button id="getPeso2" class="waves-effect btn" style="margin-top: 1.5em;">Obtener</button>
+        </div>
+        <div class="col s4">
+          <div class="input-field col s4"><input id="neto" type="text" class="form int" autocomplete="off" readonly><label
+              for="neto" class="label">NETO (KG)</label></div>
+        </div>
+      </div>
+
+      <button id="saver" class="btn-floating btn-large waves-effect blue hide tooltip" data-position="left"
+        data-tooltip="Guardar" style="position: fixed;bottom: 1em;right: 1em;"><i
+          class="material-icons">save</i></button>
+
+    </div>
+  </div>
+
+
+
+
+
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+  var incomingPayments = null;
+  var invoices = null;
+  var deliveryNotes = null;
+  var clients = [];
+  var lastItem = null;
+  var documentos = [];
+  var itemCode = null;
+  var pesoPesado = false;
+  var datoA = [];
+
+
+  var dato_td = 1;
+
+
+
+  //alert(dato_td);
+
+
+
+
+
+
+
+
+  document.querySelector('#exit').addEventListener('long-press', function (e) {
+    e.preventDefault();
+    showErrors();
+  });
+  setTitle('Nuevo Ticket Balanza');
+  setVal('fecha1', "0000-00-00 00:00:00");
+  setVal('fecha2', "0000-00-00 00:00:00");
+  setVal('sucursal', getSesion('sucursal'));
+  setVal('usuario', getSesion('owner'));
+  querySelector('#go_back').onclick = function () {
+    loadPageDirt('app', 'b.html');
+  };
+
+
+
+
+
+  loadComponents(function () {
+
+
+
+
+
+    querySelector('#tipo_docc').onchange = function () {
+      var datos_tipo_docc1 = getVal('tipo_docc');
+
+      switch (datos_tipo_docc1) {
+        case '1':
+          dato_td = 1;
+          querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12">FACTURA</span>
+<div class="input-field col s3"><input id="nit" type="number"  max="8" class="form autocomplete"  autocomplete="off" maxlength="14" placeholder="Ingresar"><label for="nit" class="label">CI</label></div>
+<div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+          querySelector('#documentos').innerHTML = ``;
+          updateNit();
+
+          break;
+        case '2':
+          dato_td = 0;
+          querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12">FACTURA</span>
+<div class="input-field col s3"><input id="nit" type="text" class="form autocomplete" autocomplete="off" maxlength="14" placeholder="Ingresar"><label for="nit" class="label">CEX</label></div>
+<div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+          querySelector('#documentos').innerHTML = ``;
+          updateNit();
+
+
+
+          break;
+        case '3':
+          dato_td = 0;
+          querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12">FACTURA</span>
+<div class="input-field col s3"><input id="nit" type="text" class="form autocomplete" autocomplete="off" maxlength="14" placeholder="Ingresar"><label for="nit" class="label">PAS</label></div>
+<div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+          querySelector('#documentos').innerHTML = ``;
+          updateNit();
+
+
+
+          break;
+        case '4':
+          dato_td = 0;
+          querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12">FACTURA</span>
+<div class="input-field col s3"><input id="nit" type="text" class="form autocomplete" autocomplete="off" maxlength="14" placeholder="Ingresar"><label for="nit" class="label">OD</label></div>
+<div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+          querySelector('#documentos').innerHTML = ``;
+          updateNit();
+          break;
+        case '5':
+          dato_td = 5;
+          querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12"  >FACTURA</span>
+<div class="input-field col s3"><input id="nit" type="number" min="8" class="form autocomplete" autocomplete="off" maxlength="14" placeholder="Ingresar"><label for="nit" class="label">NIT</label></div>
+<div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+          querySelector('#documentos').innerHTML = ``;
+          updateNit();
+          break;
+
+
+        case '6':
+          dato_td = 0;
+          querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12" >FACTURA</span>
+<div class="input-field col s3" ><input id="nit" type="text" class="form autocomplete" autocomplete="off" maxlength="14" value="99002" placeholder="Ingresar" disabled><label for="nit" class="label">SIN NIT</label></div>
+<div class="input-field col s9" ><input id="razon_social" type="text" class="form" autocomplete="off" value="CONTROL TRIBUTARIO" maxlength="49" placeholder="Ingresar" disabled><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+          querySelector('#documentos').innerHTML = ``;
+          updateNit();
+          break;
+      }
+      refresh();
+
+    };
+
+
+
+
+
+
+
+
+
+
+    querySelector('#origen').onchange = function () {
+      switch (this.selectedIndex) {
+        case 0:
+
+          $('#campo_nit').show();
+
+          var datos_tipo_docc1 = getVal('tipo_docc');
+
+          switch (datos_tipo_docc1) {
+            case '1':
+
+              querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12">FACTURA</span>
+        <div class="input-field col s3"><input id="nit" type="number" max="8" class="form autocomplete" autocomplete="off" maxlength="14" placeholder="Ingresar"><label for="nit" class="label">CI</label></div>
+        <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+              querySelector('#documentos').innerHTML = ``;
+              updateNit();
+
+              break;
+            case '2':
+              querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12">FACTURA</span>
+        <div class="input-field col s3"><input id="nit" type="text" class="form autocomplete" autocomplete="off" maxlength="14" placeholder="Ingresar"><label for="nit" class="label">CEX CEDULA DE INDENTIDAD DE EXTRANJERO</label></div>
+        <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+              querySelector('#documentos').innerHTML = ``;
+              updateNit();
+              break;
+            case '3':
+
+              querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12">FACTURA</span>
+        <div class="input-field col s3"><input id="nit" type="text" class="form autocomplete" autocomplete="off" maxlength="14" placeholder="Ingresar"><label for="nit" class="label">PAS PASAPORTE</label></div>
+        <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+              querySelector('#documentos').innerHTML = ``;
+              updateNit();
+              break;
+            case '4':
+
+              querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12">FACTURA</span>
+        <div class="input-field col s3"><input id="nit" type="text" class="form autocomplete" autocomplete="off" maxlength="14" placeholder="Ingresar"><label for="nit" class="label">OD OTRO DOCUMENTO DE INDENTIDAD</label></div>
+        <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+              querySelector('#documentos').innerHTML = ``;
+              updateNit();
+              break;
+            case '5':
+
+              querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12">FACTURA</span>
+        <div class="input-field col s3"><input id="nit" type="number" min="8"  class="form autocomplete" autocomplete="off" maxlength="14" placeholder="Ingresar"><label for="nit" class="label">NIT NUMERO DE IDENTIFICACION TRIBUTARIA</label></div>
+        <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+              querySelector('#documentos').innerHTML = ``;
+              updateNit();
+              break;
+
+
+            case '6':
+
+              querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12">FACTURA</span>
+     <div class="input-field col s3"><input id="nit" type="text" class="form autocomplete" autocomplete="off" value="99002" maxlength="14" placeholder="Ingresar"><label for="nit" class="label">NIT NUMERO DE IDENTIFICACION TRIBUTARIA</label></div>
+     <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" value="CONTROL TRIBUTARIO" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+              querySelector('#documentos').innerHTML = ``;
+              updateNit();
+              break;
+
+          }
+
+
+
+
+
+
+
+
+
+
+          break;
+        case 1:
+
+
+          //campo_nit
+
+          $('#campo_nit').hide();
+
+
+
+
+          if (clients.length > 1) {
+            querySelector('#sectorFactura').innerHTML = `
+          <div class="input-field col s9"><select id="razon_social" class="nat form"></select><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+            querySelector('#documentos').innerHTML = ``;
+            clients.forEach(el => querySelector('#razon_social').innerHTML += `<option value="${el.RAZON}">${el.RAZON}</option>`);
+            querySelector('#razon_social').onchange = function () {
+              if (this.value == "OTRO") {
+                querySelector('#sectorFactura').innerHTML = `
+             <div class="input-field col s9"><input id="razon_social" type="text" class="form uper" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+                refresh();
+              }
+            };
+          } else {
+
+            //  alert('CDC');
+            querySelector('#sectorFactura').innerHTML = `
+        <div class="input-field col s9"><input id="razon_social" type="text" class="form uper" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+            querySelector('#documentos').innerHTML = `<button id="showDoc" class="waves-effect btn">DOCUMENTOS</button><b id="lister"></b>`;
+            querySelector('#showDoc').onclick = showDoc;
+          }
+
+
+
+
+          break;
+        case 2:
+
+          $('#campo_nit').hide();
+          querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12">FACTURA</span>
+      <div class="input-field col s3"><input id="nit" type="text" class="form autocomplete" autocomplete="off" maxlength="14" placeholder="Ingresar"><label for="nit" class="label">NIT</label></div>
+      <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+          updateNit();
+
+          querySelector('#documentos').innerHTML = `<input id="facturaNumer" type="text" class="form int" autocomplete="off" value="" placeholder="Ingresar"><label for="facturaNumer" class="label active">Nº Documento</label>`;
+          querySelector('#peso1').removeAttribute('readonly');
+          querySelector('#peso2').removeAttribute('readonly');
+          querySelector('#neto').removeAttribute('readonly');
+          hideEle('#getPeso1');
+          hideEle('#getPeso2');
+          querySelector('#saver').classList.remove('hide');
+          querySelector('#facturaNumer').onkeydown = function (e) {
+            if (e.which == 13) {
+              if (this.value == '') {
+                show('Ingrese Nº Documento');
+                return;
+              }
+              setProgressMsg('Buscando...');
+
+              send('server.php', { call: 'get_datos_user' }, function (datad) {
+                var userr = datad[0]['usert'];
+                var passr = datad[0]['passt'];
+
+                send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
+                  setSesion('idSesion', dataff);
+
+                  send('server.php', { call: 'buscarNullByFact', idSesion: getSesion('idSesion'), fact: this.value }, function (data) {
+                    hideProgress();
+                    if (data.length > 0) {
+                      if (parseInt(data[0]['U_Estado']) != 3) {
+                        show('No hay resultados');
+                        return;
+                      }
+                      setVal('placa', data[0]['U_Placa']);
+                      setVal('marca', data[0]['U_Marca']);
+                      setVal('color', data[0]['U_Color']);
+                      setVal('conductor', data[0]['U_NombreChofer']);
+                      setVal('ci_conductor', data[0]['U_CI_Chofer']);
+                      setVal('ci_exp', data[0]['U_OrigenDoc']);
+                      setVal('peso1', data[0]['U_Tara']);
+                      setVal('peso2', data[0]['U_Bruto']);
+                      setVal('neto', data[0]['U_Neto']);
+                      setVal('nit', data[0]['U_NIT']);
+                      setVal('razon_social', data[0]['U_RazonSocial']);
+                    } else {
+                      show('No hay resultados');
+                    }
+                  });
+
+
+
+
+
+
+
+
+
+
+
+                });
+              });
+
+
+
+
+
+
+
+            }
+          };
+          break;
+
+
+
+        case 3:
+
+          var cd = "regi";
+          document.getElementById(cd).submit();
+
+          break;
+
+
+      }
+      if (this.selectedIndex < 2) {
+        if (pesoPesado) {
+          querySelector('#peso1').setAttribute('readonly', "");
+          querySelector('#peso2').setAttribute('readonly', "");
+          querySelector('#neto').setAttribute('readonly', "");
+        }
+        showEle('#getPeso1');
+        showEle('#getPeso2');
+        querySelector('#saver').classList.add('hide');
+      }
+      refresh();
+    };
+
+
+
+    querySelector('#getPeso1').onclick = function () {
+      getPeso('peso1', function () {
+        if (checke('#getPeso2')) { querySelector('#getPeso2').remove(); }
+      });
+    };
+    querySelector('#getPeso2').onclick = function () {
+      getPeso('peso2', function () {
+        if (checke('#getPeso1')) { querySelector('#getPeso1').remove(); }
+      });
+    };
+
+
+
+
+
+    querySelector('#placa').onkeydown = function (e) {
+      let value = this.value;
+      switch (e.which) {
+        case 9:
+          var instance = M.Autocomplete.getInstance(this);
+          setProgressMsg('Buscando...');
+          send('server.php', { call: 'complexPlaca', idSesion: getSesion('idSesion'), placa: value }, function (data) {
+            hideProgress();
+            instance.updateData(data);
+            querySelector('#placa').focus();
+          });
+          break;
+        case 13:
+          if (this.value == '') {
+            setVal('ci_conductor', '');
+            setVal('conductor', '');
+            setVal('marca', '');
+            setVal('color', '');
+            setVal('ci_exp', '');
+            return;
+          }
+          setProgressMsg('Buscando...');
+          send('server.php', { call: 'getPlaca', idSesion: getSesion('idSesion'), placa: value }, function (data) {
+            hideProgress();
+            if (data.length > 0) {
+              setVal('ci_conductor', data[0]['U_CI_Chofer']);
+              setVal('conductor', data[0]['U_NombreChofer']);
+              setVal('marca', data[0]['U_Marca']);
+              setVal('color', data[0]['U_Color']);
+              setVal('ci_exp', data[0]['U_OrigenDoc']);
+            }
+          });
+          break;
+      }
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //guardar datos
+    querySelector('#saver').onclick = function () {
+
+
+
+      //tipo de origen , contado, credito, otros servicios
+      var selec = querySelector('#origen').selectedIndex;
+
+
+      switch (selec) {
+
+        //Origen al Contado
+        case 0:
+
+
+          switch (dato_td) {
+
+            //CI EXTRANJERO, PASAPORTE, OD, SIN NINT
+            case 0:
+              var title = "Desea guardar los datos actuales?<br>(Generar Nuevo ticket)";
+              if (getVal('ticket') != '0') {
+                title = "Desea Guardar los datos actuales?";
+              } else {
+                if (getVal('origen') == 'CONTADO') {
+                  title += "<br>(Generar Nueva Factura)";
+                }
+              }
+              setProgressMsg('Verificando...');
+
+              var candena= getVal('placa');
+		          var procesado = candena.trim();
+              send('server.php', { call: 'getPlacaCP', idSesion: getSesion('idSesion'), placa: procesado }, function (data) {
+                hideProgress();
+
+                if (getVal('ticket') != '0') {
+                  showConfirm(title, function () {
+                    if (getVal('origen') == 'CONTADO') {
+                      finishPesaje();
+                    }
+                  }, null);
+                  return;
+                } else {
+                  showConfirm(title, function () {
+                    if (getVal('origen') == 'CONTADO') {
+                      generarF(0, function () {
+                        finishPesaje();
+                      });
+                    }
+                  }, null);
+                }
+
+
+
+
+
+              });
+
+
+              break;
+
+
+
+
+
+
+            //CI CARNET 
+            case 1:
+
+              var nitt = getVal('nit');
+
+              if (nitt.length <= 8) {
+
+                var title = "Desea guardar los datos actuales?<br>(Generar Nuevo ticket)";
+                if (getVal('ticket') != '0') {
+                  title = "Desea Guardar los datos actuales?";
+                } else {
+                  if (getVal('origen') == 'CONTADO') {
+                    title += "<br>(Generar Nueva Factura)";
+                  }
+                }
+                setProgressMsg('Verificando...');
+
+
+                var candena= getVal('placa');
+		          	var procesado = candena.trim();
+                send('server.php', { call: 'getPlacaCP', idSesion: getSesion('idSesion'), placa: procesado }, function (data) {
+                  hideProgress();
+                  if (getVal('ticket') != '0') {
+                    showConfirm(title, function () {
+                      if (getVal('origen') == 'CONTADO') {
+                        finishPesaje();
+                      }
+                    }, null);
+                    return;
+                  } else {
+                    showConfirm(title, function () {
+                      if (getVal('origen') == 'CONTADO') {
+                        generarF(0, function () {
+                          finishPesaje();
+                        });
+                      }
+                    }, null);
+                  }
+
+                });
+
+              } else {
+                alert('El CI tiene q ser menor o igual a 8 digitos.');
+              }
+
+
+
+              break;
+
+
+
+
+
+
+            // SON NIT
+            case 5:
+
+              var nitt = getVal('nit');
+
+              if (nitt.length >= 8) {
+                var title = "Desea guardar los datos actuales?<br>(Generar Nuevo ticket)";
+                if (getVal('ticket') != '0') {
+                  title = "Desea Guardar los datos actuales?";
+                } else {
+                  if (getVal('origen') == 'CONTADO') {
+                    title += "<br>(Generar Nueva Factura)";
+                  }
+                }
+                setProgressMsg('Verificando...');
+
+                var candena= getVal('placa');
+		          	var procesado = candena.trim();
+                send('server.php', { call: 'getPlacaCP', idSesion: getSesion('idSesion'), placa: procesado }, function (data) {
+                  hideProgress();
+                  if (getVal('ticket') != '0') {
+                    showConfirm(title, function () {
+                      if (getVal('origen') == 'CONTADO') {
+                        finishPesaje();
+                      }
+                    }, null);
+                    return;
+                  } else {
+                    showConfirm(title, function () {
+                      if (getVal('origen') == 'CONTADO') {
+                        generarF(0, function () {
+                          finishPesaje();
+                        });
+                      }
+                    }, null);
+                  }
+                });
+
+
+              } else {
+                alert('El NIT tiene que ser mayor o igual a 8 digitos.');
+              }
+
+
+
+              break;
+
+
+          }
+
+          break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //Origen al Credito
+        case 1:
+          //  alert('Credito');
+
+          var title = "Desea guardar los datos actuales?<br>(Generar Nuevo ticket)";
+          if (getVal('ticket') != '0') {
+            title = "Desea Guardar los datos actuales?";
+          }
+          setProgressMsg('Verificando...');
+
+          var candena= getVal('placa');
+		    	var procesado = candena.trim();
+
+          send('server.php', { call: 'getPlacaCP', idSesion: getSesion('idSesion'), placa: procesado }, function (data) {
+            hideProgress();
+            if (getVal('ticket') != '0') {
+              showConfirm(title, function () {
+                finishPesaje();
+              }, null);
+              return;
+            }
+
+            if (data.length == 1 && getVal('origen') == 'CREDITO') {
+              finishPesaje();
+              return;
+            }
+            if (data.length > 1 && getVal('origen') == 'CREDITO') {
+              var tdetalle = '';
+              for (ii = 0; ii < data.length; ii++) {
+                var ccf = ii + 1;
+                if (data[ii]['U_Estado'] == '1' | data[ii]['U_Estado'] == '4') {
+                  var dadf = ccf + `. Este Nº de placa tiene un documento pendiente de finalizacion (Ticket : ${data[ii]['U_NroTicket']})  en la ${data[ii]['U_Sucursal']}, tipo de Servicio  ${data[ii]['U_Origen']}`;
+                  tdetalle = tdetalle + '<br>' + dadf;
+                }
+              }
+              show(tdetalle);
+              return;
+            }else{
+              if(data.length == 0 && getVal('origen') == 'CREDITO') {
+
+
+                showConfirm(title,function(){
+                  finishPesaje();
+                },null);
+
+
+
+              }
+            }
+
+          });
+
+
+          break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //Origen Reemplazo ticket contado
+        case 2:
+
+          let selectedIndexdo = querySelector('#origen').selectedIndex;
+          if (selectedIndexdo == 2) {
+            showConfirm("Desea guardar los datos actuales?<br>(Generar Nuevo ticket)", function () {
+              setProgressMsg('Verificando...');
+
+              send('server.php', { call: 'get_datos_user' }, function (datad) {
+                var userr = datad[0]['usert'];
+                var passr = datad[0]['passt'];
+
+                send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
+                  setSesion('idSesion', dataff);
+                  send('server.php', { call: 'buscarFactura', idSesion: getSesion('idSesion'), placa: getVal('facturaNumer') }, function (data) {
+                    hideProgress();
+                    if (data.length > 0) {
+                      if (parseInt(data[0]['U_Estado']) != 3) {
+                        show('Esta Nº de factura esta asociada a un ticket Vigente');
+                        return;
+                      } else {
+                        finishPesaje();
+                      }
+                    } else {
+                      show('No existe el Nº de Documento');
+                    }
+                  });
+                });
+              });
+
+
+            }, null);
+
+
+
+
+
+            return;
+          }
+
+
+
+
+          break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      }
+
+
+
+
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    refresh();
+    updateNit();
+    initForm();
+    hideProgress();
+
+
+    var data = pop(stack);
+
+
+    if (data != null) {
+      querySelector('#campo_nit').remove();
+
+
+      if (data.id != null) {
+
+        setTitle('Revisión de Ticket');
+        setVal('origen', data.U_Origen);
+        setVal('id', data.Code);
+        setVal('fecha1', `${localDate(data.U_Fecha.split(' ')[0])} ${data.U_Hora < 1000 ? data.U_Hora.slice(0, 1) : data.U_Hora.slice(0, 2)}:${data.U_Hora.slice(-2)}`);
+        if (data.U_FechaSal) {
+          setVal('fecha2', `${localDate(data.U_FechaSal.split(' ')[0])} ${data.U_HoraSal < 1000 ? data.U_HoraSal.slice(0, 1) : data.U_HoraSal.slice(0, 2)}:${data.U_HoraSal.slice(-2)}`);
+        }
+        setVal('usuario', data.U_Nombre);
+        setVal('sucursal', data.U_Sucursal);
+        setVal('estado', data.U_Estado);
+        setVal('ticket', data.U_NroTicket);
+        setVal('placa', data.U_Placa);
+        setVal('marca', data.U_Marca);
+        setVal('color', data.U_Color);
+        setVal('conductor', data.U_NombreChofer);
+        setVal('ci_conductor', data.U_CI_Chofer);
+        setVal('ci_exp', data.U_OrigenDoc);
+        setVal('peso1', data.U_Tara);
+        setVal('peso2', data.U_Bruto);
+        setVal('neto', data.U_Neto);
+        querySelector('#saver').classList.add('hide');
+        querySelector('#origen').setAttribute('disabled', '');
+
+
+
+        if (pesoPesado) {
+          queryForeach('.form', el => el.setAttribute('readonly', ''));
+        }
+        if (getVal('estado') != '4') {
+          if (getVal('peso1') != '0') {
+            if (querySelector('#getPeso1') != null) querySelector('#getPeso1').remove();
+          }
+          if (getVal('peso2') != '0') {
+            if (querySelector('#getPeso2') != null) querySelector('#getPeso2').remove();
+          }
+        }
+        refresh();
+
+
+
+        if (getSesion('type') == 'A') {
+          if (querySelector('#getPeso1') != null) querySelector('#getPeso1').remove();
+          if (querySelector('#getPeso2') != null) querySelector('#getPeso2').remove();
+          querySelector('#documentos').innerHTML = '';
+          querySelector('#saver').classList.remove('hide');
+          querySelector('#saver').classList.remove('blue');
+          querySelector('#saver').querySelector('i').innerHTML = 'more_vert';
+          querySelector('#saver').setAttribute('data-tooltip', 'Opciones');
+          querySelector('#saver').onclick = function () {
+            openMenu(this, ['Autorizar Cambio de Peso', 'Anular este Ticket'], function (index) {
+              switch (index) {
+                case 0:
+                  showConfirmDelete('Describa el motivo de la autorización', function () {
+                    var sw = check(['obs']);
+                    if (sw) {
+                      setProgressMsg('Procesando...');
+                      send('server.php', { call: 'autoBalanza', obs: getVal('obs'), userCode: getSesion('userPeaje'), old: lastItem != null ? JSON.stringify(lastItem) : null, item: getVal('id'), idSesion: getSesion('idSesion') }, function (data) {
+                        hideProgress();
+                        if (data) {
+                          show(`Se ha autorizado la actualización del ticket ${getVal('ticket')}`);
+                          hideDialog();
+                          querySelector('#go_back').click();
+                        } else {
+                          show('No se ha podido completar la Operación');
+                        }
+                      });
+                    }
+                  }, null);
+                  break;
+                case 1:
+                  showConfirmDelete('Desea anular este Ticket?', function () {
+                    var sw = check(['obs']);
+                    if (sw) {
+                      setProgressMsg('Procesando...');
+                      send('server.php', { call: 'delBalanza', obs: getVal('obs'), userCode: getSesion('userPeaje'), item: getVal('id'), old: lastItem != null ? JSON.stringify(lastItem) : null, idSesion: getSesion('idSesion') }, function (data) {
+                        hideProgress();
+                        if (data) {
+                          show(`El Ticket ${getVal('ticket')} Se ha anulado Correctamente`);
+                          hideDialog();
+                          querySelector('#go_back').click();
+                        } else {
+                          show('No se ha podido completar la Operación');
+                        }
+                      });
+                    }
+                  }, null);
+                  break;
+              }
+            });
+          };
+        } else {
+          if (getVal('estado') == '2') {
+            if (querySelector('#saver') != null) querySelector('#saver').remove();
+          }
+        }
+
+
+
+        if (data.U_Origen == 'CONTADO') {
+
+
+          querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12">FACTURA</span>
+        <div class="input-field col s3"><input id="nit"  type="text" class="form"  autocomplete="off"  maxlength="49" value="${data.U_NIT}" placeholder="Ingresar"  disabled><label for="nit" class="label">NUMERO DE IDENTIFICACION</label></div>
+        <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" maxlength="49" value="${data.U_RazonSocial}" placeholder="Ingresar" disabled><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+          refresh();
+
+          querySelector('#documentos').innerHTML = `<input id="fact" type="text" autocomplete="off" value="${data.U_NroDocFactura}" readonly=""><label for="fact" class="label active">Nº Documento</label>`;
+        } else {
+		
+		
+		  querySelector('#sectorFactura').innerHTML = `
+ <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" value="${data.U_RazonSocial}" maxlength="49" disabled><label for="razon_social" class="label active">RAZON SOCIAL</label></div>`;
+		
+		  if (data[0]['U_Origen'] == 'CREDITO' && getVal('estado')==2 ) {
+          querySelector('#documentos').innerHTML = `<button id="showDoc" class="waves-effect btn">DOCUMENTOS</button>`;
+          querySelector('#showDoc').onclick = showDoc;
+		  
+		   }
+		  
+		  
+        }
+
+
+
+        return;
+
+
+      }
+
+      loadItem(data);
+    }
+
+
+
+
+  });
+
+  function updateNit() {
+    querySelector('#nit').onkeydown = function (e) {
+      let value = this.value;
+      if (e.which == 13) {
+        if (this.value == '') {
+          setVal('razon_social', '');
+          return;
+        }
+        setProgressMsg('Buscando...');
+        send('server.php', { call: 'getNit', nit: value }, function (data) {
+          hideProgress();
+          if (data.length > 0) {
+            setVal('razon_social', data[0]['U_RazonSocial']);
+          }
+        });
+      }
+      if (e.which == 9) {
+        var instance = M.Autocomplete.getInstance(this);
+        setProgressMsg('Buscando...');
+
+
+
+
+        send('server.php', { call: 'complexNit', idSesion: getSesion('idSesion'), placa: value }, function (data) {
+          hideProgress();
+          instance.updateData(data);
+          querySelector('#nit').focus();
+        });
+
+
+
+      }
+    };
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function generarF(index,onfinishFactura){
+  var sw=check(['nit','razon_social']);
+  if(!sw){
+    return;
+  }
+  if(itemCode==null){
+    setProgressMsg('Generando...');
+
+
+    send('server.php', { call: 'get_datos_user' },function(datad) {
+      if(datad.length>0){
+          var userr = datad[0]['usert'];
+          var passr = datad[0]['passt'];
+
+          send('server.php', { call: 'logout', user: userr, pase: passr }, function (data_lg) {
+          if(data_lg==0){
+
+            send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
+            if(dataff!=false){
+              setSesion('idSesion', dataff);
+
+
+
+              send('server.php',{call:'getFactura',nit:getVal('nit'),razon:getVal('razon_social'),user:getSesion('userPeaje'), sucu: getSesion('ramaa')},function(data){
+      if(data.length>0){
+
+
+            var datos_tipo_docc= getVal('tipo_docc');
+           
+             if(datos_tipo_docc==6){
+                 datos_tipo_docc=1;
+               
+             }
+
+        itemCode=data[0]['ITEMCODE'];
+        datoA.push({
+          DocType: data[0]['DOCTYPE'],
+          CardCode: data[0]['CARDCODE'],
+          DocCurrency:data[0]['DOCCURRENCY'],
+          TransportationCode: parseInt(data[0]['TRANSPORTATIONCODE']),
+          Indicator: data[0]['INDICATOR'],
+          ReserveInvoice:  data[0]['RESERVEINVOICE'],
+          UserSign:data[0]['SALESPERSONCODE'],
+          FederalTaxID: data[0]['FEDERALTAXID'],
+          U_NomFactura: getVal('razon_social'),
+          U_EXX_FE_Sucursal:data[1]['U_IdImpuesto'],                           
+          U_EXX_FE_PuntoVenta:"1",
+          U_EXX_FE_CodDocIden:datos_tipo_docc,
+        
+          DocumentLines: [
+          {
+            LineNum:parseInt(data[0]['LINENUM']),
+            ItemCode: data[0]['ITEMCODE'],
+            Quantity:parseFloat(data[0]['QUANTITY']),
+            Currency: data[0]['CURRENCY'],
+            TaxCode: data[0]['TAXCODE'],
+            COGSCostingCode: data[0]['COGSCOSTINGCODE'],
+            CostingCode2: data[0]['COSTINGCODE2'],
+            CostingCode3: data[0]['COSTINGCODE3'],
+            CostingCode4: data[0]['COSTINGCODE4'],
+          }
+          ]
+        });
+
+         datoA.push({
+          DocType: data[0]['DocType'],
+          CardCode: data[0]['CardCode'],
+          DocCurrency:data[0]['DocCurrency'],
+          TransportationCode: parseInt(data[0]['TransportationCode']),
+          Indicator: data[0]['Indicator'],
+          ReserveInvoice:  data[0]['ReserveInvoice'],
+          SalesPersonCode:parseInt(data[0]['SalesPersonCode']),
+          FederalTaxID: data[0]['FederalTaxID'],
+          U_NomFactura: getVal('razon_social'),
+          DocumentLines: [
+          {
+            LineNum:parseInt(data[0]['LineNum']),
+            ItemCode: data[0]['ItemCode'],
+            Quantity:parseFloat(data[0]['Quantity']),
+            Currency: data[0]['Currency'],
+            TaxCode: data[0]['TaxCode'],
+            CostingCode4: data[0]['CostingCode4'],
+            COGSCostingCode: data[0]['COGSCostingCode'],
+            CostingCode2: data[0]['CostingCode2'],
+            CostingCode3: data[0]['CostingCode3'],
+            CostingCode3: data[0]['CostingCode3']
+          }
+          ]
+        });
+
+
+
+
+
+
+        if(getVal('docnum_f')!=''&getVal('docentry_f')!=''){
+          invoices={U_LB_NumeroFactura:"",U_LB_NumeroAutorizac:"0",U_LB_CodigoControl:"",U_LB_FechaLimiteEmis:null,DocTotal:"40.02",DocEntry:getVal('docentry_f'),DocNum:getVal('docnum_f')};
+          index=1;
+        }
+        if(getVal('docnum_p')!=''&getVal('docentry_p')!=''){
+          incomingPayments={CardCode:"",DocNum:getVal('docnum_p'),DocEntry:getVal('docentry_p')};
+          index=2;
+        }
+        if(getVal('docnum_e')!=''&getVal('docentry_e')!=''){
+          deliveryNotes={DocNum:getVal('docnum_e'),DocEntry:getVal('docentry_e')};
+          index=3;
+        }
+
+
+        if(index==0 && datoA.length>0){
+          setProgressMsg('Generando Factura...');
+  
+
+          send('server.php', { call: 'logout', user: userr, pase: passr }, function (data_lg) {
+          if(data_lg==0){
+
+
+
+            send('server.php', { call: 'get_datos_user' }, function (datad) {
+        var userr = datad[0]['usert'];
+        var passr = datad[0]['passt'];
+        send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
+        setSesion('idSesion', dataff);
+
+
+
+
+
+
+
+let endData = [];
+
+
+        var origen = getVal('origen');
+
+        endData.push({
+        "Code": getVal('id'),
+        "Name": getVal('id'),
+        "U_NroTicket": getVal('ticket'),
+        "U_Sucursal": getVal('sucursal'),
+        "U_Fecha": null,
+        "U_Hora": null,
+        "U_Origen": origen,
+        "U_Estado": getVal('estado'),
+        "U_Placa": getVal('placa'),
+        "U_Marca": getVal('marca'),
+        "U_Color": getVal('color'),
+        "U_NombreChofer": getVal('conductor'),
+        "U_CI_Chofer": getVal('ci_conductor'),
+        "U_Bruto": getVal('peso2'),
+        "U_Tara": getVal('peso1'),
+        "U_Neto": getVal('neto'),
+        "U_NIT": origen == "CONTADO" ? getVal('nit') : "",
+        "U_RazonSocial": getVal('razon_social'),
+        "U_IdUsuario": getSesion('userPeaje'),
+        "U_NroDoc": getVal('ticket'),
+        "U_Nombre": getVal('usuario'),
+        "U_OrigenDoc": getVal('ci_exp'),
+        "U_Observaciones": null,
+        "U_Observaciones2": null,
+        "U_FechaSal": null,
+        "U_HoraSal": null
+      });
+
+
+        console.log('final_array '+JSON.stringify(endData));
+
+
+
+
+
+            send('server.php',{call:'getInvoicess_',idSesion:dataff,user:getSesion('userPeaje'),array:JSON.stringify(datoA),array_datos: JSON.stringify(endData)},function(data){
+
+            if(data==0){
+              alert('Factura no Registrada Correctamente vuelva a intentar registrar la factura !!!');
+            }else{
+               var dcds= JSON.stringify(data);
+               dcds= dcds.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', "");
+               invoices=JSON.parse(dcds);
+               console.log('docc  '+invoices.DocEntry);
+
+
+               
+
+
+               
+               index= index+1; 
+               generarF(index,onfinishFactura);
+            }
+
+
+            });
+
+
+
+        });
+      });
+
+
+
+
+
+
+          }
+          });
+
+
+
+
+
+
+
+
+        }else{
+          generarF(index,onfinishFactura);
+        }
+      
+      }
+    });
+
+
+
+
+    return;
+
+
+
+
+
+              
+            }
+          });
+
+
+
+
+
+
+
+
+
+
+
+
+
+          }else{
+            alert('Sesion no concluida !!!');
+          }
+
+          });
+        
+
+      }
+
+    });
+
+
+    
+  }
+
+
+  switch(index){
+
+    case 1:
+    setProgressMsg('Generando Pago Recibido');
+
+
+
+
+      send('server.php', { call: 'get_datos_user' }, function (datad) {
+        var userr = datad[0]['usert'];
+        var passr = datad[0]['passt'];
+
+        send('server.php', { call: 'logout', user: userr, pase: passr }, function (data_lg) {
+          if(data_lg==0){
+
+            send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
+            setSesion('idSesion', dataff);
+
+
+
+            send('server.php',{call:'getPago',docEntry:invoices.DocEntry},function(data){
+      var datoB=[];
+      if(data.length>0){
+        datoB.push({
+          DocType: data[0]['DocType'],
+          CardCode: data[0]['CardCode'],
+          DocCurrency: "BS",
+          CashSum: data[0]['CashSum'],
+          CashAccount: data[0]['CashAccount'],
+          PaymentInvoices: [
+          {
+            LineNum:parseInt(data[0]['LineNum']),
+            DocEntry: data[0]['DocEntry'],
+            InvoiceType: data[0]['InvoiceType'],
+            InstallmentId: data[0]['InstallmentId']
+          }
+          ]
+        });
+
+
+
+
+
+
+
+        send('server.php', { call: 'get_datos_user' }, function (datad) {
+        var userr = datad[0]['usert'];
+        var passr = datad[0]['passt'];
+
+
+        send('server.php', { call: 'logout', user: userr, pase: passr }, function (data_lg) {
+          if(data_lg==0){
+
+            send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
+            setSesion('idSesion', dataff);
+
+            send('server.php',{call:'getIncomingPayments_',idSesion:dataff,array:JSON.stringify(datoB),docEntry:invoices.DocEntry },function(data){
+         
+             if(data==0){
+               alert('Nose Pudo realizar el Pago no intentes mas comunicate con sistemas !!!');
+             }else{
+               var dcds= JSON.stringify(data);
+               dcds = dcds.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', ""); 
+               incomingPayments=JSON.parse(dcds);
+               index= index+1;
+               generarF(index,onfinishFactura);
+             }
+
+            });
+
+            });
+
+          }
+
+        });
+
+
+
+  
+      });
+
+
+
+
+
+
+      }
+    });
+
+
+
+
+
+
+            });
+
+          }
+        });
+      });
+
+
+
+
+
+
+
+
+
+
+    break;
+    case 2:
+    setProgressMsg('Generando Nota de Entrega');
+
+
+
+    send('server.php', { call: 'get_datos_user' }, function (datad) {
+        var userr = datad[0]['usert'];
+        var passr = datad[0]['passt'];
+
+
+        send('server.php', { call: 'logout', user: userr, pase: passr }, function (data_lg) {
+          if(data_lg==0){
+
+
+            send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
+            setSesion('idSesion', dataff);
+
+
+            send('server.php',{call:'getEntrega',docEntry:invoices.DocEntry},function(data){
+      let datoC=[];
+      datoC.push({
+        CardCode: data[0]['CardCode'],
+        DocCurrency: "BS",
+        DocTotal: data[0]['DocTotal'],
+        DocumentLines: [
+        {
+          LineNum: data[0]['LineNum'],
+          ItemCode: itemCode,
+          BaseType : data[0]['BaseType'],
+          BaseEntry  : invoices.DocEntry,
+          BaseLine : data[0]['BaseLine'],
+        }
+        ]
+      });
+
+      send('server.php', { call: 'get_datos_user' }, function (datad) {
+        var userr = datad[0]['usert'];
+        var passr = datad[0]['passt'];
+
+        send('server.php', { call: 'logout', user: userr, pase: passr }, function (data_lg) {
+          if(data_lg==0){
+
+
+        send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
+        setSesion('idSesion', dataff);
+
+
+      send('server.php',{call:'getDeliveryNotes_',idSesion:dataff,array:JSON.stringify(datoC),docEntry:invoices.DocEntry },function(data){
+              if(data==0){
+                alert('Nose Pudo realizar la Entrega no intentes mas comunicate con sistemas !!!');
+              }else{
+                var dcds= JSON.stringify(data);
+                dcds=dcds.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', ""); 
+                deliveryNotes=JSON.parse(dcds);
+                show("Factura generada Correctamente");
+                index++;
+                generarF(index,onfinishFactura);
+              }
+       });
+
+
+      });
+
+    }
+
+});
+
+
+
+
+      });
+
+
+
+
+
+    });
+
+
+
+            });
+
+
+          }
+
+
+
+
+
+    });
+
+
+    });
+
+
+    break;
+    case 3:
+    onfinishFactura();
+    break;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function initForm() {
+    querySelector('#origen').dispatchEvent(new Event('change'));
+    setVal('peso1', '0');
+    setVal('peso2', '0');
+    setVal('neto', '0');
+    setVal('ticket', '0');
+  }
+  function validarForm() {
+    var sw = true;
+    queryForeach('.form', function (ele, index, array) {
+      if (index > 0 & !ele.classList.contains('hide')) {
+        if (ele.value.length == 0) {
+          show('Complete el campo ' + ele.parentNode.querySelector('label').innerHTML);
+          sw = false;
+          return;
+        }
+      }
+    });
+    return sw;
+  }
+  function validarForPeso() {
+    var sw = true;
+    queryForeach('.form', function (ele, index, array) {
+      if (index > 0 & ele.getAttribute('id') != 'peso1' & ele.getAttribute('id') != 'peso2' & ele.getAttribute('id') != 'neto' & !ele.classList.contains('hide')) {
+        if (ele.value.length == 0) {
+          show('Complete el campo ' + ele.parentNode.querySelector('label').innerHTML);
+          sw = false;
+          return;
+        }
+      }
+    });
+    return sw;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function getPeso(input, onfinish) {
+    var sw = validarForPeso();
+    if (sw) {
+      onfinish();
+      setProgressMsg('Obteniendo...');
+
+      send('server.php', { call: 'getURLPeso', user: getSesion('userPeaje') }, function (data_url) {
+        console.log('url_sap  '+data_url);
+
+      send('server.php', { call: 'getPeso', user: getSesion('userPeaje') }, function (data) {
+        hideProgress();
+        //descomnetar
+       //data = 4830;
+
+        // alert(data);
+        if (data == "" | data == "00") {
+          show('Por favor vuelva a intentar.');
+          return;
+        }
+        setVal(input, data);
+
+        querySelector('#saver').classList.remove('hide');
+        if ((getVal('peso1') != '0' & getVal('peso2') == '0') | (getVal('peso1') == '0' & getVal('peso2') != '0')) {
+          setVal('estado', '1');
+        } else {
+          setVal('estado', '2');
+        }
+        let a = parseInt(getVal('peso1'));
+        let b = parseInt(getVal('peso2'));
+        setVal('neto', Math.abs(a - b).toString());
+      });
+    });
+
+
+
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function loadItem(id) {
+
+    setProgressMsg('Cargando...');
+
+    send('server.php', { call: 'get_datos_user' }, function (datad) {
+      var userr = datad[0]['usert'];
+      var passr = datad[0]['passt'];
+
+      send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
+        setSesion('idSesion', dataff);
+
+
+        send('server.php', { call: 'getLast', idSesion: getSesion('idSesion'), placa: id, sucursal: getSesion('sucursal') }, function (data) {
+          hideProgress();
+          lastItem = data;
+          if (data.length == 1) {
+            setTitle('Revisión de Ticket');
+            setVal('origen', data[0]['U_Origen']);
+            setVal('id', data[0]['Code']);
+            setVal('fecha1', `${localDate(data[0]['U_Fecha'].split(' ')[0])} ${data[0]['U_Hora'] < 1000 ? data[0]['U_Hora'].slice(0, 1) : data[0]['U_Hora'].slice(0, 2)}:${data[0]['U_Hora'].slice(-2)}`);
+            if (data[0]['U_FechaSal']) {
+              setVal('fecha2', `${localDate(data[0]['U_FechaSal'].split(' ')[0])} ${data[0]['U_HoraSal'] < 1000 ? data[0]['U_HoraSal'].slice(0, 1) : data[0]['U_HoraSal'].slice(0, 2)}:${data[0]['U_HoraSal'].slice(-2)}`);
+            }
+
+
+            //alert(data[0]['U_Bruto']);
+            setVal('usuario', data[0]['U_Nombre']);
+            setVal('sucursal', data[0]['U_Sucursal']);
+            setVal('estado', data[0]['U_Estado']);
+            setVal('ticket', data[0]['U_NroTicket']);
+            setVal('placa', data[0]['U_Placa']);
+            setVal('marca', data[0]['U_Marca']);
+            setVal('color', data[0]['U_Color']);
+            setVal('conductor', data[0]['U_NombreChofer']);
+            setVal('ci_conductor', data[0]['U_CI_Chofer']);
+            setVal('ci_exp', data[0]['U_OrigenDoc']);
+            setVal('peso1', data[0]['U_Tara']);
+            setVal('peso2', data[0]['U_Bruto']);
+            setVal('neto', data[0]['U_Neto']);
+            querySelector('#saver').classList.add('hide');
+            querySelector('#origen').setAttribute('disabled', '');
+            if (pesoPesado) {
+              queryForeach('.form', el => el.setAttribute('readonly', ''));
+            }
+            if (getVal('estado') != '4') {
+              if (getVal('peso1') != '0') {
+                if (querySelector('#getPeso1') != null) querySelector('#getPeso1').remove();
+              }
+              if (getVal('peso2') != '0') {
+                if (querySelector('#getPeso2') != null) querySelector('#getPeso2').remove();
+              }
+            }
+            refresh();
+            if (getSesion('type') == 'A') {
+              if (querySelector('#getPeso1') != null) querySelector('#getPeso1').remove();
+              if (querySelector('#getPeso2') != null) querySelector('#getPeso2').remove();
+              querySelector('#documentos').innerHTML = '';
+              querySelector('#saver').classList.remove('hide');
+              querySelector('#saver').classList.remove('blue');
+              querySelector('#saver').querySelector('i').innerHTML = 'more_vert';
+              querySelector('#saver').setAttribute('data-tooltip', 'Opciones');
+              querySelector('#saver').onclick = function () {
+                openMenu(this, ['Autorizar Cambio de Peso', 'Anular este Ticket'], function (index) {
+                  switch (index) {
+                    case 0:
+                      showConfirmDelete('Describa el motivo de la autorización', function () {
+                        var sw = check(['obs']);
+                        if (sw) {
+                          setProgressMsg('Procesando...');
+                          send('server.php', { call: 'autoBalanza', obs: getVal('obs'), userCode: getSesion('userPeaje'), old: lastItem != null ? JSON.stringify(lastItem) : null, item: getVal('id'), idSesion: getSesion('idSesion') }, function (data) {
+                            hideProgress();
+                            if (data) {
+                              show(`Se ha autorizado la actualización del ticket ${getVal('ticket')}`);
+                              hideDialog();
+                              querySelector('#go_back').click();
+                            } else {
+                              show('No se ha podido completar la Operación');
+                            }
+                          });
+                        }
+                      }, null);
+                      break;
+                    case 1:
+                      showConfirmDelete('Desea anular este Ticket?', function () {
+                        var sw = check(['obs']);
+                        if (sw) {
+                          setProgressMsg('Procesando...');
+                          send('server.php', { call: 'delBalanza', obs: getVal('obs'), userCode: getSesion('userPeaje'), item: getVal('id'), old: lastItem != null ? JSON.stringify(lastItem) : null, idSesion: getSesion('idSesion') }, function (data) {
+                            hideProgress();
+                            if (data) {
+                              show(`El Ticket ${getVal('ticket')} Se ha anulado Correctamente`);
+                              hideDialog();
+                              querySelector('#go_back').click();
+                            } else {
+                              show('No se ha podido completar la Operación');
+                            }
+                          });
+                        }
+                      }, null);
+                      break;
+                  }
+                });
+              };
+            } else {
+              if (getVal('estado') == '2') {
+                if (querySelector('#saver') != null) querySelector('#saver').remove();
+              }
+            }
+            if (data[0]['U_Origen'] == 'CONTADO') {
+              // alert('cd');
+
+
+              dato_td = 0;
+              //   alert(dato_td);
+              //var datos_tipo_doccd= getVal('getpeso2');
+              //alert(datos_tipo_doccd);
+
+              querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12">FACTURA</span>
+               <div class="input-field col s3"><input id="nit"  type="text" class="form"  autocomplete="off"  maxlength="49" value="${data[0]['U_NIT']}" placeholder="Ingresar"  disabled><label for="nit" class="label">NUMERO DE IDENTIFICACION</label></div>
+               <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" maxlength="49" value="${data[0]['U_RazonSocial']}" placeholder="Ingresar" disabled><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+              refresh();
+
+              querySelector('#documentos').innerHTML = `<input id="fact" type="text" autocomplete="off" value="${data[0]['U_NroDocFactura']}" readonly=""><label for="fact" class="label active">Nº Documento</label>`;
+            } else {
+			
+			 querySelector('#sectorFactura').innerHTML = `
+        <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" value="${data[0]['U_RazonSocial']}" maxlength="49" disabled><label for="razon_social" class="label active">RAZON SOCIAL</label></div>`;
+			
+			   if (data[0]['U_Origen'] == 'CREDITO' && getVal('estado')==2 ) {
+              querySelector('#documentos').innerHTML = `<button id="showDoc" class="waves-effect btn">DOCUMENTOS</button>`;
+              querySelector('#showDoc').onclick = showDoc;
+			 
+			   }
+			  
+            }
+          }
+        });
+
+      });
+    });
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function updateList() {
+    querySelector('#lister').innerHTML = ' EN LISTA : ' + documentos.length;
+  }
+  function loadDoc(onfinish) {
+    if (getVal('ticket') == '0') {
+      querySelector('#tbody-o').innerHTML = "";
+      documentos.forEach(function (item) {
+        querySelector('#tbody-o').innerHTML += `<tr><td>0</td><td>${item['U_Tipo_Doc']}</td><td>${item['U_Nro_Orden']}</td><td>${item['U_Peso_Total']}</td><td>${item['U_Cliente']}</td><td>${item['U_Despachador'] ? item['U_Despachador'] : ""}</td><td>${item['U_Observacion']}</td><td></td></tr>`;
+      });
+      onfinish();
+      return;
+    }
+    setProgressMsg('Cargando...');
+
+
+
+
+
+
+
+
+
+    send('server.php', { call: 'get_datos_user' }, function (datad) {
+      var userr = datad[0]['usert'];
+      var passr = datad[0]['passt'];
+
+      send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
+        setSesion('idSesion', dataff);
+        send('server.php', { call: 'getDoc', ticket: getVal('id'), idSesion: getSesion('idSesion') }, function (data) {
+          hideProgress();
+          if (data.length > 0) {
+            querySelector('#tbody-o').innerHTML = "";
+            var pesoTotal = parseFloat(0);
+            data.forEach(function (item, index, ar) {
+              var doc = item['U_Tipo_Doc'];
+              switch (doc) {
+                case "carga":
+                  doc = "Orden de Carga";
+                  break;
+                case "traspaso":
+                  doc = "Traspaso";
+                  break;
+              }
+              querySelector('#tbody-o').innerHTML += `<tr><td>${item['Code']}</td><td>${doc}</td><td>${item['U_Nro_Orden']}</td><td>${item['U_Peso_Total']}</td><td>${item['U_Cliente']}</td><td>${item['U_Despachador'] ? item['U_Despachador'] : ""}</td><td>${item['U_Observacion']}</td><td></td></tr>`;
+              pesoTotal += parseFloat(item['U_Peso_Total']);
+            });
+            var resto = '';
+            var dif = Math.abs(pesoTotal - parseFloat(getVal('neto')));
+            dif = dif.toFixed(2);
+            pesoTotal = pesoTotal.toFixed(2);
+            if (pesoTotal > parseFloat(getVal('neto'))) {
+              resto = `Faltante : <span class="blue-text">${dif}</span>`;
+            } else if (pesoTotal < getVal('neto')) {
+              resto = `Sobrepeso : <span class="red-text">${dif}</span>`;
+            } else {
+
+            }
+            querySelector('.footer-o').innerHTML = `<b>Total : <span class="black-text">${pesoTotal}</span></b><br><b>${resto}</b>`;
+          }
+          onfinish();
+        });
+
+      });
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  }
+  function loadComponents(onfinish) {
+    setProgressMsg('Cargando...');
+    send('server.php', { call: 'getRazones' }, function (data) {
+      hideProgress();
+      data.push({ "RAZON": "OTRO" });
+      clients = data;
+      onfinish();
+    });
+  }
+
+  function saveDoc(length) {
+    var sw = true;
+    queryForeach('.in-doc', function (el) {
+      if (el.value == '' & el.getAttribute('id') != 'des' + length & el.getAttribute('id') != 'obs' + length) {
+        sw = false;
+        return;
+      }
+    });
+    if (sw) {
+      setProgressMsg('Guardando...');
+      var datoZ = [];
+      datoZ.push({
+        "Code": null,
+        "Name": null,
+        "U_Nro_Ticket": getVal("id"),
+        "U_Nro_Orden": getVal('doc' + length),
+        "U_Peso_Total": getVal('peso' + length),
+        "U_Cliente": getVal('cli' + length),
+        "U_Fecha": null,
+        "U_Hora": null,
+        "U_ID": 0,
+        "U_Tipo_Doc": getVal('tipo' + length),
+        "U_Despachador": getVal('des' + length),
+        "U_Observacion": getVal('obs' + length)
+      });
+      showConfirm('Guardar los Datos?', function () {
+
+
+        send('server.php', { call: 'get_datos_user' }, function (datad) {
+          var userr = datad[0]['usert'];
+          var passr = datad[0]['passt'];
+
+          send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
+            setSesion('idSesion', dataff);
+
+
+
+            send('server.php', { call: 'saveDoc', idSesion: getSesion('idSesion'), array: JSON.stringify(datoZ) }, function (data) {
+              hideProgress();
+              if (data) {
+                show('Guardado Correctamente');
+                hideDialog();
+                loadDoc(prepare);
+              } else {
+                show('No se ha podido efectuar la operación');
+              }
+            });
+
+
+          });
+        });
+
+
+
+
+
+
+
+
+
+      }, null);
+    } else {
+      show('Complete los Campos');
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function showDoc() {
+    showPop("DOCUMENTOS", ` <div><button id="addOrden" class="waves-effect btn blue left">Agregar</button></div> <div class="table-o"> <table> <thead><tr><th>Nº</th><th>Tipo</th><th>Nº Documento</th><th>Peso Total(Kg)</th><th>Razon Social</th><th>Despachador</th><th>Observación</th><th>Opciones</th></tr></thead> <tbody id="tbody-o"></tbody> </table> </div> <div class="footer-o"> </div> `, function () {
+      querySelector('#addOrden').onclick = function () {
+        if (querySelectorAll('.order-key').length == 0) {
+          var length = querySelectorAll('select').length + 1;
+
+
+
+
+
+
+
+          send('server.php', { call: 'get_datos_user' }, function (datad) {
+            var userr = datad[0]['usert'];
+            var passr = datad[0]['passt'];
+
+            send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
+              setSesion('idSesion', dataff);
+
+
+
+
+
+              send('server.php', { call: 'getTipoDocumentos', idSesion: getSesion('idSesion') }, function (data) {
+                hideProgress();
+                let options = '';
+                data.forEach(el => options += `<option value="${el.TIPO}">${el.TIPO}</option>`);
+                querySelector('#tbody-o').innerHTML += `<tr class="order-key"><td></td><td id="tiper${length}"><select id="tipo${length}"><option value="ORDEN DE CARGA">ORDEN DE CARGA</option>${options}<option value="OTRO">OTRO</option></select></td><td><input type="text" id="doc${length}" class="int in-doc" placeholder="Nº Documento"></td><td><input type="text" id="peso${length}" class="float in-doc" placeholder="Peso Total"></td><td><input id="cli${length}" class="in-doc uper" type="text" autocomplete="off" placeholder="Razon Social"></td><td><input id="des${length}" class="in-doc uper" type="text" autocomplete="off" placeholder="Despachador"></td><td><input type="text" id="obs${length}" class="in-doc uper" placeholder="Observación"></td><td><button class="waves-effect btn green tiny-btn checkDoc"><i class="material-icons">check</i></button><button class="waves-effect btn blue tiny-btn saveDoc hide"><i class="material-icons">save</i></button><button class="waves-effect btn red tiny-btn closeDoc"><i class="material-icons">close</i></button></td></tr>`;
+                refresh();
+                querySelector('#tipo' + length).onchange = function () {
+                  if (this.value != 'ORDEN DE CARGA') {
+                    if (this.value == 'OTRO') {
+                      querySelector('#tiper' + length).innerHTML = `<input id="tipo${length}" class="in-doc uper" type="text" autocomplete="off" placeholder="Tipo de Documento">`;
+                    }
+                    refresh();
+                    querySelector('.saveDoc').classList.remove('hide');
+                    querySelector('.checkDoc').classList.add('hide');
+                  } else {
+                    querySelector('.saveDoc').classList.add('hide');
+                    querySelector('.checkDoc').classList.remove('hide');
+                  }
+                  querySelector('.saveDoc').onclick = function () {
+                    saveDoc(length);
+                  };
+                };
+                querySelector('.closeDoc').onclick = function () {
+                  this.parentNode.parentNode.remove();
+                };
+                querySelector('#doc' + length).onkeydown = function (e) {
+                  if (e.which == 13) {
+                    querySelector('.checkDoc').click();
+                  }
+                };
+                querySelector('.checkDoc').onclick = function () {
+                  if (getVal('doc' + length) != '') {
+                    setProgressMsg('Buscando Documento...');
+
+
+
+
+
+
+
+
+
+
+
+                    send('server.php', { call: 'findDoc', tipo: getVal('tipo' + length), ticket: getVal('doc' + length), idSesion: getSesion('idSesion') }, function (data) {
+                      hideProgress();
+                      if (data.length > 0) {
+                        var cliente = null;
+                        var pesoTotal = parseFloat(0);
+                        switch (getVal('tipo' + length)) {
+                          case "ORDEN DE CARGA":
+                            cliente = data[0]["U_NomFactura"];
+                            data[0]['DocumentLines'].forEach(function (item, index, ar) {
+                              pesoTotal += parseFloat(item["Weight1"]);
+                            });
+                            querySelector('#peso' + length).value = pesoTotal.toFixed(2);
+                            break;
+							
+							case "NOTA DE DEBITO":
+                            cliente = data[0]["U_NomFactura"];
+                            data[0]['DocumentLines'].forEach(function (item, index, ar) {
+                              pesoTotal += parseFloat(item["Weight1"]);
+                            });
+                            querySelector('#peso' + length).value = pesoTotal.toFixed(2);
+                            break;
+							
+                          case "TRASPASO":
+                            cliente = data[0]["Comments"];
+                            break;
+                        }
+                        if (cliente == null) {
+                          show('Documento no identificado');
+                          return;
+                        }
+                        querySelector('.saveDoc').classList.remove('hide');
+                        querySelector('.checkDoc').remove();
+                        querySelector('#cli' + length).value = cliente;
+                        querySelector('.saveDoc').onclick = function () {
+                          saveDoc(length);
+                        };
+                      } else {
+                        show('No existe este Nº de Orden');
+                        querySelector('.saveDoc').classList.remove('hide');
+                        querySelector('.checkDoc').remove();
+                        querySelector('.saveDoc').onclick = function () {
+                          saveDoc(length);
+                        };
+                      }
+                    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  }
+                };
+              });
+
+
+
+            });
+          });
+
+
+        }
+      };
+
+      loadDoc(prepare);
+    }, null);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function finishPesaje() {
+
+    //alert('finpesaje');
+
+    let endData = [];
+    var origen = getVal('origen');
+    let selectedIndex = querySelector('#origen').selectedIndex;
+    var sw = validarForPeso();
+    if (getVal('ticket') == '0') {
+      if (getVal('peso1') == '' & getVal('peso2') == '' & getVal('neto') == '') {
+        show('Complete los campos de Pesaje');
+        return;
+      }
+    } else {
+      if (getVal('peso1') == '' | getVal('peso2') == '' | getVal('neto') == '') {
+        show('Complete los campos de Pesaje');
+        return;
+      }
+    }
+    if (origen == 'CONTADO' & getVal('ticket') == '0' & selectedIndex == 0) {
+      if (deliveryNotes == null) {
+        show('Por favor genere la factura de esta Venta');
+        return;
+      }
+    }
+    if (selectedIndex == 2) {
+      if (getVal('peso1') == '' | getVal('peso2') == '') {
+        show('Complete los campos de Pesaje Correctamente');
+        return;
+      }
+      if (getVal('peso1') == '0' & getVal('peso2') == '0') {
+        show('Complete los campos de Pesaje Correctamente');
+        return;
+      }
+      if ((getVal('peso1') != '0' & getVal('peso2') == '0') | (getVal('peso1') == '0' & getVal('peso2') != '0')) {
+        setVal('estado', '1');
+      } else {
+        setVal('estado', '2');
+      }
+      let a = parseInt(getVal('peso1'));
+      let b = parseInt(getVal('peso2'));
+      setVal('neto', Math.abs(a - b).toString());
+    }
+
+
+
+
+
+
+    if (sw) {
+      var infor11=null;
+
+      // if(origen == "CONTADO"){
+      //   console.log('DATOS_INFOR INVOICE datos  1 ' + invoices['DocTotal']);
+		  // infor11=invoices['DocTotal'];
+		  // infor11=infor11.toString();
+		  // console.log('DATOS_INFOR INVOICE datos  1 ' + infor11);
+      // }
+   
+
+
+      endData.push({
+        "Code": getVal('id'),
+        "Name": getVal('id'),
+        "U_NroTicket": getVal('ticket'),
+        "U_Sucursal": getVal('sucursal'),
+        "U_Fecha": null,
+        "U_Hora": null,
+        "U_Origen": origen,
+        "U_Estado": getVal('estado'),
+        "U_Placa": getVal('placa'),
+        "U_Marca": getVal('marca'),
+        "U_Color": getVal('color'),
+        "U_NombreChofer": getVal('conductor'),
+        "U_CI_Chofer": getVal('ci_conductor'),
+        "U_Bruto": getVal('peso2'),
+        "U_Tara": getVal('peso1'),
+        "U_Neto": getVal('neto'),
+        "U_NIT": origen == "CONTADO" ? getVal('nit') : "",
+        "U_RazonSocial": getVal('razon_social'),
+        "U_CardCode": selectedIndex == 2 ? "" : origen == "CONTADO" & incomingPayments != null ? incomingPayments['CardCode'] : "",
+        "U_NroFactura": selectedIndex == 2 ? "" : origen == "CONTADO" & invoices != null ? invoices['U_LB_NumeroFactura'] : "",
+        "U_NroAutorizacion": selectedIndex == 2 ? "0" : origen == "CONTADO" & invoices != null ? invoices['U_LB_NumeroAutorizac'] : "0",
+        "U_CodigoControl": selectedIndex == 2 ? "" : origen == "CONTADO" & invoices != null ? invoices['U_LB_CodigoControl'] : "",
+        "U_FecLimEmision": selectedIndex == 2 ? null : origen == "CONTADO" & invoices != null ? invoices['U_LB_FechaLimiteEmis'] : null,
+        "U_TotalFactura": selectedIndex == 2 ? "40.02" : origen == "CONTADO" & invoices != null ? invoices['DocTotal'].toString() : "40.02",
+        "U_DocEntryFactura": selectedIndex == 2 ? 0 : origen == "CONTADO" & invoices != null ? invoices['DocEntry'] : 0,
+        "U_NroDocFactura": selectedIndex == 2 ? getVal('facturaNumer') : origen == "CONTADO" & invoices != null ? invoices['DocNum'] : 0,
+        "U_DocEntryPagoRec": selectedIndex == 2 ? 0 : origen == "CONTADO" & incomingPayments != null ? incomingPayments['DocNum'] : 0,
+        "U_NroDocPagoRec": selectedIndex == 2 ? 0 : origen == "CONTADO" & incomingPayments != null ? incomingPayments['DocEntry'] : 0,
+        "U_DocEntryEntrega": selectedIndex == 2 ? 0 : origen == "CONTADO" & deliveryNotes != null ? deliveryNotes['DocEntry'] : 0,
+        "U_NroDocEntrega": selectedIndex == 2 ? 0 : origen == "CONTADO" & deliveryNotes != null ? deliveryNotes['DocNum'] : 0,
+        "U_IdUsuario": getSesion('userPeaje'),
+        "U_NroDoc": getVal('ticket'),
+        "U_Nombre": getVal('usuario'),
+        "U_OrigenDoc": getVal('ci_exp'),
+        "U_Observaciones": null,
+        "U_Observaciones2": null,
+        "U_FechaSal": null,
+        "U_HoraSal": null
+      });
+
+
+      console.log('final_array '+JSON.stringify(endData));
+
+      setProgressMsg('Guardando...');
+
+
+      send('server.php', { call: 'get_datos_user' }, function (datad) {
+        var userr = datad[0]['usert'];
+        var passr = datad[0]['passt'];
+        send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
+          setSesion('idSesion', dataff);
+          setProgressMsg('Guardando...');
+          send('server.php', { call: 'finishBalanza', idSesion: dataff, index: selectedIndex, old: lastItem != null ? JSON.stringify(lastItem) : null, array: JSON.stringify(endData), ob11: "Sin observacion", ob22: "Sin Observacion", usuariot: userr }, function (data) {
+            hideProgress();
+            hideDialog();
+            show('Guardado Correctamente');
+            let printForm = `<button class="waves-effect btn orange tiny-btn btn-ticket" onclick="printTicket('${data.id}')"><i class="material-icons left">print</i>Ticket</button>`;
+            if (data.isNew) {
+              if (getVal('origen') == 'CONTADO') {
+                printForm += `<button class="waves-effect btn orange tiny-btn btn-f" onclick="printF('${data.id}')"><i class="material-icons left">print</i>Factura</button>`;
+              }
+            }
+            setTimeout(() => showSDialog('Impresión', printForm, 'OK', prepare, function () { hideDialog(); }, null), 1000);
+            loadComponents(function () {
+              loadItem(data.id);
+              created = true;
+            });
+          });
+        });
+      });
+
+
+
+    }
+
+
+
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

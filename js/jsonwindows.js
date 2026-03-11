@@ -1,0 +1,17 @@
+[
+"SplashScreen.scale-100":"620*300",
+"SplashScreenPhone.scale-240":"1152*1920",
+"Square30x30Logo.scale-100":"30*30",
+"Square44x44Logo.scale-100":"44*44",
+"Square44x44Logo.scale-240":"106*106",
+"Square70x70Logo.scale-100":"70*70",
+"Square71x71Logo.scale-100":"71*71",
+"Square71x71Logo.scale-240":"170*170",
+"Square150x150Logo.scale-100":"150*150",
+"Square150x150Logo.scale-240":"360*360",
+"Square310x310Logo.scale-100":"310*310",
+"StoreLogo.scale-100":"50*50",
+"StoreLogo.scale-240":"120*120",
+"Wide310x150Logo.scale-100":"310*150",
+"Wide310x150Logo.scale-240":"744*360"
+]

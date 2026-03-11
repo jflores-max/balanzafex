@@ -1,0 +1,44 @@
+:root {
+  --text-input-color:black;
+}
+.input-field label {
+  color: #5D5F6A !important;
+  font-weight: bold;
+}
+td, th {
+    padding: 5px 5px;
+}
+    /*th{
+      color: #5D5F6A !important;
+      font-weight: bold;
+      }*/
+      tr:nth-child(2) th
+      {
+        color: #5D5F6A !important;
+        font-weight: bold;
+      }
+      .dater b{
+        color: #5D5F6A !important;
+      }
+      td .input-field {
+        margin-top: 0rem;
+        margin-bottom: 0rem;
+      }
+      .input-field {
+        margin-top: .5rem;
+        margin-bottom: .5rem;
+      }
+      textarea.materialize-textarea {
+        padding: .25rem 0 .25rem 0;
+        height: 2rem;
+        margin: 0 0 0px 0;
+      }
+
+      input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+        height: 1.75rem;
+        border-bottom: 1px solid rgba(0,0,0,.15);
+      }
+
+      @media print {
+    .pagebreak { page-break-before: always; } /* page-break-after works, as well */
+}

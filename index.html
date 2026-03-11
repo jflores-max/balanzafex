@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcut icon" href="img/icon.png" type="image/x-icon" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/index.css">
+
+  <script src="cfg.js"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/lc.js"></script>
+  <script src="js/qr.js"></script>
+  <script src="js/init.js"></script>
+
+
+  <title>Monterrey Balanza</title>
+  <style type="text/css">
+			.centred {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				-webkit-transform: translate(-50%, -50%);
+				transform: translate(-50%, -50%);
+			}
+  </style>
+
+
+
+
+</head>
+<body>
+
+  
+  <div id="app">
+  </div>
+  <div id="progressShow" class="valign-wrapper" style="height: 100vh; width: 100vw; position: fixed; top: 0; left: 0; text-align: center; background: rgba(0,0,0,.5); z-index:99999; ">
+    <b id="msgProgress" style="top: 50%; position: relative; color: white; background: #202020; padding: .25em; border-radius: 8%;"></b>
+    <div class="progress" style="height: .8em;top: 50%;"> -->
+       <div class="indeterminate"></div>
+
+      <!-- <div class="centred">	
+        <img src="img/progress1.gif"><br>
+        <b id="msg_progress">PROCESANDO...</b>
+      </div> -->
+
+
+    </div>
+
+
+  </div>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="print/printThis.js"></script>
+
+  <script type="text/javascript">
+
+
+//hideProgress();
+
+
+    $('#progressShow').on('long-press', function(e) {
+     e.preventDefault();
+     hideProgress();
+    });
+
+
+    async function send_(file,datos,funcion){
+	var domain='';
+	var debug=true;
+	var es=$.ajax({
+		type: "POST",
+		url: domain+file,
+		dataType: 'json',
+		data: datos,
+		success: function(json){
+			if(debug){
+				console.log('request=>'+JSON.stringify(datos)+"\n"+'response=>'+JSON.stringify(json));
+			}
+			funcion(json);
+		},
+		error: function (err) {
+			alert('Error la Operación'), console.log('request=>'+JSON.stringify(datos)+"\n"+'error response=>'+JSON.stringify(err));
+		}
+	});
+}
+
+
+
+    $(document).ready(function(){
+
+    
+      var urll='http://app-web-mty/balanzafexs1/';
+     // var urll='http://189.28.72.156:56479/balanzafexs1/';
+    //  var urll='http://localhost/balanzafexs1/';
+     
+      var ff_direccion=urll+'server.php';
+      
+       send_(ff_direccion,{call:'set_sesion_ubi',ubi: urll },function(data) {
+ 
+        send_(ff_direccion,{call:'get_sesion_posi'},function(datad) { 
+          console.log("dr "+posii);
+             console.log("dr "+posii);      
+             console.log("dr tt "+JSON.stringify(datad));                
+             console.log("dr tt "+datad.length);                                
+            if(datad.length>0){
+              var posii= datad[0]['posi'];
+	            console.log("dr "+posii);
+
+              if(posii==0){
+                send_(ff_direccion, { call: 'cerrar_sesion'}, function (datadd) {
+                    console.log("dr r "+JSON.stringify(datadd));
+                  
+                      loadPageDirt('app','a.html');
+                  });
+              }else{
+                loadPageDirt('app',posii);
+              }
+            
+            }else{
+             console.log(datad.length);
+                  send_(ff_direccion, { call: 'cerrar_sesion'}, function (datadd) {
+                    console.log("dr r "+JSON.stringify(datadd));
+                  
+                      loadPageDirt('app','a.html');
+                  });
+            }
+	          
+			   							   
+         });
+
+		   });
+
+});
+
+
+  </script>
+</body>
+</html>

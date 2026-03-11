@@ -1,0 +1,404 @@
+<div class="row valign-wrapper" style="height:96vh;">
+    <div class="col s0 m3 l4"></div>
+    <div class="col s12 m6 l4">
+        <div class="card">
+            <div class="card-header center">
+                <span class="card-title col s12" style="padding: .5em">Monterrey Balanza</span>
+                <span class="card-title col s12" style="padding: .5em">Iniciar Sesión</span>
+                <img src="img/logo.png" id="logo" style="width: 233px;height: 60px;">
+            </div>
+            <div class="card-content row">
+                <div class="input-field col s12"><i class="material-icons prefix">person</i><input id="user" type="text"
+                        autocomplete="off"><label for="user" class="label">Usuario</label></div>
+                <div class="input-field col s12"><i class="material-icons prefix">vpn_key</i><input id="pase"
+                        type="password" autocomplete="off"><label for="pase" class="label">Contraseña</label></div>
+                <div class="col s12">
+                    <a id="login" class="btn waves-effect">Iniciar</a>
+                    <div class="switch" style="display: inline;margin-left: 5em;"> <b>Recordar</b><label> <input
+                                id="record" type="checkbox"> <span class="lever"></span> </label> </div>
+                </div>
+            </div>
+
+        </div>
+        <div style='margin: auto;text-align: center;'>
+            <a style='color: red; font-size: 18px; font-weight: 800;margin:auto' class='reset_pass' target="_blank"
+                href='manual/ManualBalanza.pdf'>Dale click para ver el Manual de Usuario</a>
+        </div>
+    </div>
+    <div class="col s0 m3 l4"></div>
+    <div class="" style="position: fixed;top: 0em;right: 0em;">
+        <div class="switch"> <b>Trabajar sin Internet</b><label> <input id="offline" type="checkbox"> <span
+                    class="lever"></span> </label> </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+    hideProgress();
+    if (getSesion('lastUser') != null) {
+        setVal('user', getSesion('lastUser'));
+    }
+    if (getSesion('lastPase') != null) {
+        setVal('pase', getSesion('lastPase'));
+    }
+    if (getSesion('isRecord') != null) {
+        if (getSesion('isRecord') == 1) {
+            $('.switch #record').attr('checked', '');
+        }
+    }
+    $('.switch #record').change(function () {
+        setSesion('isRecord', this.checked ? 1 : 0);
+    });
+    if (offline) {
+        $('.switch #offline').attr('checked', '');
+    }
+    $('.switch #offline').change(function () {
+        let cur_sw = this;
+        if (!this.checked) {
+            let i = 0;
+            let olds = [];
+            let news = [];
+            let onFinish = function () {
+                show("Sincronización Finalizada");
+                cur_sw.checked = false;
+                if (cur_sw.checked) {
+                    setSesion('offline', 1);
+                } else {
+                    setSesion('offline', 0);
+                }
+                offline = window.localStorage.getItem("offline") == 1;
+                loger();
+            }
+            execute(`select Code,U_Tara,U_Bruto,U_Neto,U_FechaSal,U_HoraSal,U_Estado from balanza where Cambio>0 and Code=Name`, function (forUB) {
+                if (forUB.length == 0) {
+                    i++;
+                    if (i > 1) {
+                        prepareSync(olds, news, onFinish);
+                    }
+                    return;
+                }
+                forUB.forEach(function (e1, i1, a1) {
+                    execute(`select Code, Name, U_Nro_Ticket, U_Nro_Orden, U_Peso_Total, U_Cliente, U_Fecha, U_Hora, U_ID, U_Tipo_Doc, U_Despachador, U_Observacion from balanza1 where Cambio>0 and U_Nro_Ticket='${e1.Code}'`, function (forIB1) {
+                        olds.push({ document: e1, lines: forIB1 });
+                        if (i1 == a1.length - 1) {
+                            i++;
+                            if (i > 1) {
+                                prepareSync(olds, news, onFinish);
+                            }
+                        }
+                    });
+                });
+            });
+            execute(`select Code, Name, U_NroTicket, U_Fecha, U_Hora, U_Origen, U_Estado, U_Placa, U_Marca, U_Color, U_NombreChofer, U_CI_Chofer, U_Bruto, U_Tara, U_Neto, U_NIT, U_RazonSocial, U_NroFactura, U_NroAutorizacion, U_CodigoControl, U_FecLimEmision, U_DocEntryFactura, U_NroDocFactura, U_DocEntryPagoRec, U_NroDocPagoRec, U_DocEntryEntrega, U_NroDocEntrega, U_IdUsuario, U_NroDoc, U_Nombre, U_OrigenDoc, U_Observaciones, U_FechaSal, U_HoraSal, U_CardCode, U_TotalFactura, U_Sucursal, U_Usuario_Anulacion, U_Fecha_Anulacion, U_Hora_Anulacion from balanza where Cambio>0 and Code<>Name`, function (forUB) {
+                if (forUB.length == 0) {
+                    i++;
+                    if (i > 1) {
+                        prepareSync(olds, news, onFinish);
+                    }
+                    return;
+                }
+                forUB.forEach(function (e1, i1, a1) {
+                    execute(`select Code, Name, U_Nro_Ticket, U_Nro_Orden, U_Peso_Total, U_Cliente, U_Fecha, U_Hora, U_ID, U_Tipo_Doc, U_Despachador, U_Observacion from balanza1 where Cambio>0 and U_Nro_Ticket='${e1.Code}'`, function (forIB1) {
+                        news.push({ document: e1, lines: forIB1 });
+                        if (i1 == a1.length - 1) {
+                            i++;
+                            if (i > 1) {
+                                prepareSync(olds, news, onFinish);
+                            }
+                        }
+                    });
+                });
+            });
+            this.checked = true;
+            return;
+        }
+        if (this.checked) {
+            setSesion('offline', 1);
+        } else {
+            setSesion('offline', 0);
+        }
+        offline = window.localStorage.getItem("offline") == 1;
+    });
+    querySelector('#user').onkeydown = function (e) {
+        if (e.which == 13) {
+            loger();
+        }
+    };
+    querySelector('#pase').onkeydown = function (e) {
+        if (e.which == 13) {
+            loger();
+        }
+    };
+    function prepareSync(olds, news, onFinish, idSesion) {
+        var sw = check(['user', 'pase']);
+        if (!sw) {
+            return;
+        }
+        if (idSesion == null) {
+            setProgressMsg('Iniciando...');
+            send('server.php', { call: 'login', user: getVal('user'), pase: getVal('pase') }, function (data) {
+                if (data == false) {
+                    show('Usuario no existente');
+                    hideProgress();
+                    return;
+                }
+                prepareSync(olds, news, onFinish, data);
+            });
+            return;
+        }
+        if (news.length == 0 & olds.length == 0) {
+            onFinish();
+            return;
+        }
+        setProgressMsg(`Sincronizando... Restantes : ${olds.length + news.length}`);
+        //console.log(`olds : ${JSON.stringify(olds)} \nnews : ${JSON.stringify(news)}`);
+        if (olds.length > 0) {
+            let cur = pop(olds);
+            let cur_code = cur.document.Code;
+            //console.log(cur);
+            send('server.php', { call: 'olds', array: JSON.stringify(cur), idSesion: getSesion('idSesion'), user: getVal('user') }, function (data) {
+                hideProgress();
+                if (data.document == 1) {
+                    execute(`delete from balanza where ${cur_code}`, function (res) {
+                        prepareSync(olds, news, onFinish, data);
+                    });
+                }
+            });
+            return;
+        }
+        onFinish();
+        if (news.length > 0) {
+            let cur = pop(news);
+            let cur_code = cur.document.Code;
+            //console.log(cur);
+            send('server.php', { call: 'news', array: JSON.stringify(cur), idSesion: getSesion('idSesion'), user: getVal('user') }, function (data) {
+                hideProgress();
+                if (data.document == 1) {
+                    execute(`delete from balanza where ${cur_code}`, function (res) {
+                        prepareSync(olds, news, onFinish, data);
+                    });
+                }
+            });
+            return;
+        }
+    }
+    document.querySelector('#logo').addEventListener('long-press', function (e) {
+        e.preventDefault();
+        /*if(offline){*/
+        execute(`select * from usuario where estado='1' and user='${getVal('user')}' and pase='${to64(getVal('pase'))}';`, function (data) {
+            if (data.length > 0) {
+                if (data[0]['admin'] == 'A') {
+                    showSDialog('Editar Dominio', `<div class="input-field col s12 min-margin"><input id="local" type="text" class="" autocomplete="off" value="${localDomain}"><label for="local" class="label">Local</label></div>
+                            <div class="input-field col s12 min-margin"><input id="domain" type="text" class="" autocomplete="off" value="${domain}"><label for="domain" class="label">Dominio</label></div>`, 'Guardar', prepare, function () {
+                        hideDialog();
+                        setSesion('local', getVal('local'));
+                        localDomain = getSesion('local');
+                        setSesion('domain', getVal('domain'));
+                        domain = getSesion('domain');
+                        show('Actualizado Correctamente :)');
+                    }, null);
+                }
+            }
+        });
+        /*}*/
+    });
+    querySelector('#login').onclick = loger;
+    document.querySelector('#login').addEventListener('long-press', function (e) {
+        e.preventDefault();
+        /*if(offline){*/
+        execute(`select * from usuario where estado='1' and user='${getVal('user')}' and pase='${to64(getVal('pase'))}';`, function (data) {
+            if (data.length > 0) {
+                if (data[0]['admin'] == 'A') {
+                    execute(`SELECT tbl_name FROM sqlite_master WHERE type='table';`, function (tables) {
+                        let rt = '';
+                        removePila(tables, 0);
+                        tables.forEach(el => rt += rt == '' ? `[${el.tbl_name}]` : `---[${el.tbl_name}]`);
+                        showPop("Consola", `<div style="padding:.5em;"><div class="input-field col s12"><textarea id="obs" class="materialize-textarea" placeholder="Ingresar"></textarea><label for="obs">select * from ${rt}</label></div>
+                                <div class="col s12" style="padding:0" id="resolt"></div>
+                            </div>`, function () {
+                            querySelector('#obs').onkeydown = function (e) {
+                                if (e.which == 13) {
+                                    e.preventDefault();
+                                    execute(this.value, function (data) {
+                                        if (typeof (data) == 'number') {
+                                            querySelector('#resolt').innerHTML = `<b>ROWS AFFECTED : </b>${data}`;
+                                        } else {
+                                            let thead = '<tr>';
+                                            let cols = '';
+                                            for (item in data[0]) {
+                                                thead += `<th>${item}</th>`;
+                                                cols += `[${item}]`;
+                                            };
+                                            thead += '</tr>';
+                                            let tbody = '';
+                                            data.forEach(function (ele, i, a) {
+                                                tbody += '<tr>';
+                                                for (item in ele) {
+                                                    tbody += `<td> ${ele[item]}</td>`;
+                                                };
+                                                tbody += '</tr>';
+                                            });
+                                            /*<b>COLS : </b>${cols}<br>*/
+                                            querySelector('#resolt').innerHTML = `<table class="card" style="zoom:0.75"><thead>${thead}</thead><tbody>${tbody}</tbody></table>`;
+                                            loca('resolt');
+                                        }
+                                    });
+                                }
+                            };
+                            prepare();
+                        });
+                    });
+                }
+            }
+        });
+        /*}*/
+    });
+    function loca(tableId, indexs) {
+        queryForeach(`#${tableId} thead tr th`, function (ele, index, ar) {
+            if (indexs == null) {
+                let title = ele.innerHTML;
+                ele.innerHTML = `<input index="${index}" type="text" class="finder uper" autocomplete="off" placeholder="${title}" style="min-width:${(title.length * 11)}px">`;
+            } else {
+                if (indexs.includes(index)) {
+                    let title = ele.innerHTML;
+                    ele.innerHTML = `<input index="${index}" type="text" class="finder uper" autocomplete="off" placeholder="${title}" style="min-width:${(title.length * 11)}px">`;
+                }
+            }
+        });
+        refresh();
+        queryForeach(`#${tableId} tbody tr`, function (ele) {
+            ele.querySelectorAll('td').forEach(function (el, index) {
+                if (indexs == null) {
+                    el.classList.add('find');
+                    el.setAttribute('index', index);
+                } else {
+                    if (indexs.includes(index)) {
+                        el.classList.add('find');
+                        el.setAttribute('index', index);
+                    }
+                }
+            });
+        });
+        $('.finder').keyup(function () {
+            $(`#${tableId} tbody tr`).addClass('hide');
+            let cuantos = 0;
+            $('.finder').each(function () {
+                if (this.value != '') {
+                    cuantos++;
+                }
+            });
+            $(`#${tableId} tbody tr`).each(function () {
+                var row = this;
+                let keys = 0;
+                $(row).find('.find').each(function () {
+                    var index = $(this).attr('index');
+                    let pa = $(`.finder[index=${index}]`).val().toUpperCase();
+                    if (pa != '' & this.innerHTML.toUpperCase().indexOf(pa) != -1) {
+                        keys++;
+                    }
+                });
+                if (cuantos == keys) {
+                    $(row).removeClass('hide');
+                }
+            });
+        });
+    }
+
+
+
+
+    function loger() {
+        /*show(getCurrentHour1());
+        return;*/
+        var sw = check(['user', 'pase']);
+        if (!sw) {
+            return;
+        }
+        let isRecord = querySelector('#record').checked;
+        if (isRecord) {
+            setSesion('lastUser', getVal('user'));
+            setSesion('lastPase', getVal('pase'));
+        } else {
+            clearSesion('lastUser');
+            clearSesion('lastPase');
+        }
+
+  // alert(offline);
+
+
+        setProgressMsg('Iniciando...');
+
+
+
+
+
+        send('server.php', { call: 'login', user: getVal('user'), pase: getVal('pase') }, function (data) {
+            if (data == false) {
+                show('Usuario no existente');
+                hideProgress();
+                return;
+            }
+            setSesion('userPeaje', getVal('user'));
+
+                setSesion('idSesion', data);
+                send('server.php', { call: 'getData', user: getVal('user') }, function (data) {
+                    if (data) {
+
+
+                        setSesion('sucursal', data[0]['SUCURSAL']);
+                        setSesion('ramaa', data[0]['RAMA']);
+                        setSesion('owner', data[0]['PROPIETARIO']);
+                        setSesion('type', data[0]['TIPO']);
+                        setSesion('u_regi', getVal('user'));
+                        setSesion('passPeaje', getVal('pase'));
+
+                        send('server.php', { call: 'get_sesion_ubi' }, function (datad) {
+                            var ubicacion = datad[0]['ubi'];
+
+                         //   alert(ubicacion);
+                            setSesion('url', ubicacion);
+                            setSesion('logo', ubicacion + 'img_otros/136156148d11fe9fce.png');
+                        });
+
+
+   
+                        send('server.php', { call: 'sucursal_acopio' }, function (datad_acopio) {
+                               var datad_acopioo = datad_acopio;
+                               // alert(datad_acopioo);
+                               setSesion('sucursal_acopio', datad_acopioo);
+
+                               starTime = new Date();
+
+
+                       send('server.php', { call: 'set_sesion_posi', posi: 'b.html' }, function (data) {
+    send('server.php', { call: 'set_datos_user', usert: getVal('user'), passt: getVal('pase') }, function (datac) {
+        send('server.php', { call: 'set_ticket', ticketr: "" }, function (datac) {
+            send('server.php', { call: 'get_sesion_posi' }, function (datad) {
+                if (datad.length > 0) {
+                    var posii = datad[0]['posi'];
+                    console.log("dr " + posii);
+                    loadPageDirt('app', posii);
+                }
+            });
+        });
+    });
+});
+
+                        });
+                             
+
+
+
+                    } else {
+                        hideProgress();
+                        show('Este usuario no tiene permisos para acceder al sistema');
+                    }
+                });
+          
+        });
+    }
+</script>

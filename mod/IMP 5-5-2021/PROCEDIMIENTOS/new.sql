@@ -1,0 +1,21 @@
+SET SCHEMA BCK_MON2020;
+
+DROP PROCEDURE SP_INT_CHART;
+CREATE PROCEDURE SP_INT_CHART(IN DIARIO INT,IN ORIGEN CHAR(20),IN FECHA1 CHAR(10),IN FECHA2 CHAR(10))
+LANGUAGE SQLSCRIPT
+SQL SECURITY INVOKER
+READS SQL DATA AS
+BEGIN
+IF :DIARIO = 1 THEN
+select DAYOFMONTH("U_Fecha") as DIA,count(*) as CANTIDAD,SUM(TO_INT(TO_DECIMAL("U_TotalFactura"))) as TOTAL 
+from "@BALANZA" 
+where "U_Origen"=:ORIGEN and "U_Fecha" between :FECHA1 and :FECHA2 
+group by DAYOFMONTH("U_Fecha"),TO_INT(TO_DECIMAL("U_TotalFactura"))
+order by DAYOFMONTH("U_Fecha");
+ELSE 
+select MONth("U_Fecha") as MES,count(*) as CANTIDAD,SUM(TO_INT(TO_DECIMAL("U_TotalFactura"))) as TOTAL 
+from "@BALANZA" 
+where "U_Origen"=:ORIGEN and "U_Fecha" between :FECHA1 and :FECHA2
+group by MONTH("U_Fecha"),TO_INT(TO_DECIMAL("U_TotalFactura"));
+END IF;
+END;

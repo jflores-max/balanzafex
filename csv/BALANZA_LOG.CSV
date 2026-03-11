@@ -1,0 +1,11 @@
+Name;SQL Data Type;Dimension;Column Store Data Type;Key;Not Null;Default;Comment
+Code;NVARCHAR;50;STRING;X(1);X;;
+Name;NVARCHAR;100;STRING;;X;;
+U_NroTicket;INTEGER;;INT;;X;;
+U_Estado;NVARCHAR;1;STRING;;X;;
+U_IdUsuario;NVARCHAR;15;STRING;;X;;
+U_Bruto;INTEGER;;INT;;;;
+U_Tara;INTEGER;;INT;;;;
+U_Neto;INTEGER;;INT;;;;
+U_Fecha;TIMESTAMP;;LONGDATE;;X;;
+U_Hora;SMALLINT;;INT;;X;;
