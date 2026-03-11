@@ -13,7 +13,7 @@ define('host_importaciones', 'localhost');
 define('db_importaciones', 'importaciones');
 define('user_importaciones', 'root');
 define('pass_importaciones', '123456789-');
-
+define('db_entrega', 'entrega_db');
 
 
 define('DB_HOST_soli', 'localhost');

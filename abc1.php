@@ -123,6 +123,33 @@ function query($sql){
 	}
 	return $arr;
 }
+function query_entrega_db($sql){
+	$conn =  mysqli_connect(host_importaciones,user_importaciones,pass_importaciones,db_entrega);
+	if ($conn->connect_error) {
+		trigger_error('Database connection failed: '  . $conn->connect_error, E_USER_ERROR);
+	}
+	mysqli_query($conn,"SET NAMES 'utf8'");
+	if (strpos($sql, 'insert') !== false) {
+		mysqli_query($conn,$sql);
+		$last_id = mysqli_insert_id($conn);
+		return $last_id;
+	}
+	if (strpos($sql, 'update') !== false|strpos($sql, 'delete') !== false) {
+		$result = $conn->query($sql);
+		return $result;
+	}
+	$result=mysqli_query($conn,$sql);
+	$arr = array();
+	if($result === false) {
+		trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $conn->error, E_USER_ERROR);
+	} else {
+		$result->data_seek(0);
+		while($row = $result->fetch_assoc()){
+			$arr[] = $row;
+		}
+	}
+	return $arr;
+}
 
 
 function query_importaciones($sql){
