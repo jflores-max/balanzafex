@@ -1889,7 +1889,8 @@ case 'get_usuario_disponible':
         exit; // 👈 IMPORTANTE
     }
     $almacen = addslashes($data[0]['ALMACEN']);
-    $buscar_almacen = query_entrega_db("select cc.*, 'TRANSFERENCIAM' as value, 'TRANSFERENCIA DE MATERIAL' as text  FROM almacen_activo cc  WHERE cc.ALMA = '$almacen'  AND cc.Estado = 1 "); 
+   // $buscar_almacen = query_entrega_db("select cc.*, 'TRANSFERENCIAM' as value, 'TRANSFERENCIA DE MATERIAL' as text  FROM almacen_activo cc  WHERE cc.ALMA = '$almacen'  AND cc.Estado = 1 ");
+      $buscar_almacen = query_entrega_db("select cc.*, 'TRANSFERENCIAM' as value, 'TRANSFERENCIA DE MATERIAL' as text  FROM almacen_activo cc "); 
    if (!empty($buscar_almacen)) {
         echo json_encode([
             "success" => true,
