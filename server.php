@@ -1894,7 +1894,7 @@ case 'get_usuario_disponible':
         echo json_encode([
             "success" => true,
             "message" => "Usuario disponible",
-            "data" => $usuario
+            "data" => $data
         ]);
    // } else {
        // echo json_encode([
