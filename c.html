@@ -2887,6 +2887,7 @@ alert('cdcdc');
     try {
       const data1 = await getDataParament_json("existe_documento_en_tabla", armo_array);
       console.log("Respuesta REAL:", JSON.stringify(data1));
+      console.log('armo_array '+JSON.stringify(armo_array));
       hideProgress();
       if (data1.Estado == 1) {
         const data = data1.Lista[0];
