@@ -633,7 +633,7 @@ $token=$_GET['dato'];
 																									 <!-- logo -->
 																									 <div  class="esp0b">
 																								   
-																										<img src="http://app-web-mty/balanzafexs1/img/cdcd1.png" style="width: 100%;">
+																										<img src="http://app-web-mty/balanzafexs14/img/cdcd1.png" style="width: 100%;">
 																									 </div>
 																									  <!-- sucursal -->
 																									 <div  class="esp1b">
