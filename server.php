@@ -1876,33 +1876,33 @@ break;
 
 case 'get_usuario_disponible':
     $usuario = posted('user');
-    $data = hanacall("\"SP_INT_DATA\"('$usuario')");
-    // Validar que el SP haya devuelto datos
-     if (empty($data) || !isset($data[0]['ALMACEN'])) {
-        echo json_encode([
-            "success" => false,
-            "message" => "No se encontró información",
-            "data" => []
-        ]);
-        exit; // 👈 IMPORTANTE
-    }
-    $almacen = addslashes($data[0]['ALMACEN']);
- 
-    $buscar_almacen = query_entrega_db("select cc.*, 'TRANSFERENCIAM' as value, 'TRANSFERENCIA DE MATERIAL' as text  FROM almacen_activo cc  WHERE cc.ALMA = '$almacen'  AND cc.Estado = 1 ");
- 
-    if (!empty($buscar_almacen)) {
+
+      $data = hanacall("\"SP_INT_DATA\"($usuario)");
+    // //$data = hanacall("\"SP_INT_DATA\"('$usuario')");
+    // // Validar que el SP haya devuelto datos
+    //  if (empty($data) || !isset($data[0]['ALMACEN'])) {
+    //     echo json_encode([
+    //         "success" => false,
+    //         "message" => "No se encontró información",
+    //         "data" => []
+    //     ]);
+    //     exit; // 👈 IMPORTANTE
+    // }
+    // $almacen = addslashes($data[0]['ALMACEN']);
+    // $buscar_almacen = query_entrega_db("select cc.*, 'TRANSFERENCIAM' as value, 'TRANSFERENCIA DE MATERIAL' as text  FROM almacen_activo cc  WHERE cc.ALMA = '$almacen'  AND cc.Estado = 1 "); 
+   // if (!empty($buscar_almacen)) {
         echo json_encode([
             "success" => true,
             "message" => "Usuario disponible",
-            "data" => $buscar_almacen
+            "data" => $data
         ]);
-    } else {
-        echo json_encode([
-            "success" => false,
-            "message" => "El almacén no está activo",
-            "data" => []
-        ]);
-    }
+   // } else {
+       // echo json_encode([
+         //   "success" => false,
+        //    "message" => "El almacén no está activo",
+        //    "data" => []
+      //  ]);
+  //  }
 
 break;
 
