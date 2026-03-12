@@ -184,6 +184,18 @@ async function send(file,data,funcion){
 	})
 	.catch(function(err){ hideProgress(), show('Error la Operación'), log('request=>'+JSON.stringify(data)+"\n"+'error response=>'+JSON.stringify(err)) });
 }
+
+
+function sendAsync(file, data) {
+  return new Promise((resolve, reject) => {
+    send(file, data, function(json) {
+      resolve(json); // Devuelve el resultado al await
+    });
+  });
+}
+
+
+
 async function call(file,data,funcion){
 	log(file);
 	showProgress();
