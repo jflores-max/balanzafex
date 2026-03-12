@@ -259,15 +259,35 @@ function loadPageDirt(idcontainer,path){
 		});
 	});
 }
+// function setProgressMsg(msg){
+// 	querySelector('#msgProgress').innerHTML=msg;
+// }
+
+
 function setProgressMsg(msg){
-	querySelector('#msgProgress').innerHTML=msg;
+	const box = querySelector('#progressShow');  
+	const txt = querySelector('#msgProgress');   
+
+	if(box) box.style.display = 'flex';          
+	if(txt) txt.innerHTML = msg;     
+	//querySelector('#msgProgress').innerHTML=msg;
 }
+
+function hideProgress(){
+	// setProgressMsg('');
+	// hideEle('#progressShow');
+
+	const box = querySelector('#progressShow');
+	if(box) box.style.display = 'none'; 
+}
+// function hideProgress(){
+// 	setProgressMsg('');
+// 	hideEle('#progressShow');
+// }
+
+
 function showProgress(msg){
 	showEle('#progressShow');
-}
-function hideProgress(){
-	setProgressMsg('');
-	hideEle('#progressShow');
 }
 function loadValues(data){
 	for(item in data) {
