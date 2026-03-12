@@ -18,18 +18,75 @@
 
 
   <title>Monterrey Balanza</title>
-  <style type="text/css">
-			.centred {
-				position: absolute;
-				left: 50%;
-				top: 50%;
-				-webkit-transform: translate(-50%, -50%);
-				transform: translate(-50%, -50%);
-			}
+
+
+
+<style>
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#progressShow {
+  display: none; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh; /* altura completa de la pantalla */
+  background: rgba(0,0,0,0.5);
+  z-index: 99999;
+
+  display: flex;
+  justify-content: center; /* centra horizontal */
+  align-items: center;     /* centra vertical */
+  text-align: center;
+}
+
+#progressContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#msgProgress {
+  color: white;
+  background: #202020;
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 1em;
+  text-align: center;
+}
+
+.progress {
+  width: 80%;
+  max-width: 400px;
+  height: 0.8em;
+  background: #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress .indeterminate {
+  background: #2196F3;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  animation: indeterminate 1.5s infinite linear;
+}
+
+@keyframes indeterminate {
+  0% { left: -100%; width: 100%; }
+  50% { left: 100%; width: 10%; }
+  100% { left: 100%; width: 10%; }
+}
+
+
   </style>
-
-
-
 
 </head>
 <body>
@@ -37,30 +94,21 @@
   
   <div id="app">
   </div>
-  <div id="progressShow" class="valign-wrapper" style="height: 100vh; width: 100vw; position: fixed; top: 0; left: 0; text-align: center; background: rgba(0,0,0,.5); z-index:99999; ">
-    <b id="msgProgress" style="top: 50%; position: relative; color: white; background: #202020; padding: .25em; border-radius: 8%;"></b>
-    <div class="progress" style="height: .8em;top: 50%;"> -->
-       <div class="indeterminate"></div>
-
-      <!-- <div class="centred">	
-        <img src="img/progress1.gif"><br>
-        <b id="msg_progress">PROCESANDO...</b>
-      </div> -->
 
 
+<div id="progressShow">
+  <div id="progressContent">
+    <b id="msgProgress">Cargando...</b>
+    <div class="progress">
+      <div class="indeterminate"></div>
     </div>
-
-
   </div>
+</div>
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="print/printThis.js"></script>
 
   <script type="text/javascript">
-
-
-//hideProgress();
-
 
     $('#progressShow').on('long-press', function(e) {
      e.preventDefault();

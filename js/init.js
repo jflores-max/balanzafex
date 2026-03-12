@@ -259,10 +259,6 @@ function loadPageDirt(idcontainer,path){
 		});
 	});
 }
-// function setProgressMsg(msg){
-// 	querySelector('#msgProgress').innerHTML=msg;
-// }
-
 
 function setProgressMsg(msg){
 	const box = querySelector('#progressShow');  
@@ -280,11 +276,6 @@ function hideProgress(){
 	const box = querySelector('#progressShow');
 	if(box) box.style.display = 'none'; 
 }
-// function hideProgress(){
-// 	setProgressMsg('');
-// 	hideEle('#progressShow');
-// }
-
 
 function showProgress(msg){
 	showEle('#progressShow');
