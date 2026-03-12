@@ -1877,7 +1877,7 @@ break;
 case 'get_usuario_disponible':
     $usuario = posted('user');
 
-     // $data = hanacall("\"SP_INT_DATA\"($usuario)");
+     $data = hanacall("\"SP_INT_DATA\"('$usuario')");
     // //$data = hanacall("\"SP_INT_DATA\"('$usuario')");
     // // Validar que el SP haya devuelto datos
     //  if (empty($data) || !isset($data[0]['ALMACEN'])) {
