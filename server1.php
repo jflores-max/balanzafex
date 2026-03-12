@@ -1795,20 +1795,6 @@ break;
 
 
 
-/*case 'getFactData':
-$ticket=posted('placa');
-$idSesion=posted('idSesion');
-$res=hanaquery("select \"U_DocEntryFactura\" from \"@BALANZA\" where \"Code\"=''$ticket''");
-$docentry=$res[0]['U_DocEntryFactura'];
-$data=hanacall("\"SPLBFACTURAS\"($docentry)");
-$totalBs=intval($data[0]['Total BS']);
-$number=convertirMonto($totalBs);
-$number=strtoupper($number);
-$data[0]['textTotal']=$number;
-echo json_encode($data);
-break;*/
-
-
 case 'getFactData':
 $ticket=posted('placa');
 $res=hanaquery("select \"U_DocEntryFactura\" from \"@BALANZA\" where \"Code\"=''$ticket''");

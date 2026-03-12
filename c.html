@@ -10,10 +10,6 @@
       </div>
     </nav>
   </div>
-
-
-
-
   <div id="main" class="row" style="padding-bottom: 4em;">
     <input id="id" type="hidden" class="form" value="0">
     <input id="docnum_f" type="hidden">
@@ -22,9 +18,7 @@
     <input id="docentry_p" type="hidden">
     <input id="docnum_e" type="hidden">
     <input id="docentry_e" type="hidden">
-
     <input id="top" type="hidden" value="0">
-
     <div class="row" style="padding: .5em">
       <div class="col s4">
         <div class="input-field col s6"><input id="fecha1" type="text" class="form" autocomplete="off" disabled><label
@@ -51,34 +45,23 @@
             for="ticket" class="label">TICKET</label></div>
       </div>
       <div class="col s12" style="height: 1px;background: rgba(0,0,0,.14);"></div>
-
-
-
       <div class="col s6 card">
         <span class="card-title col s12">SERVICIO</span>
         <div class="input-field col s12">
           <!-- <form action="otros.php" method="post"  target="_blank"  id="regi" name="regi"> -->
           <form action="otros.php" method="post" id="regi" name="regi">
             <input type="text" style="display:none" name="code" id="code" value="0" />
-
           </form>
-
           <select id="origen" class="nat form">
             <option value="CONTADO">CONTADO</option>
             <option value="CREDITO">CREDITO</option>
             <option value="CONTADO">REEMPLAZO TICKET CONTADO</option>
             <option value="OTROS">OTROS SERVICIOS</option>
           </select>
-
-
           <label>TIPO DE SERVICIO</label>
         </div>
         <div id="documentos" class="input-field col s4"></div>
       </div>
-
-
-
-
       <div class="col s6 card" id="campo_nit">
         <span class="card-title col s12">NIT NUMERO DE IDENTIFICACION</span>
         <div class="input-field col s12">
@@ -89,18 +72,11 @@
             <option value="4">OD OTRO DOCUMENTO DE INDENTIDAD</option>
             <option value="5">NIT NUMERO DE IDENTIFICACION TRIBUTARIA</option>
             <option value="6">SIN NIT</option>
-
-
-
-
-
           </select>
           <label>TIPO DE DOCUMENTO</label>
         </div>
         <div class="input-field col s4"></div>
       </div>
-
-
       <div class="col s12 card">
         <span class="card-title col s12">VEHICULO</span>
         <div class="input-field col s2"><input id="placa" type="text" maxlength="9" class="form autocomplete"
@@ -116,7 +92,6 @@
         <div class="input-field col s1"><input id="ci_exp" type="text" class="form" autocomplete="off" maxlength="5"
             placeholder="Ingresar"><label for="ci_exp" class="label">EXP.</label></div>
       </div>
-
       <div class="col s12 card" id="sectorFactura">
         <span class="card-title col s12">FACTURA</span>
         <div class="input-field col s3"><input id="nit" type="text" class="form autocomplete" autocomplete="off"
@@ -124,7 +99,6 @@
         <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off"
             maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>
       </div>
-
       <div class="col s12 card">
         <span class="card-title col s12">PESAJE</span>
         <div class="col s4">
@@ -142,18 +116,9 @@
               readonly><label for="neto" class="label">NETO (KG)</label></div>
         </div>
       </div>
-
-      <button id="saver" class="btn-floating btn-large waves-effect blue hide tooltip" data-position="left"
-        data-tooltip="Guardar" style="position: fixed;bottom: 1em;right: 1em;"><i
-          class="material-icons">save</i></button>
-
+      <button id="saver" class="btn-floating btn-large waves-effect blue hide tooltip" data-position="left" data-tooltip="Guardar" style="position: fixed;bottom: 1em;right: 1em;"><i class="material-icons">save</i></button>
     </div>
   </div>
-
-
-
-
-
 </main>
 
 
