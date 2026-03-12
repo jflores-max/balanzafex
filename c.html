@@ -52,12 +52,7 @@
           <form action="otros.php" method="post" id="regi" name="regi">
             <input type="text" style="display:none" name="code" id="code" value="0" />
           </form>
-          <select id="origen" class="nat form">
-            <option value="CONTADO">CONTADO</option>
-            <option value="CREDITO">CREDITO</option>
-            <option value="CONTADO">REEMPLAZO TICKET CONTADO</option>
-            <option value="OTROS">OTROS SERVICIOS</option>
-          </select>
+          <select id="origen" class="nat form"></select>
           <label>TIPO DE SERVICIO</label>
         </div>
         <div id="documentos" class="input-field col s4"></div>
@@ -524,6 +519,46 @@
           break;
 
 
+              case 4:
+          //campo_nit
+          $("#campo_nit").hide();
+          if (clients.length > 1) {
+            querySelector("#sectorFactura").innerHTML =
+              `<div class="input-field col s6">
+              <select id="razon_social" class="nat form"></select>
+              <label for="razon_social" class="label">RAZON SOCIAL</label></div> 
+              <div class="input-field col s6">
+          <input
+            id="numerotraspaso"
+            type="text"
+            class="form autocomplete"
+            autocomplete="off"
+            maxlength="14"
+            placeholder="Ingresar N.º de Traspaso de Material"/>
+            <label for="numerotraspaso" class="label">N.º de Traspaso de Material</label>
+        </div>`;
+            querySelector("#documentos").innerHTML = ``;
+            clients.forEach(
+              (el) =>
+              (querySelector("#razon_social").innerHTML +=
+                `<option value="${el.RAZON}">${el.RAZON}</option>`),
+            );
+            querySelector("#razon_social").onchange = function () {
+              if (this.value == "OTRO") {
+                querySelector("#sectorFactura").innerHTML =
+                  ` <div class="input-field col s9"><input id="razon_social" type="text" class="form uper" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+                refresh();
+              }
+            };
+          } else {
+            querySelector("#sectorFactura").innerHTML = `
+           <div class="input-field col s9"><input id="razon_social" type="text" class="form uper" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+            querySelector("#documentos").innerHTML =
+              `<button id="showDoc" class="waves-effect btn">DOCUMENTOS</button><b id="lister"></b>`;
+            querySelector("#showDoc").onclick = showDoc;
+          }
+
+
       }
       if (this.selectedIndex < 2) {
         if (pesoPesado) {
@@ -683,88 +718,10 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //guardar datos
     querySelector('#saver').onclick = async function () {
-
-
-
-      //tipo de origen , contado, credito, otros servicios
       var selec = querySelector('#origen').selectedIndex;
-
-
       switch (selec) {
-
 
 
    case 4:
@@ -828,15 +785,6 @@
               alert(`No existe datos de placa`);
               return;
             }
-
-
-
-
-
-
-
-
-
           } catch (error) {
             hideProgress();
             alert("Ocurrió un error inesperado");
@@ -844,10 +792,8 @@
 
           break;
 
-
         //Origen al Contado
         case 0:
-
 
           switch (dato_td) {
 
@@ -862,7 +808,6 @@
                 }
               }
               setProgressMsg('Verificando...');
-
               var candena = getVal('placa');
               var procesado = candena.trim();
               send('server.php', { call: 'getPlacaCP', idSesion: getSesion('idSesion'), placa: procesado }, function (data) {
@@ -884,28 +829,12 @@
                     }
                   }, null);
                 }
-
-
-
-
-
               });
-
-
               break;
-
-
-
-
-
-
             //CI CARNET 
             case 1:
-
               var nitt = getVal('nit');
-
               if (nitt.length <= 8) {
-
                 var title = "Desea guardar los datos actuales?<br>(Generar Nuevo ticket)";
                 if (getVal('ticket') != '0') {
                   title = "Desea Guardar los datos actuales?";
@@ -915,8 +844,6 @@
                   }
                 }
                 setProgressMsg('Verificando...');
-
-
                 var candena = getVal('placa');
                 var procesado = candena.trim();
                 send('server.php', { call: 'getPlacaCP', idSesion: getSesion('idSesion'), placa: procesado }, function (data) {
@@ -939,25 +866,13 @@
                   }
 
                 });
-
               } else {
                 alert('El CI tiene q ser menor o igual a 8 digitos.');
               }
-
-
-
               break;
-
-
-
-
-
-
             // SON NIT
             case 5:
-
               var nitt = getVal('nit');
-
               if (nitt.length >= 8) {
                 var title = "Desea guardar los datos actuales?<br>(Generar Nuevo ticket)";
                 if (getVal('ticket') != '0') {
@@ -968,7 +883,6 @@
                   }
                 }
                 setProgressMsg('Verificando...');
-
                 var candena = getVal('placa');
                 var procesado = candena.trim();
                 send('server.php', { call: 'getPlacaCP', idSesion: getSesion('idSesion'), placa: procesado }, function (data) {
@@ -990,44 +904,14 @@
                     }, null);
                   }
                 });
-
-
               } else {
                 alert('El NIT tiene que ser mayor o igual a 8 digitos.');
               }
-
-
-
               break;
-
-
           }
-
           break;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //Origen al Credito
         case 1:
-          //  alert('Credito');
-
           var title = "Desea guardar los datos actuales?<br>(Generar Nuevo ticket)";
           if (getVal('ticket') != '0') {
             title = "Desea Guardar los datos actuales?";
