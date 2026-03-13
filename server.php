@@ -436,16 +436,6 @@ break;
     $res=hanaquery('select * from "@BALANZA"  where "Code"=\'\''.$placa.'\'\'');
     echo json_encode($res);
     break;
-    
-
-
-/*case 'getLast':
-$placa=posted('placa');
-$sucursal=posted('sucursal');
-$res=hanaquery('select * from "@BALANZA" where "Code"=\'\''.$placa.'\'\' and "U_Sucursal"=\'\''.$sucursal.'\'\'');
-echo json_encode($res);
-break;*/
-
 
 
 case 'getPeso':
@@ -1061,39 +1051,21 @@ case 'get':
     $nro_docv=posted('nro_docv');
     $fecha_i=posted('fecha_i');
     $fecha_f=posted('fecha_f');
-    if($item==''){
-        $item=0;
-    }
-    if($nro_docv==''){
-        $nro_docv='';
+    if($item==''){ $item=0; }
+    if($nro_docv==''){ $nro_docv='';
     }else{
         $resf=hanaquery("select * from \"@BALANZA1\" where \"U_Nro_Orden\"=''$nro_docv'' ORDER BY \"Code\" DESC");
         if(count($resf)>0){
             $nro_docv= $resf[0]['U_Nro_Ticket'];
         }else{
             $nro_docv='Sin Ticket';
-
         }
-      
     }
-    
-
-
      if($item>0){
-            
-
-
-
-
-
-        $all=hanaquery('
-        
-
-        select MM.U_Fecha,MM."U_Sucursal" ,MM."Code",MM."U_NroTicket",MM.DocStatus,MM.DocNum,MM."U_Placa",MM."U_Origen", MM."U_Estado",MM.FECHA
+        $all=hanaquery('select MM.U_Fecha,MM."U_Sucursal" ,MM."Code",MM."U_NroTicket",MM.DocStatus,MM.DocNum,MM."U_Placa",MM."U_Origen", MM."U_Estado",MM.FECHA
        FROM
         (
          (
-
            ( select  BB."U_Fecha" AS U_Fecha ,BB."U_Sucursal" ,BB."Code",BB."U_NroTicket",TX."DocStatus" as  DocStatus ,TX."DocNum" as DocNum,BB."U_Placa",BB."U_Origen", BB."U_Estado",
            concat(TO_DATE(BB."U_Fecha"),
            concat(\'\''.' '.'\'\',
@@ -1102,17 +1074,10 @@ case 'get':
                   )
                )
            ) as FECHA
-
-         
             from "@BALANZA" BB
             INNER JOIN OINV TX  ON TX."DocEntry" = BB."U_DocEntryFactura"
             where  BB."U_Origen" in(\'\''.'CONTADO'.'\'\' ) )
-  
-          
-
 union 
-
-
 (select  BB1."U_Fecha" AS U_Fecha   ,BB1."U_Sucursal" ,BB1."Code",BB1."U_NroTicket",\'\''.''.'\'\' as DocStatus ,   0 as DocNum,BB1."U_Placa",BB1."U_Origen", BB1."U_Estado",
 concat(TO_DATE(BB1."U_Fecha"),
 concat(\'\''.' '.'\'\',
@@ -1121,38 +1086,17 @@ concat(\'\''.' '.'\'\',
        )
     )
 ) as FECHA
-
 from "@BALANZA" BB1
-where  BB1."U_Origen" in(\'\''.'CREDITO'.'\'\',\'\''.'OTROS SERVICIOS'.'\'\'   ))
-
-
-
+where  BB1."U_Origen" in(\'\''.'TRANSFERENCIAM'.'\'\',\'\''.'CREDITO'.'\'\',\'\''.'OTROS SERVICIOS'.'\'\'   ))
             )
         ) MM  WHERE MM."U_Sucursal"=\'\''.$sucursal.'\'\' and MM."U_NroTicket"=\'\''.$item.'\'\'   ORDER BY MM."U_NroTicket" DESC
-        
-    
     ');
-
-
-
-
-
-
-
-
-
      }else{
-
         if($nro_docv!=''){
-        
-            $all=hanaquery('
-        
-
-        select MM.U_Fecha,MM."U_Sucursal" ,MM."Code",MM."U_NroTicket",MM.DocStatus,MM.DocNum,MM."U_Placa",MM."U_Origen", MM."U_Estado",MM.FECHA
+            $all=hanaquery('select MM.U_Fecha,MM."U_Sucursal" ,MM."Code",MM."U_NroTicket",MM.DocStatus,MM.DocNum,MM."U_Placa",MM."U_Origen", MM."U_Estado",MM.FECHA
        FROM
         (
          (
-
            ( select  BB."U_Fecha" AS U_Fecha ,BB."U_Sucursal" ,BB."Code",BB."U_NroTicket",TX."DocStatus" as  DocStatus ,TX."DocNum" as DocNum,BB."U_Placa",BB."U_Origen", BB."U_Estado",
            concat(TO_DATE(BB."U_Fecha"),
            concat(\'\''.' '.'\'\',
@@ -1161,17 +1105,10 @@ where  BB1."U_Origen" in(\'\''.'CREDITO'.'\'\',\'\''.'OTROS SERVICIOS'.'\'\'   )
                   )
                )
            ) as FECHA
-
-         
             from "@BALANZA" BB
             INNER JOIN OINV TX  ON TX."DocEntry" = BB."U_DocEntryFactura"
             where  BB."U_Origen" in(\'\''.'CONTADO'.'\'\' ) )
-  
-          
-
 union 
-
-
 (select  BB1."U_Fecha" AS U_Fecha   ,BB1."U_Sucursal" ,BB1."Code",BB1."U_NroTicket",\'\''.''.'\'\' as DocStatus ,   0 as DocNum,BB1."U_Placa",BB1."U_Origen", BB1."U_Estado",
 concat(TO_DATE(BB1."U_Fecha"),
 concat(\'\''.' '.'\'\',
@@ -1180,32 +1117,17 @@ concat(\'\''.' '.'\'\',
        )
     )
 ) as FECHA
-
 from "@BALANZA" BB1
-where  BB1."U_Origen" in(\'\''.'CREDITO'.'\'\',\'\''.'OTROS SERVICIOS'.'\'\'   ))
-
-
-
+where  BB1."U_Origen" in(\'\''.'TRANSFERENCIAM'.'\'\',\'\''.'CREDITO'.'\'\',\'\''.'OTROS SERVICIOS'.'\'\'   ))
             )
-        ) MM  WHERE MM."U_Sucursal"=\'\''.$sucursal.'\'\' and MM."Code"=\'\''.$nro_docv.'\'\'   ORDER BY MM."U_NroTicket" DESC
-        
-    
-    ');
-
+        ) MM  WHERE MM."U_Sucursal"=\'\''.$sucursal.'\'\' and MM."Code"=\'\''.$nro_docv.'\'\'   ORDER BY MM."U_NroTicket" DESC');
         }else{
-
-
-
-            $all=hanaquery('
-        
-
-            select MM.U_Fecha,MM."U_Sucursal" ,MM."Code",MM."U_NroTicket" ,    MM.DocStatus,MM.DocNum,MM."U_Placa",MM."U_Origen", MM."U_Estado",MM.FECHA
+            $all=hanaquery('select MM.U_Fecha,MM."U_Sucursal" ,MM."Code",MM."U_NroTicket" , 
+            MM.DocStatus,MM.DocNum,MM."U_Placa",MM."U_Origen", MM."U_Estado",MM.FECHA
            FROM
             (
              (
-    
                ( select  BB."U_Fecha" AS U_Fecha ,BB."U_Sucursal" ,BB."Code",BB."U_NroTicket",  
-               
             TX."DocStatus"  AS  DocStatus ,TX."DocNum" as DocNum,BB."U_Placa",BB."U_Origen", BB."U_Estado",
                concat(TO_DATE(BB."U_Fecha"),
                concat(\'\''.' '.'\'\',
@@ -1214,17 +1136,10 @@ where  BB1."U_Origen" in(\'\''.'CREDITO'.'\'\',\'\''.'OTROS SERVICIOS'.'\'\'   )
                       )
                    )
                ) as FECHA
-    
-             
                 from "@BALANZA" BB
                 INNER JOIN OINV TX  ON TX."DocEntry" = BB."U_DocEntryFactura"
                 where  BB."U_Origen" in(\'\''.'CONTADO'.'\'\' ) )
-      
-              
-    
     union 
-    
-    
     (select  BB1."U_Fecha" AS U_Fecha   ,BB1."U_Sucursal" ,BB1."Code",BB1."U_NroTicket",\'\''.''.'\'\' as DocStatus ,   0 as DocNum,BB1."U_Placa",BB1."U_Origen", BB1."U_Estado",
     concat(TO_DATE(BB1."U_Fecha"),
     concat(\'\''.' '.'\'\',
@@ -1233,34 +1148,18 @@ where  BB1."U_Origen" in(\'\''.'CREDITO'.'\'\',\'\''.'OTROS SERVICIOS'.'\'\'   )
            )
         )
     ) as FECHA
-    
     from "@BALANZA" BB1
-    where  BB1."U_Origen" in(\'\''.'CREDITO'.'\'\',\'\''.'OTROS SERVICIOS'.'\'\'   ))
-    
-    
-    
+    where  BB1."U_Origen" in(\'\''.'TRANSFERENCIAM'.'\'\',\'\''.'CREDITO'.'\'\',\'\''.'OTROS SERVICIOS'.'\'\'   ))
                 )
             ) MM  WHERE MM."U_Sucursal"=\'\''.$sucursal.'\'\' and MM.U_Fecha BETWEEN \'\''.$fecha_i.'\'\' AND \'\''.$fecha_f.'\'\'  ORDER BY MM."U_NroTicket" DESC
-            
-        
         ');
-
         }
-
- 
-     
      }
- 
-
-
-
-
  //   $all=hanacall("\"SP_INT_GET_TABLE\"($item,'$fecha_i','$fecha_f','$sucursal')");
     //$pend=hanaquery('(select * from "@BALANZA" where "U_Estado"=\'\'1\'\' and "U_Sucursal"=\'\''.$sucursal.'\'\') UNION (select * from "@BALANZA" where "Code" in (select "Code" from "@BALANZA" where "U_Sucursal"=\'\''.$sucursal.'\'\' order by "U_Fecha" desc,"U_Hora" desc limit 1))');
    // $det=hanaquery("select b.* from \"@BALANZA\" a,\"@BALANZA1\" b where a.\"U_Estado\"=''1'' and a.\"Code\"=b.\"U_Nro_Ticket\"");
     $a='delete from balanza;';
     $x='delete from balanza1;';
-
     echo json_encode(array('all'=>$all,'pen'=>$a,'det'=>$x));
     break;
 

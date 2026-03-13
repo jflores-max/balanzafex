@@ -33,7 +33,6 @@
 				<div class="input-field col s2"><i class="material-icons prefix">search</i><input id="keyNumber_placa"
 						class="textt" type="text" autocomplete="off" placeholder="Nº"><label for="keyNumber_placa"
 						class="label">Buscar Nº Placa</label></div>
-
 				<div class="input-field col s1" style="margin-top: 0em; width: 5%; margin: auto;">
 					<button id="reporter" class="btn-floating btn-large waves-effect orange tooltip"
 						data-position="right" data-tooltip="Reportes"><i class="material-icons">print</i></button>
@@ -43,7 +42,6 @@
 					<input id="usuario" style="font-size: 10px;color: black;font-weight: bold; margin-left: 12%;"
 						type="text" class="form" autocomplete="off" disabled />
 					<label style="font-size: 15px;" for="usuario" class="label"> Usuario Actual</label>
-
 				</div>
 				<div class="input-field col s1" style="width: 9%;padding-right: 0rem !important;">
 					<i class="material-icons prefix purple-text" style="font-size: 20px;margin-left: -10%;">home</i>
@@ -51,7 +49,6 @@
 						style="font-size: 10px;color: black;font-weight: bold;    margin-left: 7%;    width: 100%;"
 						type="text" class="form" autocomplete="off" disabled>
 					<label for="sucursal" style="font-size: 15px;" class="label">Sucursal</label>
-
 				</div>
 				<a id="printer" class="btn waves-effect orange hide" style="margin-left: 1.5em;"><i
 						class="material-icons left">print</i>Imprimir Todo</a>
@@ -60,11 +57,8 @@
 				<thead>
 					<tr>
 						<th>Nº Ticket</th>
-						<!-- <th>Nº Documento</th> -->
 						<th width="80"><input id="keyy" type="text" autocomplete="off" style="width: 80px"
 								placeholder="Nº Documento"></th>
-
-
 						<th width="80"><input id="key" type="text" autocomplete="off" style="width: 80px"
 								placeholder="Placa"></th>
 						<th>Origen</th>
@@ -82,27 +76,13 @@
 	</div>
 </main>
 
-
-
-
-
-
-
 <script type="text/javascript">
 	let offlineList = [];
 	refresh();
-
-
-
-
 	setVal('fecha_i', getCurrentDate1());
 	setVal('fecha_f', getCurrentDate1());
-
-
 	setVal('sucursal', getSesion('sucursal'));
 	setVal('usuario', getSesion('owner'));
-
-
 	querySelector('#reporter').onclick = function () {
 		openMenu(this, ['Reporte de Caja al Contado', 'Reporte de Caja al Credito', 'Reporte de Credito por Razon Social'], function (index) {
 			switch (index) {
@@ -150,23 +130,16 @@
 		}
 	};
 
-
 	querySelector('#keyNumber_no').onkeydown = function (e) {
 		if (e.which == 13) {
 			load("", null, this.value);
 		}
 	};
 
-
 	querySelector('#keyNumber_placa').onkeydown = function (e) {
 		if (e.which == 13) {
-			//load("",null,this.value);
-
 			var candena = this.value;
-			//	alert(candena.length);
 			var procesado = candena.trim();
-			//alert(procesado.length);
-
 			send('server.php', { call: 'getPlacaCP', idSesion: getSesion('idSesion'), placa: procesado }, function (data) {
 				hideProgress();
 				var tdetalle = '';
@@ -184,22 +157,15 @@
 					show(tdetalle);
 					return;
 				}
-
-
 			});
-
 		}
 	};
-
-
 
 	setTitle('Pesajes');
 	if (getSesion('type') == 'A') {
 		querySelector('#new').remove();
 	} else {
 		querySelector('#new').onclick = function () {
-
-
 			send('server.php', { call: 'set_sesion_posi', posi: 'c.html' }, function (data) {
 				send('server.php', { call: 'get_sesion_posi' }, function (datad) {
 					if (datad.length > 0) {
@@ -212,71 +178,35 @@
 		}
 	}
 
-
-
-
-
-
-
 	async function load(tipo, tiket, nro_doc) {
-
 		var ticketr = '';
 		var nro_docc = '';
-
 		send('server.php', { call: 'get_ticket' }, function (datad) {
 			if (datad.length > 0) {
 				ticketr = datad[0]['ticketr'];
 				console.log("dr " + ticketr);
-
-
 			}
-
-
-
-
 			let cad = '';
 			if (tiket == null) {
 				tiket = '';
 			}
-
 			if (nro_doc == null) {
 				nro_doc = '';
 			}
 			querySelector('#tbody').innerHTML = '';
 			if (offline) {
-
 			} else {
-
 				setProgressMsg('Cargando...');
 				var fechaii = getVal('fecha_i');
 				var fechaff = getVal('fecha_f');
 				var pol = '';
-
-
-				//    send('server.php', { call: 'getDoc', ticket:'07-175-17708', idSesion: getSesion('idSesion') }, function (dataj) {
-				// 	console.log('Lista_info'+JSON.stringify(dataj));
-
-				//    });	
-
-				//  send('server.php', { call: 'getDocNO', norden:'220716896', idSesion: getSesion('idSesion') }, function (datajJ) {
-				// 	console.log('Lista_info NO'+JSON.stringify(datajJ));
-				//  });	
-
 				send('server.php', { call: 'get', idSesion: getSesion('idSesion'), item: tiket, nro_docv: nro_doc, fecha_i: fechaii, fecha_f: fechaff, sucursal: getSesion('sucursal') }, function (data) {
-
 					console.log('cdcdc ' + JSON.stringify(data));
-
-
-
-
-
 					data.all.forEach(function (item, index, ar) {
 						let origen = item['U_Origen'];
-
 						var cdestc = item['DOCSTATUS'];
 						switch (cdestc) {
 							case "C":
-
 								pol = `<button class="waves-effect btn green tiny-btn btn-info"><i class="material-icons left">lock</i></button>`;
 								break;
 							case "O":
@@ -286,41 +216,23 @@
 								pol = ``;
 								break;
 						}
-
 						if (origen == tipo | tiket != '' | tipo == '') {
 							let estado = item['U_Estado'];
 							let buttons = '';
 							let buttonClass = '';
 							var facturado = ``;
-
 							if (getSesion('type') == 'A' | getSesion('type') == 'U') {
-
-
-
 								facturado = `<button class="waves-effect btn orange tiny-btn btn-ticket"><i class="material-icons left">print</i>Ticket</button>`;
-
-
-
 								if (item['U_Sucursal'] == getSesion('sucursal_acopio')) {
-
-
 									facturado = facturado + `<button class="waves-effect btn orange tiny-btn btn-ticket_boleta"><i class="material-icons left">print</i>Ticket boleta </button>`;
 								}
-
-
 								if (item['U_Origen'] == 'CONTADO') {
 									facturado += `<button class="waves-effect btn orange tiny-btn btn-f"><i class="material-icons left">print</i>Detalle Factura</button>`;
 								}
-
-
 							}
-							buttons = `
-						
-
-						<form action="otros.php" method="post"  id="regi${item['Code']}" name="regi${item['Code']}">
+							buttons = `<form action="otros.php" method="post"  id="regi${item['Code']}" name="regi${item['Code']}">
                           <input type="text" style="display:none" name="code" id="code" value="${item['Code']}" />
                         </form>
-
 						<button class="waves-effect btn tiny-btn btn-rev"><i class="material-icons left">check</i>Revisar</button>
 						<button class="waves-effect btn orange tiny-btn btn-info"><i class="material-icons left">print</i>Informe</button>${facturado}`;
 							switch (estado) {
@@ -335,15 +247,10 @@
 									break;
 								case "3":
 									estado = `<div class="chip black white-text tiny-btn">Anulado</div>`;
-
 									buttons = `<button class="waves-effect btn tiny-btn btn-rev"><i class="material-icons left">check</i>Revisar</button>
 									<button class="waves-effect btn orange tiny-btn btn-info"><i class="material-icons left">print</i>Informe</button>${facturado}`;
 									break;
 							}
-
-
-
-
 							cad += `<tr><td class="log">${item['U_NroTicket']}</td><td class="keyy">${item['DOCNUM']}</td><td class="key">${item['U_Placa']}</td><td id="tipoo${item['Code']}">${item['U_Origen']}</td><td>${estado}</td><td>${item['FECHA']}</td><td more="${item['Code']}">${buttons}${pol}</td> </tr>`;
 						}
 					});
@@ -354,74 +261,21 @@
 							log('Error on data load');
 						}
 					});
-
 					querySelector('#tbody').innerHTML = cad;
 					afterLoad();
 					if (ticketr != "") {
-						send('server.php', { call: 'set_ticket', ticketr: "" }, function (datac) {
-							imprimir(ticketr);
-						});
+						send('server.php', { call: 'set_ticket', ticketr: "" }, function (datac) { imprimir(ticketr); });
 					}
-
-
 				});
-
-
-
-
-
-
 			}
-
-
-
-
-
-
-
 		});
-
-
-
-
-
-
-
-
-
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
 	function afterLoad() {
-
-
 		queryForeach('.btn-rev', function (e, i, a) {
 			e.onclick = function () {
 				var ele = e.parentNode.getAttribute('more');
-
 				var tipoo = $('#tipoo' + ele).text();
-
-
 				switch (tipoo) {
 					case "CREDITO":
 						if (offline) {
@@ -442,55 +296,36 @@
 						break;
 					case "OTROS SERVICIOS":
 						var cd = "regi" + ele;
-
 						document.getElementById(cd).submit();
 						break;
-
-
 				}
 
 			};
 		});
-
-
 		queryForeach('.btn-ticket', function (e, i, a) {
 			e.onclick = function () {
 				var ele = e.parentNode.getAttribute('more');
 				if (offline) {
 					printTicket(offlineList[parseInt(ele)]['id']);
 				} else {
-
-
-
 					var tipoo = $('#tipoo' + ele).text();
-
-
 					switch (tipoo) {
 						case "CREDITO":
 							printTicket(ele);
 							break;
 						case "CONTADO":
 							printTicket(ele);
-
 							break;
 						case "OTROS SERVICIOS":
-							//	alert(ele);
 							imprimir(ele);
 							break;
-
-
 					}
-
-
 				}
 			};
 		});
-
-
 		queryForeach('.btn-ticket_boleta', function (e, i, a) {
 			e.onclick = function () {
 				var ele = e.parentNode.getAttribute('more');
-
 				var tipoo = $('#tipoo' + ele).text();
 				switch (tipoo) {
 					case "CREDITO":
@@ -500,14 +335,8 @@
 						PrintElem(ele);
 						break;
 				}
-
-
 			};
 		});
-
-
-
-
 		queryForeach('.btn-f', function (e, i, a) {
 			if (offline) {
 				show('No disponible');
@@ -516,12 +345,8 @@
 			e.onclick = function () {
 				var ele = e.parentNode.getAttribute('more');
 				printF(ele);
-
 			};
 		});
-
-
-
 		queryForeach('.btn-info', function (e, i, a) {
 			e.onclick = function () {
 				var ele = e.parentNode.getAttribute('more');
@@ -536,18 +361,13 @@
 		refresh();
 		hideProgress();
 	}
+
+
+
 	document.querySelector('#exit').addEventListener('click', function (e) {
-
-
-
-
-
 		send('server.php', { call: 'get_sesion_posi' }, function (datad) {
-
-			console.log('ultimo datoa ' + datad.length);
 			if (datad.length > 0) {
 				var posii = datad[0]['posi'];
-				console.log("dr " + posii);
 				send('server.php', { call: 'cerrar_sesion' }, function (datadd) {
 					loadPageDirt('app', 'index.html');
 				});
@@ -557,10 +377,7 @@
 					loadPageDirt('app', 'index.html');
 				});
 			}
-
-
 		});
-
 		clearSesion('userPeaje');
 		clearSesion('sucursal');
 		clearSesion('ramaa');
@@ -570,17 +387,13 @@
 		clearSesion('passPeaje');
 		clearSesion('url');
 		clearSesion('logo');
-
-
-
 	});
+
+
 	document.querySelector('#exit').addEventListener('long-press', function (e) {
 		e.preventDefault();
 		openMenu(this, ['Documentos de Control', 'Errores'], function (index) {
 			switch (index) {
-
-
-
 				case 0:
 					showPop("Documentos de Control", `<div class="row center" style="margin-bottom:0em;">DESDE <b>${localDate(getVal('fecha_i'))}</b> HASTA <b>${localDate(getVal('fecha_f'))}</b></div><div class="table-o"> <table> <thead><tr><th>Nº</th><th>Fecha</th><th>Documento</th><th>Precio</th></tr></thead> <tbody id="tbody-o"></tbody> </table> </div> <div class="footer-o"> </div>`, function () {
 						setProgressMsg('Cargando...');
@@ -598,8 +411,6 @@
 						});
 					});
 					break;
-
-
 				case 1:
 					showErrors();
 					break;
@@ -612,6 +423,8 @@
 			}
 		});
 	});
+
+
 	querySelector('#loader').onclick = function () {
 		openMenu(this, ['Cargar Todos', 'Cargar al Contado', 'Cargar al Credito', 'Cargar Otros Servicios', 'Borrador'], function (index) {
 			switch (index) {
@@ -627,9 +440,6 @@
 				case 3:
 					load('OTROS SERVICIOS', null, null);
 					break;
-
-
-
 				case 4:
 					showPop("Borrador", `<div class="table-o"> <table> <thead><tr><th>Nº</th><th>Documento</th><th>Nit</th><th>Razon Social</th><th>Fecha</th><th>Opciones</th></tr></thead> <tbody id="tbody-o"></tbody> </table> </div> <div class="footer-o"> </div> `, function () {
 						setProgressMsg('Cargando...');
@@ -645,30 +455,13 @@
 							queryForeach('.btn-pro', function (ele, index, ar) {
 								ele.onclick = function () {
 									let inde = parseInt(this.getAttribute('index'));
-							
-
 									send('server.php', { call: 'buscar_datos_p_e_eraser', docentry_f: inde }, function (data_pe) {
-
-
-										console.log('DATOS_INFOR INVOICE ' + data_pe);
 										data_pe.forEach(function (item_dpe, indexxpe, arrpe) {
 											var docentry_p = (item_dpe.docentry_p);
 											var docentry_e = (item_dpe.docentry_e);
 											var docentry_ticket = (item_dpe.ticket);
-											console.log('DATOS_INFOR ' + docentry_p);
-											console.log('DATOS_INFOR ' + docentry_e);
-											console.log('DATOS_INFOR ' + docentry_ticket);
-
-
-
-
-
 											if (docentry_p == 0) {
-
-
-
 												send('server.php', { call: 'buscar_detalle_factura', docentry_f: inde }, function (data_docentry) {
-
 													var invoices = null;
 													var incomingPayments = null;
 													var deliveryNotes = null;
@@ -678,47 +471,22 @@
 													var itemCode_datos = null;
 													var data_cc_dd = null;
 													var infor11 = null;
-													console.log('DATOS_INFOR INVOICE ' + data_docentry);
-
-
 													data_docentry.forEach(function (item_d, indexx, arr) {
 														JSON_INVOICE = (item_d.JSON);
 														JSON_DATOS = (item_d.JSON_datos);
-														console.log('DATOS_INFOR INVOICE ' + JSON_INVOICE);
-														console.log('DATOS_INFOR DATOS ' + JSON_DATOS);
-
-
-
 														invoices = JSON_INVOICE;
-	                                                	invoices = invoices.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', "");
-		                                                invoices = JSON.parse(invoices);  
-		                                                console.log('DATOS_INFOR INVOICE 3 ' + invoices.DocEntry);
-
-
-														console.log('DATOS_INFOR INVOICE datos  1 ' + invoices.DocTotal);
-		                                                infor11=invoices.DocTotal;
-		                                                infor11=infor11.toString();
-		                                                console.log('DATOS_INFOR INVOICE datos  1 ' + infor11);
-													 
-
-
+														invoices = invoices.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', "");
+														invoices = JSON.parse(invoices);
+														infor11 = invoices.DocTotal;
+														infor11 = infor11.toString();
 														JSON_DATOS_E = JSON.parse(JSON_DATOS);
-														console.log('DATOS_INFOR INVOICE ' + JSON_DATOS_E);
-
-
-
 														send('server.php', { call: 'get_datos_user' }, function (datad) {
 															var userr = datad[0]['usert'];
 															var passr = datad[0]['passt'];
-
 															send('server.php', { call: 'logout', user: userr, pase: passr }, function (data_lg) {
 																if (data_lg == 0) {
-
 																	send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
 																		setSesion('idSesion', dataff);
-
-
-
 																		send('server.php', { call: 'getPago', docEntry: invoices.DocEntry }, function (data_bb) {
 																			var datoB = [];
 																			if (data_bb.length > 0) {
@@ -737,54 +505,33 @@
 																						}
 																					]
 																				});
-
 																				send('server.php', { call: 'get_datos_user' }, function (datad) {
 																					var userr = datad[0]['usert'];
 																					var passr = datad[0]['passt'];
-
-
 																					send('server.php', { call: 'logout', user: userr, pase: passr }, function (data_lg) {
 																						if (data_lg == 0) {
-
 																							send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
 																								setSesion('idSesion', dataff);
-
 																								send('server.php', { call: 'getIncomingPayments_', idSesion: dataff, array: JSON.stringify(datoB), docEntry: invoices.DocEntry }, function (data_bbb) {
-
 																									if (data_bbb == 0) {
 																										alert('Nose Pudo realizar el Pago !!!');
 																									} else {
 																										var dcds = JSON.stringify(data_bbb);
 																										dcds = dcds.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', "");
 																										incomingPayments = JSON.parse(dcds);
-
-
-
-
 																										send('server.php', { call: 'get_datos_user' }, function (datad) {
 																											var userr = datad[0]['usert'];
 																											var passr = datad[0]['passt'];
-
-
 																											send('server.php', { call: 'logout', user: userr, pase: passr }, function (data_lg) {
 																												if (data_lg == 0) {
-
-
 																													send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
 																														setSesion('idSesion', dataff);
-
-
 																														send('server.php', { call: 'getEntrega', docEntry: invoices.DocEntry }, function (data_cc) {
-
 																															data_cc_dd = data_cc;
-
 																															console.log('Entregaa ' + JSON.stringify(data_cc_dd));
-
 																															send('server.php', { call: 'getFactura_itemcode', user: getSesion('userPeaje') }, function (data_cc_itemcode) {
-
 																																if (data_cc_itemcode.length > 0) {
 																																	itemCode_datos = data_cc_itemcode[0]['ITEMCODE'];
-
 																																	let datoC = [];
 																																	datoC.push({
 																																		CardCode: data_cc_dd[0]['CardCode'],
@@ -800,44 +547,24 @@
 																																			}
 																																		]
 																																	});
-
-
-
-
-
-
 																																	send('server.php', { call: 'get_datos_user' }, function (datad) {
 																																		var userr = datad[0]['usert'];
 																																		var passr = datad[0]['passt'];
-
 																																		send('server.php', { call: 'logout', user: userr, pase: passr }, function (data_lg) {
 																																			if (data_lg == 0) {
-
-
 																																				send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
 																																					setSesion('idSesion', dataff);
-
-
 																																					send('server.php', { call: 'getDeliveryNotes_', idSesion: dataff, array: JSON.stringify(datoC), docEntry: invoices.DocEntry }, function (data_ccc) {
 																																						if (data_ccc == 0) {
 																																							alert('Nose Pudo realizar la Entrega !!!');
 																																						} else {
 																																							var dcds = JSON.stringify(data_ccc);
-																																							dcds = dcds.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', ""); 
+																																							dcds = dcds.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', "");
 																																							deliveryNotes = JSON.parse(dcds);
 																																							show("Factura generada Correctamente");
-																																							console.log('datos ' + JSON.stringify(JSON_DATOS));
-
-
-
-
-
 																																							JSON_DATOS_E.forEach(function (item_dd, index_dd, ar_dd) {
 																																								console.log('DATOS_INFOR INVOICE ' + item_dd.Code);
-
-
 																																								let endData = [];
-
 																																								endData.push({
 																																									"Code": item_dd.Code,
 																																									"Name": item_dd.Name,
@@ -857,8 +584,6 @@
 																																									"U_Neto": item_dd.U_Neto,
 																																									"U_NIT": item_dd.U_NIT,
 																																									"U_RazonSocial": item_dd.U_RazonSocial,
-
-
 																																									"U_CardCode": incomingPayments['CardCode'],
 																																									"U_NroFactura": invoices['U_LB_NumeroFactura'],
 																																									"U_NroAutorizacion": invoices['U_LB_NumeroAutorizac'],
@@ -871,8 +596,6 @@
 																																									"U_NroDocPagoRec": incomingPayments['DocEntry'],
 																																									"U_DocEntryEntrega": deliveryNotes['DocEntry'],
 																																									"U_NroDocEntrega": deliveryNotes['DocNum'],
-
-
 																																									"U_IdUsuario": item_dd.U_IdUsuario,
 																																									"U_NroDoc": item_dd.U_NroDoc,
 																																									"U_Nombre": item_dd.U_Nombre,
@@ -883,9 +606,7 @@
 																																									"U_HoraSal": null
 																																								});
 																																								console.log('DATOS_INFOR ' + JSON.stringify(endData));
-
 																																								setProgressMsg('Guardando...');
-
 																																								send('server.php', { call: 'get_datos_user' }, function (datad) {
 																																									var userr = datad[0]['usert'];
 																																									var passr = datad[0]['passt'];
@@ -906,158 +627,40 @@
 
 																																											}
 																																											setTimeout(() => showSDialog('Impresión', printForm, 'OK', prepare, function () { hideDialog(); }, null), 1000);
-
 																																										});
 																																									});
 																																								});
-
-
-
-
-
-
-
-
 																																							});
-
-
-
-
-
 																																						}
 																																					});
-
-
 																																				});
-
 																																			}
-
 																																		});
-
-
-
-
 																																	});
-
-
-
-
 																																}
-
-
 																															});
-
-
 																														});
-
-
-
 																													});
-
-
 																												}
-
-
-
-
-
 																											});
-
-
 																										});
-
-
 																									}
-
 																								});
-
 																							});
-
 																						}
-
 																					});
-
-
-
-
 																				});
-
-
-
-
-
-
 																			}
 																		});
-
-
-
-
-
-
 																	});
-
 																}
 															});
 														});
-
-
-
-
-
-
-
-
-
-
-
-
 													});
-
 												});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 											}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 											if (docentry_e == 0) {
-
-
-											
 												send('server.php', { call: 'buscar_detalle_factura', docentry_f: inde }, function (data_docentry) {
-
 													var invoices = null;
 													var incomingPayments = null;
 													var deliveryNotes = null;
@@ -1069,82 +672,39 @@
 													var itemCode_datos = null;
 													var data_cc_dd = null;
 													var infor11 = null;
-													console.log('DATOS_INFOR INVOICE ' + data_docentry);
-
-
-													 data_docentry.forEach(function (item_d, indexx, arr) {
-													 	JSON_INVOICE = (item_d.JSON);
-													 	JSON_DATOS = (item_d.JSON_datos);
+													data_docentry.forEach(function (item_d, indexx, arr) {
+														JSON_INVOICE = (item_d.JSON);
+														JSON_DATOS = (item_d.JSON_datos);
 														console.log('DATOS_INFOR INVOICE ' + JSON_INVOICE);
 														console.log('DATOS_INFOR DATOS  entrega' + JSON_DATOS);
-
-
-
-
 														invoices = JSON_INVOICE;
-	                                                	invoices = invoices.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', "");
-		                                                invoices = JSON.parse(invoices);  
-		                                                console.log('DATOS_INFOR INVOICE 3 ' + invoices.DocEntry);
-
-
+														invoices = invoices.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', "");
+														invoices = JSON.parse(invoices);
+														console.log('DATOS_INFOR INVOICE 3 ' + invoices.DocEntry);
 														console.log('DATOS_INFOR INVOICE datos  1 ' + invoices.DocTotal);
-		                                                infor11=invoices.DocTotal;
-		                                                infor11=infor11.toString();
-		                                                console.log('DATOS_INFOR INVOICE datos  1 ' + infor11);
-													 
-
-
-													 	JSON_DATOS_E = JSON.parse(JSON_DATOS);
-													 	console.log('DATOS_INFOR INVOICE campo intro ' + JSON.stringify(JSON_DATOS_E));
-
-
-
-
+														infor11 = invoices.DocTotal;
+														infor11 = infor11.toString();
+														console.log('DATOS_INFOR INVOICE datos  1 ' + infor11);
+														JSON_DATOS_E = JSON.parse(JSON_DATOS);
+														console.log('DATOS_INFOR INVOICE campo intro ' + JSON.stringify(JSON_DATOS_E));
 														send('server.php', { call: 'buscar_detalle_factura_pago', docentry_f: inde }, function (data_pago) {
-
-
-
 															console.log('DATOS_INFOR INVOICE ' + data_pago);
-
-
 															data_pago.forEach(function (item_dp, indexxp, arrp) {
 																JSON_PAGO = (item_dp.JSON);
-																JSON_PAGO = JSON_PAGO.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', ""); 
+																JSON_PAGO = JSON_PAGO.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', "");
 																incomingPayments = JSON.parse(JSON_PAGO);
-
-																console.log('DATOS_INFOR INVOICE ' + JSON.stringify(incomingPayments));
-
-
-															
-
-
-
 																send('server.php', { call: 'get_datos_user' }, function (datad) {
 																	var userr = datad[0]['usert'];
 																	var passr = datad[0]['passt'];
-
-
 																	send('server.php', { call: 'logout', user: userr, pase: passr }, function (data_lg) {
 																		if (data_lg == 0) {
-
-
 																			send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
 																				setSesion('idSesion', dataff);
-
-																
 																				send('server.php', { call: 'getEntrega', docEntry: invoices.DocEntry }, function (data_cc) {
-
 																					data_cc_dd = data_cc;
-
-																					console.log('Entregaa ' + JSON.stringify(data_cc_dd));
-
 																					send('server.php', { call: 'getFactura_itemcode', user: getSesion('userPeaje') }, function (data_cc_itemcode) {
-
 																						if (data_cc_itemcode.length > 0) {
 																							itemCode_datos = data_cc_itemcode[0]['ITEMCODE'];
-
-
-
 																							let datoC = [];
 																							datoC.push({
 																								CardCode: data_cc_dd[0]['CardCode'],
@@ -1160,152 +720,95 @@
 																									}
 																								]
 																							});
-
-
-
 																							send('server.php', { call: 'get_datos_user' }, function (datad) {
 																								var userr = datad[0]['usert'];
 																								var passr = datad[0]['passt'];
-
 																								send('server.php', { call: 'logout', user: userr, pase: passr }, function (data_lg) {
 																									if (data_lg == 0) {
-
-
 																										send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
 																											setSesion('idSesion', dataff);
-
-
-																											console.log('DATOS_INFOR jj ' + JSON.stringify(datoC));
-
-
 																											send('server.php', { call: 'getDeliveryNotes_', idSesion: dataff, array: JSON.stringify(datoC), docEntry: invoices.DocEntry }, function (data_ccc) {
 																												if (data_ccc == 0) {
 																													alert('Nose Pudo realizar la Entrega !!!');
-
 																												} else {
+																													var dcds = JSON.stringify(data_ccc);
+																													dcds = dcds.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', "");
+																													deliveryNotes = JSON.parse(dcds);
+																													show("Factura generada Correctamente");
+																													JSON_DATOS_E.forEach(function (item_dd, index_dd, ar_dd) {
+																														console.log('DATOS_INFOR INVOICE ' + item_dd.Code);
+																														let endData = [];
+																														endData.push({
+																															"Code": item_dd.Code,
+																															"Name": item_dd.Name,
+																															"U_NroTicket": item_dd.U_NroTicket,
+																															"U_Sucursal": item_dd.U_Sucursal,
+																															"U_Fecha": null,
+																															"U_Hora": null,
+																															"U_Origen": item_dd.U_Origen,
+																															"U_Estado": item_dd.U_Estado,
+																															"U_Placa": item_dd.U_Placa,
+																															"U_Marca": item_dd.U_Marca,
+																															"U_Color": item_dd.U_Color,
+																															"U_NombreChofer": item_dd.U_NombreChofer,
+																															"U_CI_Chofer": item_dd.U_CI_Chofer,
+																															"U_Bruto": item_dd.U_Bruto,
+																															"U_Tara": item_dd.U_Tara,
+																															"U_Neto": item_dd.U_Neto,
+																															"U_NIT": item_dd.U_NIT,
+																															"U_RazonSocial": item_dd.U_RazonSocial,
+																															"U_CardCode": incomingPayments['CardCode'],
+																															"U_NroFactura": invoices['U_LB_NumeroFactura'],
+																															"U_NroAutorizacion": invoices['U_LB_NumeroAutorizac'],
+																															"U_CodigoControl": invoices['U_LB_CodigoControl'],
+																															"U_FecLimEmision": invoices['U_LB_FechaLimiteEmis'],
+																															"U_TotalFactura": infor11,
+																															"U_DocEntryFactura": invoices['DocEntry'],
+																															"U_NroDocFactura": invoices['DocNum'],
+																															"U_DocEntryPagoRec": incomingPayments['DocNum'],
+																															"U_NroDocPagoRec": incomingPayments['DocEntry'],
+																															"U_DocEntryEntrega": deliveryNotes['DocEntry'],
+																															"U_NroDocEntrega": deliveryNotes['DocNum'],
+																															"U_IdUsuario": item_dd.U_IdUsuario,
+																															"U_NroDoc": item_dd.U_NroDoc,
+																															"U_Nombre": item_dd.U_Nombre,
+																															"U_OrigenDoc": item_dd.U_OrigenDoc,
+																															"U_Observaciones": null,
+																															"U_Observaciones2": null,
+																															"U_FechaSal": null,
+																															"U_HoraSal": null
+																														});
+																														console.log('DATOS_INFOR ' + JSON.stringify(endData));
 
+																														setProgressMsg('Guardando...');
 
+																														send('server.php', { call: 'get_datos_user' }, function (datad) {
+																															var userr = datad[0]['usert'];
+																															var passr = datad[0]['passt'];
+																															send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
+																																setSesion('idSesion', dataff);
+																																setProgressMsg('Guardando...');
 
-																														var dcds = JSON.stringify(data_ccc);
-																														dcds = dcds.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', ""); 
-																														deliveryNotes = JSON.parse(dcds);
-																														show("Factura generada Correctamente");
-																														console.log('datos ' + JSON.stringify(JSON_DATOS));
+																																send('server.php', {
+																																	call: 'finishBalanza_contado', idSesion: dataff,
+																																	array: JSON.stringify(endData), ob11: "Sin observacion", ob22: "Sin Observacion", usuariot: userr
+																																}, function (data_fini) {
+																																	hideProgress();
+																																	hideDialog();
+																																	show('Guardado Correctamente');
+																																	let printForm = `<button class="waves-effect btn orange tiny-btn btn-ticket" onclick="printTicket('${data_fini.id}')"><i class="material-icons left">print</i>Ticket</button>`;
+																																	if (data_fini.isNew) {
 
+																																		printForm += `<button class="waves-effect btn orange tiny-btn btn-f" onclick="printF('${data_fini.id}')"><i class="material-icons left">print</i>Factura</button>`;
 
-
-
-
-
-																														JSON_DATOS_E.forEach(function (item_dd, index_dd, ar_dd) {
-																															console.log('DATOS_INFOR INVOICE ' + item_dd.Code);
-
-
-																															let endData = [];
-
-																															endData.push({
-																																"Code": item_dd.Code,
-																																"Name": item_dd.Name,
-																																"U_NroTicket": item_dd.U_NroTicket,
-																																"U_Sucursal": item_dd.U_Sucursal,
-																																"U_Fecha": null,
-																																"U_Hora": null,
-																																"U_Origen": item_dd.U_Origen,
-																																"U_Estado": item_dd.U_Estado,
-																																"U_Placa": item_dd.U_Placa,
-																																"U_Marca": item_dd.U_Marca,
-																																"U_Color": item_dd.U_Color,
-																																"U_NombreChofer": item_dd.U_NombreChofer,
-																																"U_CI_Chofer": item_dd.U_CI_Chofer,
-																																"U_Bruto": item_dd.U_Bruto,
-																																"U_Tara": item_dd.U_Tara,
-																																"U_Neto": item_dd.U_Neto,
-																																"U_NIT": item_dd.U_NIT,
-																																"U_RazonSocial": item_dd.U_RazonSocial,
-
-
-																																"U_CardCode": incomingPayments['CardCode'],
-																																"U_NroFactura": invoices['U_LB_NumeroFactura'],
-																																"U_NroAutorizacion": invoices['U_LB_NumeroAutorizac'],
-																																"U_CodigoControl": invoices['U_LB_CodigoControl'],
-																																"U_FecLimEmision": invoices['U_LB_FechaLimiteEmis'],
-																																"U_TotalFactura": infor11,
-																																"U_DocEntryFactura": invoices['DocEntry'],
-																																"U_NroDocFactura": invoices['DocNum'],
-																																"U_DocEntryPagoRec": incomingPayments['DocNum'],
-																																"U_NroDocPagoRec": incomingPayments['DocEntry'],
-																																"U_DocEntryEntrega": deliveryNotes['DocEntry'],
-																																"U_NroDocEntrega": deliveryNotes['DocNum'],
-
-
-																																"U_IdUsuario": item_dd.U_IdUsuario,
-																																"U_NroDoc": item_dd.U_NroDoc,
-																																"U_Nombre": item_dd.U_Nombre,
-																																"U_OrigenDoc": item_dd.U_OrigenDoc,
-																																"U_Observaciones": null,
-																																"U_Observaciones2": null,
-																																"U_FechaSal": null,
-																																"U_HoraSal": null
-																															});
-																															console.log('DATOS_INFOR ' + JSON.stringify(endData));
-
-																															setProgressMsg('Guardando...');
-
-																															send('server.php', { call: 'get_datos_user' }, function (datad) {
-																																var userr = datad[0]['usert'];
-																																var passr = datad[0]['passt'];
-																																send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
-																																	setSesion('idSesion', dataff);
-																																	setProgressMsg('Guardando...');
-
-																																	send('server.php', {
-																																		call: 'finishBalanza_contado', idSesion: dataff,
-																																		array: JSON.stringify(endData), ob11: "Sin observacion", ob22: "Sin Observacion", usuariot: userr
-																																	}, function (data_fini) {
-																																		hideProgress();
-																																		hideDialog();
-																																		show('Guardado Correctamente');
-																																		let printForm = `<button class="waves-effect btn orange tiny-btn btn-ticket" onclick="printTicket('${data_fini.id}')"><i class="material-icons left">print</i>Ticket</button>`;
-																																		if (data_fini.isNew) {
-
-																																			printForm += `<button class="waves-effect btn orange tiny-btn btn-f" onclick="printF('${data_fini.id}')"><i class="material-icons left">print</i>Factura</button>`;
-
-																																		}
-																																		setTimeout(() => showSDialog('Impresión', printForm, 'OK', prepare, function () { hideDialog(); }, null), 1000);
-
-																																	});
+																																	}
+																																	setTimeout(() => showSDialog('Impresión', printForm, 'OK', prepare, function () { hideDialog(); }, null), 1000);
 
 																																});
+
 																															});
-
-
-
-
-
-
-
-
 																														});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+																													});
 
 																												}
 																											});
@@ -1316,191 +819,60 @@
 																									}
 
 																								});
-
-
-
-
 																							});
-
-
-
-
 																						}
 
 																					});
-
-
-
-
-
-
 																				});
-
-
-
 																			});
-
-
 																		}
-
-
-
-
-
 																	});
-
-
 																});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 															});
-
-
-
-
-
-
 														});
-
-
-
-
-
-
-
-
-
-
-
-
 													});
-
-
-
-
-
-
 												});
-
-
 											}
-
-
-
-
-											
-												if(docentry_ticket==0){
-
-
-
-
-send('server.php', { call: 'buscar_detalle_factura', docentry_f: inde }, function (data_docentry) {
-
-	var invoices = null;
-	var incomingPayments = null;
-	var deliveryNotes = null;
-	var JSON_INVOICE = null;
-	var JSON_PAGO = null;
-	var JSON_ENTREGA = null;
-	var JSON_DATOS = null;
-	var JSON_DATOS_E = null;
-	var itemCode_datos = null;
-	var data_cc_dd = null;
-	var infor11 = null;
-
-	console.log('DATOS_INFOR INVOICE 0 ' + data_docentry);
-
-
-	data_docentry.forEach(function (item_d, indexx, arr) {
-		JSON_INVOICE = (item_d.JSON);
-		JSON_DATOS = (item_d.JSON_datos);
-		console.log('DATOS_INFOR INVOICE 1 ' + JSON_INVOICE);
-		console.log('DATOS_INFOR INVOICE 2 ' + JSON_DATOS);
-		invoices = JSON_INVOICE;
-		invoices = invoices.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', "");
-		invoices = JSON.parse(invoices);  
-		console.log('DATOS_INFOR INVOICE 3 ' + invoices.DocEntry);
-
-
-
-		console.log('DATOS_INFOR INVOICE datos  1 ' + invoices.DocTotal);
-		infor11=invoices.DocTotal;
-		infor11=infor11.toString();
-		console.log('DATOS_INFOR INVOICE datos  1 ' + infor11);
-
-
-
-		JSON_DATOS_E = JSON.parse(JSON_DATOS);
-		console.log('DATOS_INFOR INVOICE 4 ' + JSON.stringify(JSON_DATOS_E));
-
-
-
-
-		send('server.php', { call: 'buscar_detalle_factura_pago', docentry_f: inde }, function (data_pago) {
-
-
-
-			console.log('DATOS_INFOR INVOICE 5 ' + data_pago);
-
-
-			data_pago.forEach(function (item_dp, indexxp, arrp) {
-				JSON_PAGO = (item_dp.JSON);
-				JSON_PAGO = JSON_PAGO.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', ""); 
-				incomingPayments = JSON.parse(JSON_PAGO);
-
-				console.log('DATOS_INFOR INVOICE ' + JSON.stringify(incomingPayments));
-
-
-		
-
-				
-
-				send('server.php', { call: 'buscarentrega', docentry_f: invoices.DocEntry }, function (dataentregaa) {
-																			console.log('DATOS_INFOR INVOICE ' + dataentregaa);
-																						  
-
-
-
-
-
-																			dataentregaa.forEach(function (item_dpe, indexxpe, arrpe) {
-																				JSON_ENTREGA = (item_dpe.JSON);
-																				JSON_ENTREGA = JSON_ENTREGA.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', ""); 
-																				deliveryNotes = JSON.parse(JSON_ENTREGA);
-
-
-
-
-
-
-																				JSON_DATOS_E.forEach(function (item_dd, index_dd, ar_dd) {
-																			console.log('DATOS_INFOR INVOICE ' + item_dd.Code);
-
-
+											if (docentry_ticket == 0) {
+												send('server.php', { call: 'buscar_detalle_factura', docentry_f: inde }, function (data_docentry) {
+													var invoices = null;
+													var incomingPayments = null;
+													var deliveryNotes = null;
+													var JSON_INVOICE = null;
+													var JSON_PAGO = null;
+													var JSON_ENTREGA = null;
+													var JSON_DATOS = null;
+													var JSON_DATOS_E = null;
+													var itemCode_datos = null;
+													var data_cc_dd = null;
+													var infor11 = null;
+													data_docentry.forEach(function (item_d, indexx, arr) {
+														JSON_INVOICE = (item_d.JSON);
+														JSON_DATOS = (item_d.JSON_datos);
+														console.log('DATOS_INFOR INVOICE 1 ' + JSON_INVOICE);
+														console.log('DATOS_INFOR INVOICE 2 ' + JSON_DATOS);
+														invoices = JSON_INVOICE;
+														invoices = invoices.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', "");
+														invoices = JSON.parse(invoices);
+														console.log('DATOS_INFOR INVOICE 3 ' + invoices.DocEntry);
+														console.log('DATOS_INFOR INVOICE datos  1 ' + invoices.DocTotal);
+														infor11 = invoices.DocTotal;
+														infor11 = infor11.toString();
+														console.log('DATOS_INFOR INVOICE datos  1 ' + infor11);
+														JSON_DATOS_E = JSON.parse(JSON_DATOS);
+														console.log('DATOS_INFOR INVOICE 4 ' + JSON.stringify(JSON_DATOS_E));
+														send('server.php', { call: 'buscar_detalle_factura_pago', docentry_f: inde }, function (data_pago) {
+															data_pago.forEach(function (item_dp, indexxp, arrp) {
+																JSON_PAGO = (item_dp.JSON);
+																JSON_PAGO = JSON_PAGO.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', "");
+																incomingPayments = JSON.parse(JSON_PAGO);
+																send('server.php', { call: 'buscarentrega', docentry_f: invoices.DocEntry }, function (dataentregaa) {
+																	dataentregaa.forEach(function (item_dpe, indexxpe, arrpe) {
+																		JSON_ENTREGA = (item_dpe.JSON);
+																		JSON_ENTREGA = JSON_ENTREGA.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', "");
+																		deliveryNotes = JSON.parse(JSON_ENTREGA);
+																		JSON_DATOS_E.forEach(function (item_dd, index_dd, ar_dd) {
 																			let endData = [];
-
 																			endData.push({
 																				"Code": item_dd.Code,
 																				"Name": item_dd.Name,
@@ -1520,8 +892,6 @@ send('server.php', { call: 'buscar_detalle_factura', docentry_f: inde }, functio
 																				"U_Neto": item_dd.U_Neto,
 																				"U_NIT": item_dd.U_NIT,
 																				"U_RazonSocial": item_dd.U_RazonSocial,
-
-
 																				"U_CardCode": incomingPayments['CardCode'],
 																				"U_NroFactura": invoices['U_LB_NumeroFactura'],
 																				"U_NroAutorizacion": invoices['U_LB_NumeroAutorizac'],
@@ -1534,8 +904,6 @@ send('server.php', { call: 'buscar_detalle_factura', docentry_f: inde }, functio
 																				"U_NroDocPagoRec": incomingPayments['DocEntry'],
 																				"U_DocEntryEntrega": deliveryNotes['DocEntry'],
 																				"U_NroDocEntrega": deliveryNotes['DocNum'],
-
-
 																				"U_IdUsuario": item_dd.U_IdUsuario,
 																				"U_NroDoc": item_dd.U_NroDoc,
 																				"U_Nombre": item_dd.U_Nombre,
@@ -1560,7 +928,7 @@ send('server.php', { call: 'buscar_detalle_factura', docentry_f: inde }, functio
 																						call: 'finishBalanza_contado', idSesion: dataff,
 																						array: JSON.stringify(endData), ob11: "Sin observacion", ob22: "Sin Observacion", usuariot: userr
 																					}, function (data_fini) {
-																						console.log('retalle '+JSON.stringify(data_fini));
+																						console.log('retalle ' + JSON.stringify(data_fini));
 																						hideProgress();
 																						hideDialog();
 																						show('Guardado Correctamente');
@@ -1578,104 +946,17 @@ send('server.php', { call: 'buscar_detalle_factura', docentry_f: inde }, functio
 																				});
 																			});
 
-
-
-
-
-
-
-
 																		});
-
-
-
-
-																			});
-
-
-
-
-
-
-											
-
-
-																		});
-
-
-
-
-
-
-			});
-
-
-
-
-
-
-		});
-
-
-
-
-	});
-
-
-
-
-
-
-});
-
-
-
-
-
-}
-
-
-
-
-                                      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+																	});
+																});
+															});
+														});
+													});
+												});
+											}
 
 										});
-
-
-
 									});
-
-
-
-
-
-
-
-
-
 								}
 							});
 							hideProgress();
@@ -1683,11 +964,6 @@ send('server.php', { call: 'buscar_detalle_factura', docentry_f: inde }, functio
 						});
 					});
 					break;
-
-
-
-
-
 			}
 		});
 	}
@@ -1698,11 +974,6 @@ send('server.php', { call: 'buscar_detalle_factura', docentry_f: inde }, functio
 		});
 		print(prints);
 	}
-
-
-
-
-
 	querySelector('#key').onkeyup = function () {
 		if (this.value != null) {
 			var valo = this.value;
@@ -1720,7 +991,6 @@ send('server.php', { call: 'buscar_detalle_factura', docentry_f: inde }, functio
 		}
 	}
 
-
 	querySelector('#keyy').onkeyup = function () {
 		if (this.value != null) {
 			var valo = this.value;
@@ -1737,8 +1007,5 @@ send('server.php', { call: 'buscar_detalle_factura', docentry_f: inde }, functio
 			});
 		}
 	}
-
-
-
 	load('', null, null);
 </script>

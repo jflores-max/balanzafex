@@ -689,40 +689,10 @@ function callApiss($type,$url,$params,$idSesion,$usuario, $sucursal, $code){
 }
 
 
-
-
-
-
-
-
-
-
-
-// function callPost($url,$params,$idSesion){
-// 	if($idSesion!=null){
-// 		$header=array('Content-type: application/json;odata=minimalmetadata;charset=utf8\r\n',"Cookie: B1SESSION=$idSesion; ROUTEID=.node0");
-// 	}else{
-// 		$header=array('Content-type: application/json;odata=minimalmetadata;charset=utf8\r\n');
-// 	}
-// 	$res=@file_get_contents($url, false, stream_context_create([
-// 		"ssl"=>[
-// 		"verify_peer"=>false,
-// 		"verify_peer_name"=>false,
-// 		],
-// 		'http' => [
-// 		'method' => 'POST',
-// 		'header'  => $header,
-// 		'content' => json_encode($params)
-// 		]
-// 		]));
-// 	return $res;
-// }
-
 function callPost($url) {
     $header = [
         'Content-type: application/json;odata=minimalmetadata;charset=utf8\r\n'
     ];
-
     $context = stream_context_create([
         'http' => [
             'method'  => 'POST',
@@ -730,13 +700,10 @@ function callPost($url) {
             'content' => json_encode([]) // sin parámetros, la balanza solo devuelve el peso
         ]
     ]);
-
     $res = @file_get_contents($url, false, $context);
-
     if ($res === false) {
         return null; // error → no hay peso
     }
-
     return trim($res);
 }
 
