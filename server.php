@@ -1263,23 +1263,17 @@ where  BB1."U_Origen" in(\'\''.'TRANSFERENCIAM'.'\'\',\'\''.'CREDITO'.'\'\',\'\'
 
 
     case 'finishBalanza_contado':
-
-
- 
         $idSesion=posted('idSesion');
         $usuariot=posted('usuariot');
         $ob1=posted('ob11');
         $ob2=posted('ob22');
         $data=json_decode($_POST['array'],TRUE);
-
-
         $isNew=false;
         $data[0]['U_Fecha']=$fecha;
         $data[0]['U_Hora']=$hora;
         $sucursal=$data[0]['U_Sucursal'];
         $usuario=$data[0]['U_IdUsuario'];
         $array=array();
-        
         $datas=hanacall("\"SP_INT_DATA\"('$usuario')");
         $preNew=hanaquery("select max(\"U_NroTicket\") as MAX from \"@BALANZA\" where \"U_Sucursal\"=''$sucursal'' and \"U_IdUsuario\"=''$usuario''");
         $max=intval($preNew[0]['MAX']);
@@ -1288,7 +1282,6 @@ where  BB1."U_Origen" in(\'\''.'TRANSFERENCIAM'.'\'\',\'\''.'CREDITO'.'\'\',\'\'
         $branch=$datas[0]['RAMA'];
         $newCode="{$branch}-{$codi}-{$max}";
         $old=null;
-        
         if($data[0]['Code']=='0'){
             $code=0;
             $data[0]['Code']=$newCode;
@@ -1301,40 +1294,22 @@ where  BB1."U_Origen" in(\'\''.'TRANSFERENCIAM'.'\'\',\'\''.'CREDITO'.'\'\',\'\'
             $data[0]['U_NroTicket']=$ticket;
             $isNew=true;
         }
- 
-      
-        
-        
-        
         session_start();
         if(isset($_SESSION['usert'])){
         $usuariot=$_SESSION['usert'];
-        
         if($isNew){
             $res=callApiss('POST',$mainUrl.'U_BALANZA',$data[0],$idSesion,$usuariot, $sucursal, $code );
             $res=json_decode($res,TRUE);
-
-             
-
-
             if(isset($res['error'])){
                 echo json_encode($res);
             }else if(isset($res['U_NroDocFactura'])){
-               //   query("delete from eraser where docnum_f=".$res['U_NroDocFactura']);
-
                   query("update eraser set Estado=2  where docnum_f=".$res['U_NroDocFactura']);
-
-
                 echo json_encode(array('isNew' => $isNew,'id' => $res['Code']));
             }else{
                 echo json_encode(0);
             }
         }
-
-  
         }
-        
-        
         break;
         
         
@@ -1343,9 +1318,6 @@ where  BB1."U_Origen" in(\'\''.'TRANSFERENCIAM'.'\'\',\'\''.'CREDITO'.'\'\',\'\'
 
 
 case 'finishBalanza':
-
-
-
 $idSesion=posted('idSesion');
 $usuariot=posted('usuariot');
 $ob1=posted('ob11');
@@ -1358,7 +1330,6 @@ $data[0]['U_Hora']=$hora;
 $sucursal=$data[0]['U_Sucursal'];
 $usuario=$data[0]['U_IdUsuario'];
 $array=array();
-
 $datas=hanacall("\"SP_INT_DATA\"('$usuario')");
 $preNew=hanaquery("select max(\"U_NroTicket\") as MAX from \"@BALANZA\" where \"U_Sucursal\"=''$sucursal'' and \"U_IdUsuario\"=''$usuario''");
 $max=intval($preNew[0]['MAX']);
@@ -1372,7 +1343,6 @@ if($data[0]['Code']=='0'){
     $data[0]['Code']=$newCode;
     $data[0]['Name']=$newCode;
     $data[0]['U_Observaciones']=$ob1;
-  
     $resT=hanaquery('select max("U_NroTicket") as MAX from "@BALANZA" where "U_Sucursal"=\'\''.$sucursal.'\'\'');
     $ticket=isset($resT[0]['MAX'])?$resT[0]['MAX']:0;
     $ticket=intval($ticket)+1;
@@ -1392,27 +1362,16 @@ $array['U_Tara']=$data[0]['U_Tara'];
 $array['U_Bruto']=$data[0]['U_Bruto'];
 $array['U_Neto']=$data[0]['U_Neto'];
 $array['U_Observaciones2']=$data[0]['U_Observaciones2'];
-
-
-
 session_start();
 if(isset($_SESSION['usert'])){
 $usuariot=$_SESSION['usert'];
-
 if($isNew){
     $res=callApiss('POST',$mainUrl.'U_BALANZA',$data[0],$idSesion,$usuariot, $sucursal, $code );
     $res=json_decode($res,TRUE);
     if(isset($res['error'])){
         echo json_encode($res);
     }else if(isset($res['U_NroDocFactura'])){
-        //descomentar
-
-        //  query("delete from eraser where docnum_f=".$res['U_NroDocFactura']);
-         
-          query("update eraser set Estado=2 where docnum_f=".$res['U_NroDocFactura']);
-
-
-
+        query("update eraser set Estado=2 where docnum_f=".$res['U_NroDocFactura']);
         echo json_encode(array('isNew' => $isNew,'id' => $res['Code']));
     }else{
         echo json_encode(0);
@@ -1429,8 +1388,6 @@ if($old!=null){
     loger($old,$usuario,$idSesion,$usuariot);
 }
 }
-
-
 break;
 
 
