@@ -539,6 +539,18 @@
             var procesado = candena.trim();
             const datap = await sendAsync("server.php", { call: "getPlacaCP", idSesion: getSesion("idSesion"), placa: procesado });
             if (datap.length > 0) {
+
+      if (getVal('peso1') == '' | getVal('peso2') == '') {
+        show('Complete los campos de Pesaje Correctamente');
+        return;
+      }
+      if (getVal('peso1') == '0' & getVal('peso2') == '0') {
+        show('Complete los campos de Pesaje Correctamente');
+        return;
+      }
+      if ((getVal('peso1') != '0' & getVal('peso2') == '0') | (getVal('peso1') == '0' & getVal('peso2') != '0')) {
+
+
               if (getVal("ticket") != "0") {
                 await ejecutar_armo_array(armo_array, "TRANSFERENCIA DE MATERIAL", data, datad);
                 return;
@@ -559,6 +571,13 @@
                 hideProgress();
                 return;
               }
+
+
+      }
+
+
+
+
             } else {
               hideProgress();
               alert(`No existe datos de placa`);
