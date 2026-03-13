@@ -2126,7 +2126,7 @@
         send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
           setSesion('idSesion', dataff);
           setProgressMsg('Guardando...');
-          send('server.php', { call: 'finishBalanza', idSesion: dataff, index: selectedIndex, old: lastItem != null ? JSON.stringify(lastItem) : null, array: JSON.stringify(endData), ob11: "Sin observacion", ob22: "Sin Observacion", usuariot: userr }, function (data) {
+          send('server.php', { call: 'finishBalanza', idSesion: dataff, index: selectedIndex, old: lastItem != null ? JSON.stringify(lastItem) : null, array: JSON.stringify(endData), ob11: [4].includes(selectedIndex) ? getVal('numerotraspaso'): "Sin observacion", ob22: "Sin Observacion", usuariot: userr }, function (data) {
             hideProgress();
             hideDialog();
             show('Guardado Correctamente');

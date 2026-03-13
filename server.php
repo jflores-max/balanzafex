@@ -1256,7 +1256,6 @@ where  BB1."U_Origen" in(\'\''.'TRANSFERENCIAM'.'\'\',\'\''.'CREDITO'.'\'\',\'\'
             $data[0]['Code']=$newCode;
             $data[0]['Name']=$newCode;
             $data[0]['U_Observaciones']=$ob1;
-          
             $resT=hanaquery('select max("U_NroTicket") as MAX from "@BALANZA" where "U_Sucursal"=\'\''.$sucursal.'\'\'');
             $ticket=isset($resT[0]['MAX'])?$resT[0]['MAX']:0;
             $ticket=intval($ticket)+1;
