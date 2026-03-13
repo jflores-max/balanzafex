@@ -1260,6 +1260,7 @@
       send('server.php', { call: 'getURLPeso', user: getSesion('userPeaje') }, function (data_url) {
         send('server.php', { call: 'getPeso', user: getSesion('userPeaje') }, function (data) {
           hideProgress();
+          data=10;
           if (data == "" | data == "00") {
             show('Por favor vuelva a intentar.');
             return;
