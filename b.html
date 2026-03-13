@@ -50,17 +50,14 @@
 						type="text" class="form" autocomplete="off" disabled>
 					<label for="sucursal" style="font-size: 15px;" class="label">Sucursal</label>
 				</div>
-				<a id="printer" class="btn waves-effect orange hide" style="margin-left: 1.5em;"><i
-						class="material-icons left">print</i>Imprimir Todo</a>
+				<a id="printer" class="btn waves-effect orange hide" style="margin-left: 1.5em;"><i class="material-icons left">print</i>Imprimir Todo</a>
 			</div>
 			<table class="col s12 card highlight">
 				<thead>
 					<tr>
 						<th>Nº Ticket</th>
-						<th width="80"><input id="keyy" type="text" autocomplete="off" style="width: 80px"
-								placeholder="Nº Documento"></th>
-						<th width="80"><input id="key" type="text" autocomplete="off" style="width: 80px"
-								placeholder="Placa"></th>
+						<th width="80"><input id="keyy" type="text" autocomplete="off" style="width: 80px" placeholder="Nº Documento"></th>
+						<th width="80"><input id="key" type="text" autocomplete="off" style="width: 80px" placeholder="Placa"></th>
 						<th>Origen</th>
 						<th>Estado</th>
 						<th>Fecha</th>
@@ -69,9 +66,7 @@
 				</thead>
 				<tbody id="tbody"></tbody>
 			</table>
-			<button id="new" class="btn-floating btn-large waves-effect blue tooltip" data-position="left"
-				data-tooltip="Nuevo" style="position: fixed;bottom: 1em;right: 1em;"><i
-					class="material-icons">add</i></button>
+			<button id="new" class="btn-floating btn-large waves-effect blue tooltip" data-position="left"data-tooltip="Nuevo" style="position: fixed;bottom: 1em;right: 1em;"><i class="material-icons">add</i></button>
 		</div>
 	</div>
 </main>
@@ -270,7 +265,7 @@
 			}
 		});
 	}
-	
+
 	function afterLoad() {
 		queryForeach('.btn-rev', function (e, i, a) {
 			e.onclick = function () {
@@ -292,11 +287,18 @@
 							stack.push(ele);
 						}
 						loadPageDirt('app', 'c.html');
-
 						break;
 					case "OTROS SERVICIOS":
 						var cd = "regi" + ele;
 						document.getElementById(cd).submit();
+						break;
+				    case "TRANSFERENCIAM":
+						if (offline) {
+							stack.push(offlineList[parseInt(ele)]);
+						} else {
+							stack.push(ele);
+						}
+						loadPageDirt('app', 'c.html');
 						break;
 				}
 
@@ -317,6 +319,9 @@
 							printTicket(ele);
 							break;
 						case "OTROS SERVICIOS":
+							imprimir(ele);
+							break;
+					    case "TRANSFERENCIAM":
 							imprimir(ele);
 							break;
 					}

@@ -1860,8 +1860,6 @@ function printInfo(ticket,dataFact,dataDoc){
 			resto=`Faltante : <span class="blue-text">${dif}</span>`;
 		}else if(pesoTotal<parseFloat(dataFact[0]['U_Neto'])){
 			resto=`Sobrepeso : <span class="red-text">${dif}</span>`;
-		}else{
-
 		}
 		docdocs=`<b>Total : <span>${pesoTotal}</span></b><br><b>${resto}</b>`;
 		docs=`
@@ -1971,7 +1969,6 @@ requestFile('css/style.css','text',function(css1){
 			var plantilla=`<html> <head> <meta charset="utf-8" /> <style>${css1}${css2}</style><title>Reporte</title>
 			<link rel="stylesheet" href="css/print.css"></head> <body style="">${cad}</body> </html>`;
 			console.log(plantilla);
-			
 			$(plantilla).printThis({
 					
 					
