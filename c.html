@@ -21,17 +21,13 @@
     <input id="top" type="hidden" value="0">
     <div class="row" style="padding: .5em">
       <div class="col s4">
-        <div class="input-field col s6"><input id="fecha1" type="text" class="form" autocomplete="off" disabled><label
-            for="fecha" class="label">PRIMER PESAJE</label></div>
-        <div class="input-field col s6"><input id="fecha2" type="text" class="form" autocomplete="off" disabled><label
-            for="hora" class="label">SEGUNDO PESAJE</label></div>
-        <div class="input-field col s6"><input id="usuario" type="text" class="form" autocomplete="off" disabled><label
-            for="usuario" class="label">USUARIO</label></div>
+        <div class="input-field col s6"><input id="fecha1" type="text" class="form" autocomplete="off" disabled><label for="fecha" class="label">PRIMER PESAJE</label></div>
+        <div class="input-field col s6"><input id="fecha2" type="text" class="form" autocomplete="off" disabled><label for="hora" class="label">SEGUNDO PESAJE</label></div>
+        <div class="input-field col s6"><input id="usuario" type="text" class="form" autocomplete="off" disabled><label for="usuario" class="label">USUARIO</label></div>
       </div>
       <div class="col s4"></div>
       <div class="col s4">
-        <div class="input-field col s6"><input id="sucursal" type="text" class="form" autocomplete="off" disabled><label
-            for="sucursal" class="label">SUCURSAL</label></div>
+        <div class="input-field col s6"><input id="sucursal" type="text" class="form" autocomplete="off" disabled><label for="sucursal" class="label">SUCURSAL</label></div>
         <div class="input-field col s6">
           <select id="estado" class="nat form" disabled>
             <option value="1">INICIAL</option>
@@ -41,8 +37,7 @@
           <label>ESTADO</label>
         </div>
         <div class="input-field col s6"></div>
-        <div class="input-field col s6"><input id="ticket" type="text" class="form" autocomplete="off" disabled><label
-            for="ticket" class="label">TICKET</label></div>
+        <div class="input-field col s6"><input id="ticket" type="text" class="form" autocomplete="off" disabled><label  for="ticket" class="label">TICKET</label></div>
       </div>
       <div class="col s12" style="height: 1px;background: rgba(0,0,0,.14);"></div>
       <div class="col s6 card">
@@ -111,10 +106,11 @@
               readonly><label for="neto" class="label">NETO (KG)</label></div>
         </div>
       </div>
-      <button id="saver" class="btn-floating btn-large waves-effect blue hide tooltip" data-position="left" data-tooltip="Guardar" style="position: fixed;bottom: 1em;right: 1em;"><i class="material-icons">save</i></button>
+      <button id="saver" class="btn-floating btn-large waves-effect blue hide tooltip" data-position="left"
+        data-tooltip="Guardar" style="position: fixed;bottom: 1em;right: 1em;"><i
+          class="material-icons">save</i></button>
     </div>
   </div>
-
   <div id="alertBox" class="alert-backdrop">
     <div class="alert-card">
       <h3 id="alertHeader">Título</h3>
@@ -122,7 +118,6 @@
       <div id="alertButtons" class="alert-buttons"></div>
     </div>
   </div>
-
 </main>
 
 
@@ -194,25 +189,8 @@
   var itemCode = null;
   var pesoPesado = false;
   var datoA = [];
-
-
   var dato_td = 1;
-
-
-
-  //alert(dato_td);
-
-
-
-
-
-
-
-
-  document.querySelector('#exit').addEventListener('long-press', function (e) {
-    e.preventDefault();
-    showErrors();
-  });
+  document.querySelector('#exit').addEventListener('long-press', function (e) { e.preventDefault(); showErrors();});
   setTitle('Nuevo Ticket Balanza');
   setVal('fecha1', "0000-00-00 00:00:00");
   setVal('fecha2', "0000-00-00 00:00:00");
@@ -222,19 +200,9 @@
     loadPageDirt('app', 'b.html');
   };
 
-
-
-
-
   loadComponents(function () {
-
-
-
-
-
     querySelector('#tipo_docc').onchange = function () {
       var datos_tipo_docc1 = getVal('tipo_docc');
-
       switch (datos_tipo_docc1) {
         case '1':
           dato_td = 1;
@@ -253,8 +221,6 @@
           querySelector('#documentos').innerHTML = ``;
           updateNit();
 
-
-
           break;
         case '3':
           dato_td = 0;
@@ -263,8 +229,6 @@
 <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
           querySelector('#documentos').innerHTML = ``;
           updateNit();
-
-
 
           break;
         case '4':
@@ -275,6 +239,7 @@
           querySelector('#documentos').innerHTML = ``;
           updateNit();
           break;
+
         case '5':
           dato_td = 5;
           querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12"  >FACTURA</span>
@@ -283,7 +248,6 @@
           querySelector('#documentos').innerHTML = ``;
           updateNit();
           break;
-
 
         case '6':
           dato_td = 0;
@@ -295,29 +259,15 @@
           break;
       }
       refresh();
-
     };
-
-
-
-
-
-
-
-
-
 
     querySelector('#origen').onchange = function () {
       switch (this.selectedIndex) {
         case 0:
-
           $('#campo_nit').show();
-
           var datos_tipo_docc1 = getVal('tipo_docc');
-
           switch (datos_tipo_docc1) {
             case '1':
-
               querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12">FACTURA</span>
         <div class="input-field col s3"><input id="nit" type="number" max="8" class="form autocomplete" autocomplete="off" maxlength="14" placeholder="Ingresar"><label for="nit" class="label">CI</label></div>
         <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
@@ -357,38 +307,18 @@
               updateNit();
               break;
 
-
             case '6':
-
               querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12">FACTURA</span>
      <div class="input-field col s3"><input id="nit" type="text" class="form autocomplete" autocomplete="off" value="99002" maxlength="14" placeholder="Ingresar"><label for="nit" class="label">NIT NUMERO DE IDENTIFICACION TRIBUTARIA</label></div>
      <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" value="CONTROL TRIBUTARIO" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
               querySelector('#documentos').innerHTML = ``;
               updateNit();
               break;
-
           }
-
-
-
-
-
-
-
-
-
-
           break;
         case 1:
 
-
-          //campo_nit
-
           $('#campo_nit').hide();
-
-
-
-
           if (clients.length > 1) {
             querySelector('#sectorFactura').innerHTML = `
           <div class="input-field col s9"><select id="razon_social" class="nat form"></select><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
@@ -402,26 +332,18 @@
               }
             };
           } else {
-
-            //  alert('CDC');
             querySelector('#sectorFactura').innerHTML = `
         <div class="input-field col s9"><input id="razon_social" type="text" class="form uper" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
             querySelector('#documentos').innerHTML = `<button id="showDoc" class="waves-effect btn">DOCUMENTOS</button><b id="lister"></b>`;
             querySelector('#showDoc').onclick = showDoc;
           }
-
-
-
-
           break;
         case 2:
-
           $('#campo_nit').hide();
           querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12">FACTURA</span>
       <div class="input-field col s3"><input id="nit" type="text" class="form autocomplete" autocomplete="off" maxlength="14" placeholder="Ingresar"><label for="nit" class="label">NIT</label></div>
       <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
           updateNit();
-
           querySelector('#documentos').innerHTML = `<input id="facturaNumer" type="text" class="form int" autocomplete="off" value="" placeholder="Ingresar"><label for="facturaNumer" class="label active">Nº Documento</label>`;
           querySelector('#peso1').removeAttribute('readonly');
           querySelector('#peso2').removeAttribute('readonly');
@@ -436,14 +358,11 @@
                 return;
               }
               setProgressMsg('Buscando...');
-
               send('server.php', { call: 'get_datos_user' }, function (datad) {
                 var userr = datad[0]['usert'];
                 var passr = datad[0]['passt'];
-
                 send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
                   setSesion('idSesion', dataff);
-
                   send('server.php', { call: 'buscarNullByFact', idSesion: getSesion('idSesion'), fact: this.value }, function (data) {
                     hideProgress();
                     if (data.length > 0) {
@@ -466,26 +385,8 @@
                       show('No hay resultados');
                     }
                   });
-
-
-
-
-
-
-
-
-
-
-
                 });
               });
-
-
-
-
-
-
-
             }
           };
           break;
@@ -493,14 +394,12 @@
 
 
         case 3:
-
           var cd = "regi";
           document.getElementById(cd).submit();
-
           break;
 
 
-              case 4:
+        case 4:
           //campo_nit
           $("#campo_nit").hide();
           if (clients.length > 1) {
@@ -538,8 +437,6 @@
               `<button id="showDoc" class="waves-effect btn">DOCUMENTOS</button><b id="lister"></b>`;
             querySelector("#showDoc").onclick = showDoc;
           }
-
-
       }
       if (this.selectedIndex < 2) {
         if (pesoPesado) {
@@ -554,22 +451,17 @@
       refresh();
     };
 
-
-
     querySelector('#getPeso1').onclick = function () {
       getPeso('peso1', function () {
         if (checke('#getPeso2')) { querySelector('#getPeso2').remove(); }
       });
     };
+
     querySelector('#getPeso2').onclick = function () {
       getPeso('peso2', function () {
         if (checke('#getPeso1')) { querySelector('#getPeso1').remove(); }
       });
     };
-
-
-
-
 
     querySelector('#placa').onkeydown = function (e) {
       let value = this.value;
@@ -607,105 +499,11 @@
       }
     };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //guardar datos
     querySelector('#saver').onclick = async function () {
       var selec = querySelector('#origen').selectedIndex;
       switch (selec) {
-
-
-   case 4:
+        case 4:
           try {
             var title = "Desea guardar los datos actuales?<br>(Generar Nuevo ticket)";
             if (getVal("ticket") != "0") {
@@ -770,7 +568,6 @@
             hideProgress();
             alert("Ocurrió un error inesperado");
           }
-
           break;
 
         //Origen al Contado
@@ -928,62 +725,24 @@
               return;
             } else {
               if (data.length == 0 && getVal('origen') == 'CREDITO') {
-
-
                 showConfirm(title, function () {
                   finishPesaje();
                 }, null);
-
-
-
               }
             }
-
           });
-
-
           break;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         //Origen Reemplazo ticket contado
         case 2:
-
           let selectedIndexdo = querySelector('#origen').selectedIndex;
           if (selectedIndexdo == 2) {
             showConfirm("Desea guardar los datos actuales?<br>(Generar Nuevo ticket)", function () {
               setProgressMsg('Verificando...');
-
               send('server.php', { call: 'get_datos_user' }, function (datad) {
                 var userr = datad[0]['usert'];
                 var passr = datad[0]['passt'];
-
                 send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
                   setSesion('idSesion', dataff);
                   send('server.php', { call: 'buscarFactura', idSesion: getSesion('idSesion'), placa: getVal('facturaNumer') }, function (data) {
@@ -1001,197 +760,21 @@
                   });
                 });
               });
-
-
             }, null);
-
-
-
-
-
             return;
           }
-
-
-
-
           break;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       }
-
-
-
-
     };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     refresh();
     updateNit();
     initForm();
     hideProgress();
-
-
     var data = pop(stack);
-
-
     if (data != null) {
       querySelector('#campo_nit').remove();
-
-
       if (data.id != null) {
-
         setTitle('Revisión de Ticket');
         setVal('origen', data.U_Origen);
         setVal('id', data.Code);
@@ -1214,9 +797,6 @@
         setVal('neto', data.U_Neto);
         querySelector('#saver').classList.add('hide');
         querySelector('#origen').setAttribute('disabled', '');
-
-
-
         if (pesoPesado) {
           queryForeach('.form', el => el.setAttribute('readonly', ''));
         }
@@ -1229,9 +809,6 @@
           }
         }
         refresh();
-
-
-
         if (getSesion('type') == 'A') {
           if (querySelector('#getPeso1') != null) querySelector('#getPeso1').remove();
           if (querySelector('#getPeso2') != null) querySelector('#getPeso2').remove();
@@ -1288,45 +865,24 @@
           }
         }
 
-
-
         if (data.U_Origen == 'CONTADO') {
-
-
           querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12">FACTURA</span>
-        <div class="input-field col s3"><input id="nit"  type="text" class="form"  autocomplete="off"  maxlength="49" value="${data.U_NIT}" placeholder="Ingresar"  disabled><label for="nit" class="label">NUMERO DE IDENTIFICACION</label></div>
-        <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" maxlength="49" value="${data.U_RazonSocial}" placeholder="Ingresar" disabled><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+          <div class="input-field col s3"><input id="nit"  type="text" class="form"  autocomplete="off"  maxlength="49" value="${data.U_NIT}" placeholder="Ingresar"  disabled><label for="nit" class="label">NUMERO DE IDENTIFICACION</label></div>
+          <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" maxlength="49" value="${data.U_RazonSocial}" placeholder="Ingresar" disabled><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
           refresh();
-
           querySelector('#documentos').innerHTML = `<input id="fact" type="text" autocomplete="off" value="${data.U_NroDocFactura}" readonly=""><label for="fact" class="label active">Nº Documento</label>`;
         } else {
-
-
           querySelector('#sectorFactura').innerHTML = `
- <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" value="${data.U_RazonSocial}" maxlength="49" disabled><label for="razon_social" class="label active">RAZON SOCIAL</label></div>`;
-
+          <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" value="${data.U_RazonSocial}" maxlength="49" disabled><label for="razon_social" class="label active">RAZON SOCIAL</label></div>`;
           if (data[0]['U_Origen'] == 'CREDITO' && getVal('estado') == 2) {
             querySelector('#documentos').innerHTML = `<button id="showDoc" class="waves-effect btn">DOCUMENTOS</button>`;
             querySelector('#showDoc').onclick = showDoc;
-
           }
-
-
         }
-
-
-
         return;
-
-
       }
-
       loadItem(data);
     }
-
-
-
-
   });
 
   function updateNit() {
@@ -1348,71 +904,14 @@
       if (e.which == 9) {
         var instance = M.Autocomplete.getInstance(this);
         setProgressMsg('Buscando...');
-
-
-
-
         send('server.php', { call: 'complexNit', idSesion: getSesion('idSesion'), placa: value }, function (data) {
           hideProgress();
           instance.updateData(data);
           querySelector('#nit').focus();
         });
-
-
-
       }
     };
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   function generarF(index, onfinishFactura) {
     var sw = check(['nit', 'razon_social']);
@@ -1421,33 +920,21 @@
     }
     if (itemCode == null) {
       setProgressMsg('Generando...');
-
-
       send('server.php', { call: 'get_datos_user' }, function (datad) {
         if (datad.length > 0) {
           var userr = datad[0]['usert'];
           var passr = datad[0]['passt'];
-
           send('server.php', { call: 'logout', user: userr, pase: passr }, function (data_lg) {
             if (data_lg == 0) {
-
               send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
                 if (dataff != false) {
                   setSesion('idSesion', dataff);
-
-
-
                   send('server.php', { call: 'getFactura', nit: getVal('nit'), razon: getVal('razon_social'), user: getSesion('userPeaje'), sucu: getSesion('ramaa') }, function (data) {
                     if (data.length > 0) {
-
-
                       var datos_tipo_docc = getVal('tipo_docc');
-
                       if (datos_tipo_docc == 6) {
                         datos_tipo_docc = 1;
-
                       }
-
                       itemCode = data[0]['ITEMCODE'];
                       datoA.push({
                         DocType: data[0]['DOCTYPE'],
@@ -1462,7 +949,6 @@
                         U_EXX_FE_Sucursal: data[1]['U_IdImpuesto'],
                         U_EXX_FE_PuntoVenta: "1",
                         U_EXX_FE_CodDocIden: datos_tipo_docc,
-
                         DocumentLines: [
                           {
                             LineNum: parseInt(data[0]['LINENUM']),
@@ -1477,7 +963,6 @@
                           }
                         ]
                       });
-
                       datoA.push({
                         DocType: data[0]['DocType'],
                         CardCode: data[0]['CardCode'],
@@ -1503,12 +988,6 @@
                           }
                         ]
                       });
-
-
-
-
-
-
                       if (getVal('docnum_f') != '' & getVal('docentry_f') != '') {
                         invoices = { U_LB_NumeroFactura: "", U_LB_NumeroAutorizac: "0", U_LB_CodigoControl: "", U_LB_FechaLimiteEmis: null, DocTotal: "40.02", DocEntry: getVal('docentry_f'), DocNum: getVal('docnum_f') };
                         index = 1;
@@ -1521,34 +1000,17 @@
                         deliveryNotes = { DocNum: getVal('docnum_e'), DocEntry: getVal('docentry_e') };
                         index = 3;
                       }
-
-
                       if (index == 0 && datoA.length > 0) {
                         setProgressMsg('Generando Factura...');
-
-
                         send('server.php', { call: 'logout', user: userr, pase: passr }, function (data_lg) {
                           if (data_lg == 0) {
-
-
-
                             send('server.php', { call: 'get_datos_user' }, function (datad) {
                               var userr = datad[0]['usert'];
                               var passr = datad[0]['passt'];
                               send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
-                                setSesion('idSesion', dataff);
-
-
-
-
-
-
-
+                              setSesion('idSesion', dataff);
                                 let endData = [];
-
-
                                 var origen = getVal('origen');
-
                                 endData.push({
                                   "Code": getVal('id'),
                                   "Name": getVal('id'),
@@ -1577,16 +1039,8 @@
                                   "U_FechaSal": null,
                                   "U_HoraSal": null
                                 });
-
-
                                 console.log('final_array ' + JSON.stringify(endData));
-
-
-
-
-
                                 send('server.php', { call: 'getInvoicess_', idSesion: dataff, user: getSesion('userPeaje'), array: JSON.stringify(datoA), array_datos: JSON.stringify(endData) }, function (data) {
-
                                   if (data == 0) {
                                     alert('Factura no Registrada Correctamente vuelva a intentar registrar la factura !!!');
                                   } else {
@@ -1594,107 +1048,40 @@
                                     dcds = dcds.replace('W/"356A192B7913B04C54574D18C28D46E6395428AB"', "");
                                     invoices = JSON.parse(dcds);
                                     console.log('docc  ' + invoices.DocEntry);
-
-
-
-
-
-
                                     index = index + 1;
                                     generarF(index, onfinishFactura);
                                   }
-
-
                                 });
-
-
-
                               });
                             });
-
-
-
-
-
-
                           }
                         });
-
-
-
-
-
-
-
-
                       } else {
                         generarF(index, onfinishFactura);
                       }
-
                     }
                   });
-
-
-
-
                   return;
-
-
-
-
-
-
                 }
               });
-
-
-
-
-
-
-
-
-
-
-
-
-
             } else {
               alert('Sesion no concluida !!!');
             }
-
           });
-
-
         }
-
       });
-
-
-
     }
 
-
     switch (index) {
-
       case 1:
         setProgressMsg('Generando Pago Recibido');
-
-
-
-
         send('server.php', { call: 'get_datos_user' }, function (datad) {
           var userr = datad[0]['usert'];
           var passr = datad[0]['passt'];
-
           send('server.php', { call: 'logout', user: userr, pase: passr }, function (data_lg) {
             if (data_lg == 0) {
-
               send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
                 setSesion('idSesion', dataff);
-
-
-
                 send('server.php', { call: 'getPago', docEntry: invoices.DocEntry }, function (data) {
                   var datoB = [];
                   if (data.length > 0) {
@@ -1713,26 +1100,14 @@
                         }
                       ]
                     });
-
-
-
-
-
-
-
                     send('server.php', { call: 'get_datos_user' }, function (datad) {
                       var userr = datad[0]['usert'];
                       var passr = datad[0]['passt'];
-
-
                       send('server.php', { call: 'logout', user: userr, pase: passr }, function (data_lg) {
                         if (data_lg == 0) {
-
                           send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
                             setSesion('idSesion', dataff);
-
                             send('server.php', { call: 'getIncomingPayments_', idSesion: dataff, array: JSON.stringify(datoB), docEntry: invoices.DocEntry }, function (data) {
-
                               if (data == 0) {
                                 alert('Nose Pudo realizar el Pago no intentes mas comunicate con sistemas !!!');
                               } else {
@@ -1742,67 +1117,28 @@
                                 index = index + 1;
                                 generarF(index, onfinishFactura);
                               }
-
                             });
-
                           });
-
                         }
-
                       });
-
-
-
-
                     });
-
-
-
-
-
-
                   }
                 });
-
-
-
-
-
-
               });
-
             }
           });
         });
-
-
-
-
-
-
-
-
-
-
         break;
+
       case 2:
         setProgressMsg('Generando Nota de Entrega');
-
-
-
         send('server.php', { call: 'get_datos_user' }, function (datad) {
           var userr = datad[0]['usert'];
           var passr = datad[0]['passt'];
-
-
           send('server.php', { call: 'logout', user: userr, pase: passr }, function (data_lg) {
             if (data_lg == 0) {
-
-
               send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
                 setSesion('idSesion', dataff);
-
-
                 send('server.php', { call: 'getEntrega', docEntry: invoices.DocEntry }, function (data) {
                   let datoC = [];
                   datoC.push({
@@ -1819,19 +1155,13 @@
                       }
                     ]
                   });
-
                   send('server.php', { call: 'get_datos_user' }, function (datad) {
                     var userr = datad[0]['usert'];
                     var passr = datad[0]['passt'];
-
                     send('server.php', { call: 'logout', user: userr, pase: passr }, function (data_lg) {
                       if (data_lg == 0) {
-
-
                         send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
                           setSesion('idSesion', dataff);
-
-
                           send('server.php', { call: 'getDeliveryNotes_', idSesion: dataff, array: JSON.stringify(datoC), docEntry: invoices.DocEntry }, function (data) {
                             if (data == 0) {
                               alert('Nose Pudo realizar la Entrega no intentes mas comunicate con sistemas !!!');
@@ -1844,59 +1174,21 @@
                               generarF(index, onfinishFactura);
                             }
                           });
-
-
                         });
-
                       }
-
                     });
-
-
-
-
                   });
-
-
-
-
-
                 });
-
-
-
               });
-
-
             }
-
-
-
-
-
           });
-
-
         });
-
-
         break;
       case 3:
         onfinishFactura();
         break;
     }
   }
-
-
-
-
-
-
-
-
-
-
-
 
 
   function initForm() {
@@ -1906,6 +1198,8 @@
     setVal('neto', '0');
     setVal('ticket', '0');
   }
+
+
   function validarForm() {
     var sw = true;
     queryForeach('.form', function (ele, index, array) {
@@ -1919,6 +1213,8 @@
     });
     return sw;
   }
+
+
   function validarForPeso() {
     var sw = true;
     queryForeach('.form', function (ele, index, array) {
@@ -1936,111 +1232,19 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   function getPeso(input, onfinish) {
     var sw = validarForPeso();
     if (sw) {
       onfinish();
       setProgressMsg('Obteniendo...');
-
       send('server.php', { call: 'getURLPeso', user: getSesion('userPeaje') }, function (data_url) {
-        console.log('url_sap  ' + data_url);
-
         send('server.php', { call: 'getPeso', user: getSesion('userPeaje') }, function (data) {
           hideProgress();
-          //descomnetar
-          //data = 4830;
-
-          // alert(data);
           if (data == "" | data == "00") {
             show('Por favor vuelva a intentar.');
             return;
           }
           setVal(input, data);
-
           querySelector('#saver').classList.remove('hide');
           if ((getVal('peso1') != '0' & getVal('peso2') == '0') | (getVal('peso1') == '0' & getVal('peso2') != '0')) {
             setVal('estado', '1');
@@ -2052,120 +1256,17 @@
           setVal('neto', Math.abs(a - b).toString());
         });
       });
-
-
-
     }
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   function loadItem(id) {
-
     setProgressMsg('Cargando...');
-
     send('server.php', { call: 'get_datos_user' }, function (datad) {
       var userr = datad[0]['usert'];
       var passr = datad[0]['passt'];
-
       send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
         setSesion('idSesion', dataff);
-
-
         send('server.php', { call: 'getLast', idSesion: getSesion('idSesion'), placa: id, sucursal: getSesion('sucursal') }, function (data) {
           hideProgress();
           lastItem = data;
@@ -2177,8 +1278,6 @@
             if (data[0]['U_FechaSal']) {
               setVal('fecha2', `${localDate(data[0]['U_FechaSal'].split(' ')[0])} ${data[0]['U_HoraSal'] < 1000 ? data[0]['U_HoraSal'].slice(0, 1) : data[0]['U_HoraSal'].slice(0, 2)}:${data[0]['U_HoraSal'].slice(-2)}`);
             }
-
-
             //alert(data[0]['U_Bruto']);
             setVal('usuario', data[0]['U_Nombre']);
             setVal('sucursal', data[0]['U_Sucursal']);
@@ -2263,112 +1362,39 @@
               }
             }
             if (data[0]['U_Origen'] == 'CONTADO') {
-         
-
               dato_td = 0;
-      
-
               querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12">FACTURA</span>
                <div class="input-field col s3"><input id="nit"  type="text" class="form"  autocomplete="off"  maxlength="49" value="${data[0]['U_NIT']}" placeholder="Ingresar"  disabled><label for="nit" class="label">NUMERO DE IDENTIFICACION</label></div>
                <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" maxlength="49" value="${data[0]['U_RazonSocial']}" placeholder="Ingresar" disabled><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
               refresh();
-
               querySelector('#documentos').innerHTML = `<input id="fact" type="text" autocomplete="off" value="${data[0]['U_NroDocFactura']}" readonly=""><label for="fact" class="label active">Nº Documento</label>`;
             } else {
-
-
-if (data[0]["U_Origen"] == "TRANSFERENCIAM") {
-alert('cdcdc');
-   querySelector("#sectorFactura").innerHTML = `<div class="input-field col s6">
+              if (data[0]["U_Origen"] == "TRANSFERENCIAM") {
+                alert('cdcdc');
+                querySelector("#sectorFactura").innerHTML = `<div class="input-field col s6">
                  <input id="razon_social" type="text" class="form" autocomplete="off" value="${data[0]["U_RazonSocial"]}" maxlength="49" disabled>
                  <label for="razon_social" class="label active">RAZON SOCIALc</label></div> 
                  <div class="input-field col s6">
                  <input id="numerotraspaso" type="text" class="form" autocomplete="off" value="${data[0]["U_Observaciones"]}" maxlength="49" disabled>
                  <label for="numerotraspaso" class="label active">N.º de Traspaso de Material</label></div>`;
-}else{
- querySelector('#sectorFactura').innerHTML = ` <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" value="${data[0]['U_RazonSocial']}" maxlength="49" disabled><label for="razon_social" class="label active">RAZON SOCIAL</label></div>`;
-
-              if (data[0]['U_Origen'] == 'CREDITO' && getVal('estado') == 2) {
-                querySelector('#documentos').innerHTML = `<button id="showDoc" class="waves-effect btn">DOCUMENTOS</button>`;
-                querySelector('#showDoc').onclick = showDoc;
-
+              } else {
+                querySelector('#sectorFactura').innerHTML = ` <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" value="${data[0]['U_RazonSocial']}" maxlength="49" disabled><label for="razon_social" class="label active">RAZON SOCIAL</label></div>`;
+                if (data[0]['U_Origen'] == 'CREDITO' && getVal('estado') == 2) {
+                  querySelector('#documentos').innerHTML = `<button id="showDoc" class="waves-effect btn">DOCUMENTOS</button>`;
+                  querySelector('#showDoc').onclick = showDoc;
+                }
               }
-}
-
-             
-
             }
           }
         });
-
       });
     });
-
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   function updateList() {
     querySelector('#lister').innerHTML = ' EN LISTA : ' + documentos.length;
   }
+
   function loadDoc(onfinish) {
     if (getVal('ticket') == '0') {
       querySelector('#tbody-o').innerHTML = "";
@@ -2379,19 +1405,9 @@ alert('cdcdc');
       return;
     }
     setProgressMsg('Cargando...');
-
-
-
-
-
-
-
-
-
     send('server.php', { call: 'get_datos_user' }, function (datad) {
       var userr = datad[0]['usert'];
       var passr = datad[0]['passt'];
-
       send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
         setSesion('idSesion', dataff);
         send('server.php', { call: 'getDoc', ticket: getVal('id'), idSesion: getSesion('idSesion') }, function (data) {
@@ -2420,77 +1436,48 @@ alert('cdcdc');
               resto = `Faltante : <span class="blue-text">${dif}</span>`;
             } else if (pesoTotal < getVal('neto')) {
               resto = `Sobrepeso : <span class="red-text">${dif}</span>`;
-            } else {
-
-            }
+            } 
             querySelector('.footer-o').innerHTML = `<b>Total : <span class="black-text">${pesoTotal}</span></b><br><b>${resto}</b>`;
           }
           onfinish();
         });
-
       });
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   }
+
+
+
   function loadComponents(onfinish) {
     setProgressMsg('Cargando...');
     send('server.php', { call: 'getRazones' }, function (data) {
       send("server.php", { call: "get_usuario_disponible", user: getSesion("userPeaje") }, function (response) {
         const select = document.getElementById("origen");
-        select.innerHTML = ""; // limpiar opciones
-        // Opciones base (SIEMPRE)
+        select.innerHTML = "";
         const opciones = [
           { value: "CONTADO", text: "CONTADO" },
           { value: "CREDITO", text: "CREDITO" },
           { value: "REEMPLAZO_CONTADO", text: "REEMPLAZO TICKET CONTADO" },
           { value: "OTROS", text: "OTROS SERVICIOS" }
         ];
-        // 👉 Si el usuario está disponible, agregar transferencia
         if (response.success === true) {
-           const lista_p = (response.data);
-           opciones.push({
-            value:lista_p[0].value,
-            text:lista_p[0].text
+          const lista_p = (response.data);
+          opciones.push({
+            value: lista_p[0].value,
+            text: lista_p[0].text
           });
         }
-        console.log("Opciones finales:", opciones);
-        // Pintar opciones
         opciones.forEach(op => {
           const option = document.createElement("option");
           option.value = op.value;
           option.textContent = op.text;
           select.appendChild(option);
         });
-        // 🔥 REINICIALIZAR SELECT
-        // Destruir instancia anterior si existe
         const instance = M.FormSelect.getInstance(select);
         if (instance) {
           instance.destroy();
         }
-        // Inicializar nuevamente
         M.FormSelect.init(select);
       });
-
       hideProgress();
       data.push({ "RAZON": "OTRO" });
       clients = data;
@@ -2524,17 +1511,11 @@ alert('cdcdc');
         "U_Observacion": getVal('obs' + length)
       });
       showConfirm('Guardar los Datos?', function () {
-
-
         send('server.php', { call: 'get_datos_user' }, function (datad) {
           var userr = datad[0]['usert'];
           var passr = datad[0]['passt'];
-
           send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
             setSesion('idSesion', dataff);
-
-
-
             send('server.php', { call: 'saveDoc', idSesion: getSesion('idSesion'), array: JSON.stringify(datoZ) }, function (data) {
               hideProgress();
               if (data) {
@@ -2545,19 +1526,8 @@ alert('cdcdc');
                 show('No se ha podido efectuar la operación');
               }
             });
-
-
           });
         });
-
-
-
-
-
-
-
-
-
       }, null);
     } else {
       show('Complete los Campos');
@@ -2565,80 +1535,16 @@ alert('cdcdc');
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   function showDoc() {
     showPop("DOCUMENTOS", ` <div><button id="addOrden" class="waves-effect btn blue left">Agregar</button></div> <div class="table-o"> <table> <thead><tr><th>Nº</th><th>Tipo</th><th>Nº Documento</th><th>Peso Total(Kg)</th><th>Razon Social</th><th>Despachador</th><th>Observación</th><th>Opciones</th></tr></thead> <tbody id="tbody-o"></tbody> </table> </div> <div class="footer-o"> </div> `, function () {
       querySelector('#addOrden').onclick = function () {
         if (querySelectorAll('.order-key').length == 0) {
           var length = querySelectorAll('select').length + 1;
-
-
-
-
-
-
-
           send('server.php', { call: 'get_datos_user' }, function (datad) {
             var userr = datad[0]['usert'];
             var passr = datad[0]['passt'];
-
             send('server.php', { call: 'login', user: userr, pase: passr }, function (dataff) {
               setSesion('idSesion', dataff);
-
-
-
-
-
               send('server.php', { call: 'getTipoDocumentos', idSesion: getSesion('idSesion') }, function (data) {
                 hideProgress();
                 let options = '';
@@ -2672,17 +1578,6 @@ alert('cdcdc');
                 querySelector('.checkDoc').onclick = function () {
                   if (getVal('doc' + length) != '') {
                     setProgressMsg('Buscando Documento...');
-
-
-
-
-
-
-
-
-
-
-
                     send('server.php', { call: 'findDoc', tipo: getVal('tipo' + length), ticket: getVal('doc' + length), idSesion: getSesion('idSesion') }, function (data) {
                       hideProgress();
                       if (data.length > 0) {
@@ -2728,70 +1623,16 @@ alert('cdcdc');
                         };
                       }
                     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                   }
                 };
               });
-
-
-
             });
           });
-
-
         }
       };
-
       loadDoc(prepare);
     }, null);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   function crearBotonesLugar3_inicializar(
     data,
@@ -2826,14 +1667,12 @@ alert('cdcdc');
     datad,
   ) {
     const botones = [];
-
     if (data.respuesta1?.trim()) {
       botones.push({
         texto: data.respuesta1,
         callback: () => console.log("Cancelar proceso"),
       });
     }
-
     if (data.respuesta2?.trim()) {
       botones.push({
         texto: data.respuesta2,
@@ -2847,7 +1686,6 @@ alert('cdcdc');
 
   function crearBotonesLugar1(data) {
     const botones = [];
-
     if (data.respuesta1?.trim()) {
       botones.push({
         texto: data.respuesta1,
@@ -2860,7 +1698,6 @@ alert('cdcdc');
         callback: () => console.log("Solo cerrar 2 "),
       });
     }
-
     return botones;
   }
 
@@ -2868,11 +1705,10 @@ alert('cdcdc');
     try {
       const data1 = await getDataParament_json("existe_documento_en_tabla", armo_array);
       console.log("Respuesta REAL:", JSON.stringify(data1));
-      console.log('armo_array '+JSON.stringify(armo_array));
+      console.log('armo_array ' + JSON.stringify(armo_array));
       hideProgress();
       if (data1.Estado == 1) {
         const data = data1.Lista[0];
-
         switch (data.lugar) {
           case "1":
             mensaje_almacen(
@@ -2887,7 +1723,6 @@ alert('cdcdc');
               ),
             );
             break;
-
           case "5":
             mensaje_almacen(header, data.mensaje, crearBotonesLugar1(data));
             break;
@@ -2905,11 +1740,9 @@ alert('cdcdc');
               ),
             );
             break;
-
           case "4":
             mensaje_almacen(header, data.mensaje, crearBotonesLugar1(data));
             break;
-
           default:
             console.warn("Lugar no válido:", data.lugar);
         }
@@ -2932,7 +1765,7 @@ alert('cdcdc');
 
 
 
- async function getListatipoentrega(header, armo_array, data_user, datad, datall) {
+  async function getListatipoentrega(header, armo_array, data_user, datad, datall) {
     setProgressMsg("Guardando");
     try {
       const data1 = await getDataParament("lista_tipo_traspaso");
@@ -2974,28 +1807,14 @@ alert('cdcdc');
       if (data_find.Estado == 1) {
         const lista_documento_find = JSON.parse(data_find.Lista);
         try {
-          const data_find_log = await getDataParament_json(
-            "find_log_traspasos",
-            armo_array,
-          );
-          console.log("gggg " + JSON.stringify(data_find_log));
-          console.log("items_estado " + JSON.stringify(items_estado));
+          const data_find_log = await getDataParament_json("find_log_traspasos",armo_array);
           if (data_find_log.Estado == 1) {
             let lista_documento_find_log = JSON.parse(data_find_log.Lista);
-            let lista_documento_find_logg = JSON.parse(
-              lista_documento_find_log[0].item_array,
-            );
-            existen_items_nocompletados = JSON.parse(
-              lista_documento_find_log[0].existen_items_nocompletados,
-            );
+            let lista_documento_find_logg = JSON.parse( lista_documento_find_log[0].item_array);
+            existen_items_nocompletados = JSON.parse(lista_documento_find_log[0].existen_items_nocompletados);
             lista_documento_find.forEach((elementt) => {
-              const find_log_doc = lista_documento_find_logg.find(
-                (doc) => doc.CODIGO_ITEM === elementt.CODIGO_ITEM,
-              );
-              const userFound = items_estado.find(
-                (user) =>
-                  parseInt(user.Id) === parseInt(find_log_doc.Id_tipoentrega),
-              );
+              const find_log_doc = lista_documento_find_logg.find( (doc) => doc.CODIGO_ITEM === elementt.CODIGO_ITEM);
+              const userFound = items_estado.find( (user) =>  parseInt(user.Id) === parseInt(find_log_doc.Id_tipoentrega) );
               elementt.Id_tipoentrega = find_log_doc.Id_tipoentrega;
               elementt.Color_id_tipoentrega = userFound.Color;
               elementt.Detalle_id_tipoentrega = userFound.Detalle;
@@ -3019,10 +1838,7 @@ alert('cdcdc');
           } else if (data_find_log.Estado == 0) {
             existen_items_nocompletados = lista_documento_find.length;
             lista_documento_find.forEach((elementt) => {
-              const userFound = items_estado.find(
-                (user) =>
-                  parseInt(user.Id) === parseInt(elementt.Id_tipoentrega),
-              );
+              const userFound = items_estado.find( (user) => parseInt(user.Id) === parseInt(elementt.Id_tipoentrega) );
               elementt.Color_id_tipoentrega = userFound.Color;
               elementt.Detalle_id_tipoentrega = userFound.Detalle;
               lista_detalle_find.push(elementt);
@@ -3037,7 +1853,6 @@ alert('cdcdc');
           const codigosEnDetalle = lista_detalle_find.map((i) => i.CODIGO_ITEM);
           const objetosNoEnDetalle = lista_filtro.filter((item) => !codigosEnDetalle.includes(item.CODIGO_ITEM),);
           lista_filtro = objetosNoEnDetalle;
-
           await enviar_parametro(
             header,
             lista_detalle_find,
@@ -3050,14 +1865,12 @@ alert('cdcdc');
             datall
           );
         } catch (error) {
-          console.error("Error hhhh :", error);
           manejarError(header, error);
         }
       } else if (data_find.Estado == 0) {
         show(U_n_documento + " " + data_find.Mensaje);
       }
     } catch (error) {
-      console.error("Error:", error);
       manejarError(header, error);
     }
   }
@@ -3076,8 +1889,7 @@ alert('cdcdc');
     console.log("enviar_parametro");
     let itemsModificados = [];
     let lista_detalle_find_unido = [];
-    lista_detalle_find_unido =
-      lista_detalle_find_unido.concat(lista_detalle_find);
+    lista_detalle_find_unido = lista_detalle_find_unido.concat(lista_detalle_find);
     lista_detalle_find_unido = lista_detalle_find_unido.concat(lista_filtro);
     lista_detalle_find_unido.sort((a, b) => a.posi - b.posi);
     lista_detalle_find_unido.forEach((itemActual) => {
@@ -3088,11 +1900,6 @@ alert('cdcdc');
         itemsModificados.push(itemActual.CODIGO_ITEM);
       }
     });
-
-    console.log("Items modificados: ", JSON.stringify(itemsModificados));
-    console.log("Items modificadovfvf s :", JSON.stringify(armo_array));
-    console.log("Items data_user :", JSON.stringify(data_user));
-    // const cuantos_compelatos= lista_detalle_find.filter((objeto) => objeto.es_servicio === '0' &&  objeto.campo_select === '0');
     const a = {
       U_n_documento: armo_array.U_n_documento,
       U_tipo_documento: armo_array.U_tipo_documento,
@@ -3116,15 +1923,12 @@ alert('cdcdc');
     };
     console.log("datos a " + JSON.stringify(a));
     try {
-      const resp = await getDataParament_json(
-        "registrar_informacion_n_nota_traspaso",
-        a,
-      );
+      const resp = await getDataParament_json( "registrar_informacion_n_nota_traspaso", a );
       mensaje_almacen(header, resp.Mensaje, {
         texto: "OK",
         callback: () => {
-          // finishPesaje();
-          alert('No se va a registrar el pesaje porque es un sistema de prueba');
+          finishPesaje();
+         // alert('No se va a registrar el pesaje porque es un sistema de prueba');
         }
       });
     } catch (error) {
@@ -3132,18 +1936,11 @@ alert('cdcdc');
     }
   }
 
-
-
-
   function manejarError(headerr, error) {
     var sin_coneccion_internet = "Sin Conexión a Internet !!!";
     var campo_incorrecto = "Campos Incorrectos !!!";
-    const mensaje =
-      error?.status === 0 ? this.sin_coneccion_internet : this.campo_incorrecto;
-    mensaje_almacen(headerr, mensaje, {
-      texto: "OK",
-      callback: () => console.log("Se cerró el alert"),
-    });
+    const mensaje = error?.status === 0 ? this.sin_coneccion_internet : this.campo_incorrecto;
+    mensaje_almacen(headerr, mensaje, { texto: "OK", callback: () => console.log("Se cerró el alert")});
   }
 
   function mensaje_almacen(header, mensaje, botones) {
@@ -3156,93 +1953,64 @@ alert('cdcdc');
       console.error("Alert no encontrado en el DOM");
       return;
     }
-
     headerEl.innerText = header;
     messageEl.innerText = mensaje;
     alertButtons.innerHTML = "";
-
     const btnArray = Array.isArray(botones) ? botones : [botones];
-
     btnArray.forEach((op) => {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.innerText = op.texto;
-
       console.log("Creando botón:", op.texto);
-
       btn.onclick = async () => {
         console.log("CLICK REAL:", op.texto);
         alertBox.style.display = "none";
-
         if (typeof op.callback === "function") {
           await op.callback(); // 👈 SOLO aquí se ejecuta
         }
       };
-
       alertButtons.appendChild(btn);
     });
-
     alertBox.style.display = "flex";
   }
 
-
-
-
-
   function fechaActualFormato() {
     const fecha = new Date();
-
     const dia = fecha.getDate().toString().padStart(2, "0");
     const mes = fecha.toLocaleString("es-ES", { month: "long" });
     const anio = fecha.getFullYear();
-
     const hora = fecha.getHours().toString().padStart(2, "0");
     const min = fecha.getMinutes().toString().padStart(2, "0");
     const seg = fecha.getSeconds().toString().padStart(2, "0");
-
     return `${dia} de ${mes} de ${anio}, ${hora}:${min}:${seg}`;
   }
 
-
- function objetosDiferentes(obj1, obj2) {
+  function objetosDiferentes(obj1, obj2) {
     if (!obj1 || !obj2) return true;
-
     const IGNORAR = ["U_fecha_actual"];
-
     const keys1 = Object.keys(obj1);
     const keys2 = Object.keys(obj2);
-
     if (keys1.length !== keys2.length) return true;
-
     for (const key of keys1) {
       if (IGNORAR.includes(key)) continue;
-
       let val1 = obj1[key];
       let val2 = obj2[key];
-
-      // Normalizar números ( "217.000000" vs 217 )
       if (!isNaN(val1) && !isNaN(val2)) {
         val1 = Number(val1);
         val2 = Number(val2);
       }
-
       if (typeof val1 === "object" && val1 !== null) {
         if (objetosDiferentes(val1, val2)) return true;
       } else {
         if (val1 !== val2) return true;
       }
     }
-
     return false;
   }
 
 
   function salirapp() {
-    send("server.php", { call: "cerrar_sesion_k" }, function (data_lg) {
-      if (data_lg == 1) {
-        loadPageDirt("app", "index.html");
-      }
-    });
+    send("server.php", { call: "cerrar_sesion_k" }, function (data_lg) {if (data_lg == 1) {  loadPageDirt("app", "index.html"); } });
   }
 
   function getDataParament(nombre) {
@@ -3251,70 +2019,24 @@ alert('cdcdc');
   }
 
   function getDataParament_json(nombre, json) {
-    const baseUrl =
-      "http://app-web-mty/web_service_entrega_traspasos/servicio.php?nombre=" +
-      encodeURIComponent(nombre);
-
+    const baseUrl =  "http://app-web-mty/web_service_entrega_traspasos/servicio.php?nombre=" + encodeURIComponent(nombre);
     return fetch(baseUrl, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(json),
-    })
-      .then((res) => res.text())
-      .then((text) => {
+    }).then((res) => res.text()).then((text) => {
         try {
           return JSON.parse(text);
         } catch (e) {
           console.error("No es JSON válido:", text);
           throw e;
         }
-      });
+    });
   }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   function finishPesaje() {
-
-    //alert('finpesaje');
-
     let endData = [];
     var origen = getVal('origen');
     let selectedIndex = querySelector('#origen').selectedIndex;
@@ -3354,24 +2076,12 @@ alert('cdcdc');
       let b = parseInt(getVal('peso2'));
       setVal('neto', Math.abs(a - b).toString());
     }
-
-
-
-
-
-
     if (sw) {
       var infor11 = null;
-
       // if(origen == "CONTADO"){
-      //   console.log('DATOS_INFOR INVOICE datos  1 ' + invoices['DocTotal']);
       // infor11=invoices['DocTotal'];
       // infor11=infor11.toString();
-      // console.log('DATOS_INFOR INVOICE datos  1 ' + infor11);
       // }
-
-
-
       endData.push({
         "Code": getVal('id'),
         "Name": getVal('id'),
@@ -3412,13 +2122,8 @@ alert('cdcdc');
         "U_FechaSal": null,
         "U_HoraSal": null
       });
-
-
       console.log('final_array ' + JSON.stringify(endData));
-
       setProgressMsg('Guardando...');
-
-
       send('server.php', { call: 'get_datos_user' }, function (datad) {
         var userr = datad[0]['usert'];
         var passr = datad[0]['passt'];
@@ -3443,34 +2148,7 @@ alert('cdcdc');
           });
         });
       });
-
-
-
     }
-
-
-
-
-
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </script>

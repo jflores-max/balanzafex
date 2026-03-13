@@ -7,7 +7,6 @@
   <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/index.css">
-
   <script src="cfg.js"></script>
   <script src="js/jquery.js"></script>
   <script src="js/index.js"></script>
@@ -15,11 +14,7 @@
   <script src="js/lc.js"></script>
   <script src="js/qr.js"></script>
   <script src="js/init.js"></script>
-
-
   <title>Monterrey Balanza</title>
-
-
 
 <style>
 html, body {
@@ -84,14 +79,10 @@ html, body {
   50% { left: 100%; width: 10%; }
   100% { left: 100%; width: 10%; }
 }
-
-
   </style>
-
 </head>
 <body>
 
-  
   <div id="app">
   </div>
 
@@ -107,7 +98,6 @@ html, body {
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="print/printThis.js"></script>
-
   <script type="text/javascript">
 
     $('#progressShow').on('long-press', function(e) {
@@ -116,7 +106,7 @@ html, body {
     });
 
 
-    async function send_(file,datos,funcion){
+  async function send_(file,datos,funcion){
 	var domain='';
 	var debug=true;
 	var es=$.ajax({
@@ -136,51 +126,24 @@ html, body {
 	});
 }
 
-
-
     $(document).ready(function(){
-
-    
       var urll='http://app-web-mty/balanzafexs14/';
       var ff_direccion=urll+'server.php';
-      
        send_(ff_direccion,{call:'set_sesion_ubi',ubi: urll },function(data) {
- 
-        send_(ff_direccion,{call:'get_sesion_posi'},function(datad) { 
-          console.log("dr "+posii);
-             console.log("dr "+posii);      
-             console.log("dr tt "+JSON.stringify(datad));                
-             console.log("dr tt "+datad.length);                                
+        send_(ff_direccion,{call:'get_sesion_posi'},function(datad) {                               
             if(datad.length>0){
               var posii= datad[0]['posi'];
-	            console.log("dr "+posii);
-
               if(posii==0){
-                send_(ff_direccion, { call: 'cerrar_sesion'}, function (datadd) {
-                    console.log("dr r "+JSON.stringify(datadd));
-                  
-                      loadPageDirt('app','a.html');
-                  });
+                send_(ff_direccion, { call: 'cerrar_sesion'}, function (datadd) {loadPageDirt('app','a.html')});
               }else{
                 loadPageDirt('app',posii);
               }
-            
             }else{
-             console.log(datad.length);
-                  send_(ff_direccion, { call: 'cerrar_sesion'}, function (datadd) {
-                    console.log("dr r "+JSON.stringify(datadd));
-                  
-                      loadPageDirt('app','a.html');
-                  });
-            }
-	          
-			   							   
+                send_(ff_direccion, { call: 'cerrar_sesion'}, function (datadd) {loadPageDirt('app','a.html')});
+            }				   
          });
-
 		   });
-
-});
-
+    });
 
   </script>
 </body>
