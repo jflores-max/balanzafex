@@ -1343,7 +1343,7 @@ if($isNew){
         echo json_encode(0);
     }
 }else{
-    $res=callApiss('PATCH',$mainUrl.'U_BALANZA'.'(\''.$code.'\')',$array,$idSesion,$usuariot , $sucursal, $code);
+    $res=callApiss('PATCH',$mainUrl.'U_BALANZA'.'(\''.$code.'\')',$array,$idSesion,$usuariot,$sucursal,$code);
     if($res!=''){
         echo json_encode($res);
         return;
