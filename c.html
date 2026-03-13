@@ -1581,7 +1581,7 @@
                 refresh();
                 querySelector('#tipo' + length).onchange = function () {
                   if (this.value != 'ORDEN DE CARGA') {
-                    if (this.value == 'OTRO') {
+                    if (this.value == 'OTRO' || this.value == 'TRANSFERENCIAM' ) {
                       querySelector('#tiper' + length).innerHTML = `<input id="tipo${length}" class="in-doc uper" type="text" autocomplete="off" placeholder="Tipo de Documento">`;
                     }
                     refresh();
