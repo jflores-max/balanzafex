@@ -1231,37 +1231,6 @@ where  BB1."U_Origen" in(\'\''.'TRANSFERENCIAM'.'\'\',\'\''.'CREDITO'.'\'\',\'\'
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     case 'finishBalanza_contado':
         $idSesion=posted('idSesion');
         $usuariot=posted('usuariot');
