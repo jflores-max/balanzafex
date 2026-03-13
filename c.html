@@ -1373,7 +1373,7 @@
                 alert('cdcdc');
                 querySelector("#sectorFactura").innerHTML = `<div class="input-field col s6">
                  <input id="razon_social" type="text" class="form" autocomplete="off" value="${data[0]["U_RazonSocial"]}" maxlength="49" disabled>
-                 <label for="razon_social" class="label active">RAZON SOCIALc</label></div> 
+                 <label for="razon_social" class="label active">RAZON SOCIAL</label></div> 
                  <div class="input-field col s6">
                  <input id="numerotraspaso" type="text" class="form" autocomplete="off" value="${data[0]["U_Observaciones"]}" maxlength="49" disabled>
                  <label for="numerotraspaso" class="label active">N.º de Traspaso de Material</label></div>`;
@@ -2058,7 +2058,7 @@
         return;
       }
     }
-    if (selectedIndex == 2) {
+    if (selectedIndex == 2 || selectedIndex == 4) {
       if (getVal('peso1') == '' | getVal('peso2') == '') {
         show('Complete los campos de Pesaje Correctamente');
         return;
@@ -2078,10 +2078,6 @@
     }
     if (sw) {
       var infor11 = null;
-      // if(origen == "CONTADO"){
-      // infor11=invoices['DocTotal'];
-      // infor11=infor11.toString();
-      // }
       endData.push({
         "Code": getVal('id'),
         "Name": getVal('id'),
@@ -2101,23 +2097,23 @@
         "U_Neto": getVal('neto'),
         "U_NIT": origen == "CONTADO" ? getVal('nit') : "",
         "U_RazonSocial": getVal('razon_social'),
-        "U_CardCode": selectedIndex == 2 ? "" : origen == "CONTADO" & incomingPayments != null ? incomingPayments['CardCode'] : "",
-        "U_NroFactura": selectedIndex == 2 ? "" : origen == "CONTADO" & invoices != null ? invoices['U_LB_NumeroFactura'] : "",
-        "U_NroAutorizacion": selectedIndex == 2 ? "0" : origen == "CONTADO" & invoices != null ? invoices['U_LB_NumeroAutorizac'] : "0",
-        "U_CodigoControl": selectedIndex == 2 ? "" : origen == "CONTADO" & invoices != null ? invoices['U_LB_CodigoControl'] : "",
-        "U_FecLimEmision": selectedIndex == 2 ? null : origen == "CONTADO" & invoices != null ? invoices['U_LB_FechaLimiteEmis'] : null,
-        "U_TotalFactura": selectedIndex == 2 ? "40.02" : origen == "CONTADO" & invoices != null ? invoices['DocTotal'].toString() : "40.02",
-        "U_DocEntryFactura": selectedIndex == 2 ? 0 : origen == "CONTADO" & invoices != null ? invoices['DocEntry'] : 0,
-        "U_NroDocFactura": selectedIndex == 2 ? getVal('facturaNumer') : origen == "CONTADO" & invoices != null ? invoices['DocNum'] : 0,
-        "U_DocEntryPagoRec": selectedIndex == 2 ? 0 : origen == "CONTADO" & incomingPayments != null ? incomingPayments['DocNum'] : 0,
-        "U_NroDocPagoRec": selectedIndex == 2 ? 0 : origen == "CONTADO" & incomingPayments != null ? incomingPayments['DocEntry'] : 0,
-        "U_DocEntryEntrega": selectedIndex == 2 ? 0 : origen == "CONTADO" & deliveryNotes != null ? deliveryNotes['DocEntry'] : 0,
-        "U_NroDocEntrega": selectedIndex == 2 ? 0 : origen == "CONTADO" & deliveryNotes != null ? deliveryNotes['DocNum'] : 0,
+        "U_CardCode": [2,4].includes(selectedIndex) ? "" : origen == "CONTADO" & incomingPayments != null ? incomingPayments['CardCode'] : "",
+        "U_NroFactura": [2,4].includes(selectedIndex)? "" : origen == "CONTADO" & invoices != null ? invoices['U_LB_NumeroFactura'] : "",
+        "U_NroAutorizacion": [2,4].includes(selectedIndex) ? "0" : origen == "CONTADO" & invoices != null ? invoices['U_LB_NumeroAutorizac'] : "0",
+        "U_CodigoControl": [2,4].includes(selectedIndex) ? "" : origen == "CONTADO" & invoices != null ? invoices['U_LB_CodigoControl'] : "",
+        "U_FecLimEmision": [2,4].includes(selectedIndex) ? null : origen == "CONTADO" & invoices != null ? invoices['U_LB_FechaLimiteEmis'] : null,
+        "U_TotalFactura": [2,4].includes(selectedIndex) ? "40.02" : origen == "CONTADO" & invoices != null ? invoices['DocTotal'].toString() : "40.02",
+        "U_DocEntryFactura": [2,4].includes(selectedIndex) ? 0 : origen == "CONTADO" & invoices != null ? invoices['DocEntry'] : 0,
+        "U_NroDocFactura": [2,4].includes(selectedIndex) ? getVal('facturaNumer') : origen == "CONTADO" & invoices != null ? invoices['DocNum'] : 0,
+        "U_DocEntryPagoRec": [2,4].includes(selectedIndex) ? 0 : origen == "CONTADO" & incomingPayments != null ? incomingPayments['DocNum'] : 0,
+        "U_NroDocPagoRec": [2,4].includes(selectedIndex) ? 0 : origen == "CONTADO" & incomingPayments != null ? incomingPayments['DocEntry'] : 0,
+        "U_DocEntryEntrega": [2,4].includes(selectedIndex) ? 0 : origen == "CONTADO" & deliveryNotes != null ? deliveryNotes['DocEntry'] : 0,
+        "U_NroDocEntrega": [2,4].includes(selectedIndex) ? 0 : origen == "CONTADO" & deliveryNotes != null ? deliveryNotes['DocNum'] : 0,
         "U_IdUsuario": getSesion('userPeaje'),
         "U_NroDoc": getVal('ticket'),
         "U_Nombre": getVal('usuario'),
         "U_OrigenDoc": getVal('ci_exp'),
-        "U_Observaciones": null,
+        "U_Observaciones": [4].includes(selectedIndex) ? getVal('numerotraspaso'): null,
         "U_Observaciones2": null,
         "U_FechaSal": null,
         "U_HoraSal": null
