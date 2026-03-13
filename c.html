@@ -316,12 +316,13 @@
               break;
           }
           break;
-        case 1:
 
+
+
+        case 1:
           $('#campo_nit').hide();
           if (clients.length > 1) {
-            querySelector('#sectorFactura').innerHTML = `
-          <div class="input-field col s9"><select id="razon_social" class="nat form"></select><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+            querySelector('#sectorFactura').innerHTML = ` <div class="input-field col s9"><select id="razon_social" class="nat form"></select><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
             querySelector('#documentos').innerHTML = ``;
             clients.forEach(el => querySelector('#razon_social').innerHTML += `<option value="${el.RAZON}">${el.RAZON}</option>`);
             querySelector('#razon_social').onchange = function () {
@@ -332,12 +333,13 @@
               }
             };
           } else {
-            querySelector('#sectorFactura').innerHTML = `
-        <div class="input-field col s9"><input id="razon_social" type="text" class="form uper" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+            querySelector('#sectorFactura').innerHTML = ` <div class="input-field col s9"><input id="razon_social" type="text" class="form uper" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
             querySelector('#documentos').innerHTML = `<button id="showDoc" class="waves-effect btn">DOCUMENTOS</button><b id="lister"></b>`;
             querySelector('#showDoc').onclick = showDoc;
           }
           break;
+
+
         case 2:
           $('#campo_nit').hide();
           querySelector('#sectorFactura').innerHTML = `<span class="card-title col s12">FACTURA</span>
@@ -400,14 +402,9 @@
 
 
         case 4:
-          //campo_nit
           $("#campo_nit").hide();
           if (clients.length > 1) {
-            querySelector("#sectorFactura").innerHTML =
-              `<div class="input-field col s6">
-              <select id="razon_social" class="nat form"></select>
-              <label for="razon_social" class="label">RAZON SOCIAL</label></div> 
-              <div class="input-field col s6">
+            querySelector("#sectorFactura").innerHTML =  `<div class="input-field col s6"> <select id="razon_social" class="nat form"></select> <label for="razon_social" class="label">RAZON SOCIAL</label></div>  <div class="input-field col s6">
           <input
             id="numerotraspaso"
             type="text"
@@ -420,9 +417,7 @@
             querySelector("#documentos").innerHTML = ``;
             clients.forEach(
               (el) =>
-              (querySelector("#razon_social").innerHTML +=
-                `<option value="${el.RAZON}">${el.RAZON}</option>`),
-            );
+              (querySelector("#razon_social").innerHTML +=  `<option value="${el.RAZON}">${el.RAZON}</option>`), );
             querySelector("#razon_social").onchange = function () {
               if (this.value == "OTRO") {
                 querySelector("#sectorFactura").innerHTML =
@@ -431,11 +426,9 @@
               }
             };
           } else {
-            querySelector("#sectorFactura").innerHTML = `
-           <div class="input-field col s9"><input id="razon_social" type="text" class="form uper" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
-            querySelector("#documentos").innerHTML =
-              `<button id="showDoc" class="waves-effect btn">DOCUMENTOS</button><b id="lister"></b>`;
-            querySelector("#showDoc").onclick = showDoc;
+            querySelector('#sectorFactura').innerHTML = ` <div class="input-field col s9"><input id="razon_social" type="text" class="form uper" autocomplete="off" maxlength="49" placeholder="Ingresar"><label for="razon_social" class="label">RAZON SOCIAL</label></div>`;
+            querySelector('#documentos').innerHTML = `<button id="showDoc" class="waves-effect btn">DOCUMENTOS</button><b id="lister"></b>`;
+            querySelector('#showDoc').onclick = showDoc;
           }
       }
       if (this.selectedIndex < 2) {
@@ -894,7 +887,7 @@
         } else {
           querySelector('#sectorFactura').innerHTML = `
           <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" value="${data.U_RazonSocial}" maxlength="49" disabled><label for="razon_social" class="label active">RAZON SOCIAL</label></div>`;
-          if (data[0]['U_Origen'] == 'CREDITO' && getVal('estado') == 2) {
+          if ((data[0]['U_Origen'] == 'CREDITO' && getVal('estado') == 2) || (data[0]['U_Origen'] == 'TRANSFERENCIAM' && getVal('estado') == 2)) {
             querySelector('#documentos').innerHTML = `<button id="showDoc" class="waves-effect btn">DOCUMENTOS</button>`;
             querySelector('#showDoc').onclick = showDoc;
           }
@@ -1401,7 +1394,7 @@
                  <label for="numerotraspaso" class="label active">N.º de Traspaso de Material</label></div>`;
               } else {
                 querySelector('#sectorFactura').innerHTML = ` <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" value="${data[0]['U_RazonSocial']}" maxlength="49" disabled><label for="razon_social" class="label active">RAZON SOCIAL</label></div>`;
-                if (data[0]['U_Origen'] == 'CREDITO' && getVal('estado') == 2) {
+                if (data[0]['U_Origen'] == 'CREDITO' && getVal('estado') == 2 || (data[0]['U_Origen'] == 'TRANSFERENCIAM' && getVal('estado') == 2)) {
                   querySelector('#documentos').innerHTML = `<button id="showDoc" class="waves-effect btn">DOCUMENTOS</button>`;
                   querySelector('#showDoc').onclick = showDoc;
                 }
@@ -1571,7 +1564,13 @@
                 hideProgress();
                 let options = '';
                 data.forEach(el => options += `<option value="${el.TIPO}">${el.TIPO}</option>`);
-                querySelector('#tbody-o').innerHTML += `<tr class="order-key"><td></td><td id="tiper${length}"><select id="tipo${length}"><option value="ORDEN DE CARGA">ORDEN DE CARGA</option>${options}<option value="OTRO">OTRO</option></select></td><td><input type="text" id="doc${length}" class="int in-doc" placeholder="Nº Documento"></td><td><input type="text" id="peso${length}" class="float in-doc" placeholder="Peso Total"></td><td><input id="cli${length}" class="in-doc uper" type="text" autocomplete="off" placeholder="Razon Social"></td><td><input id="des${length}" class="in-doc uper" type="text" autocomplete="off" placeholder="Despachador"></td><td><input type="text" id="obs${length}" class="in-doc uper" placeholder="Observación"></td><td><button class="waves-effect btn green tiny-btn checkDoc"><i class="material-icons">check</i></button><button class="waves-effect btn blue tiny-btn saveDoc hide"><i class="material-icons">save</i></button><button class="waves-effect btn red tiny-btn closeDoc"><i class="material-icons">close</i></button></td></tr>`;
+                querySelector('#tbody-o').innerHTML += `<tr class="order-key"><td></td><td id="tiper${length}">
+                  <select id="tipo${length}">
+                    <option value="ORDEN DE CARGA">ORDEN DE CARGA</option>
+                    ${options}
+                    <option value="OTRO">OTRO</option>
+                    <option value="TRANSFERENCIAM">TRANSFERENCIAM</option>
+                    </select></td><td><input type="text" id="doc${length}" class="int in-doc" placeholder="Nº Documento"></td><td><input type="text" id="peso${length}" class="float in-doc" placeholder="Peso Total"></td><td><input id="cli${length}" class="in-doc uper" type="text" autocomplete="off" placeholder="Razon Social"></td><td><input id="des${length}" class="in-doc uper" type="text" autocomplete="off" placeholder="Despachador"></td><td><input type="text" id="obs${length}" class="in-doc uper" placeholder="Observación"></td><td><button class="waves-effect btn green tiny-btn checkDoc"><i class="material-icons">check</i></button><button class="waves-effect btn blue tiny-btn saveDoc hide"><i class="material-icons">save</i></button><button class="waves-effect btn red tiny-btn closeDoc"><i class="material-icons">close</i></button></td></tr>`;
                 refresh();
                 querySelector('#tipo' + length).onchange = function () {
                   if (this.value != 'ORDEN DE CARGA') {
