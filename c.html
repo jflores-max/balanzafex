@@ -538,6 +538,7 @@
             var candena = getVal("placa");
             var procesado = candena.trim();
             const datap = await sendAsync("server.php", { call: "getPlacaCP", idSesion: getSesion("idSesion"), placa: procesado });
+            alert(datap);
             if (datap.length > 0) {
 
       if (getVal('peso1') == '' | getVal('peso2') == '') {
