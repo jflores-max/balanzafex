@@ -1392,9 +1392,16 @@
                  <div class="input-field col s6">
                  <input id="numerotraspaso" type="text" class="form" autocomplete="off" value="${data[0]["U_Observaciones"]}" maxlength="49" disabled>
                  <label for="numerotraspaso" class="label active">N.º de Traspaso de Material</label></div>`;
+
+
+                if ((data[0]['U_Origen'] == 'TRANSFERENCIAM' && getVal('estado') == 2)) {
+                  querySelector('#documentos').innerHTML = `<button id="showDoc" class="waves-effect btn">DOCUMENTOS</button>`;
+                  querySelector('#showDoc').onclick = showDoc;
+                }
+
               } else {
                 querySelector('#sectorFactura').innerHTML = ` <div class="input-field col s9"><input id="razon_social" type="text" class="form" autocomplete="off" value="${data[0]['U_RazonSocial']}" maxlength="49" disabled><label for="razon_social" class="label active">RAZON SOCIAL</label></div>`;
-                if (data[0]['U_Origen'] == 'CREDITO' && getVal('estado') == 2 || (data[0]['U_Origen'] == 'TRANSFERENCIAM' && getVal('estado') == 2)) {
+                if ((data[0]['U_Origen'] == 'CREDITO' && getVal('estado') == 2)) {
                   querySelector('#documentos').innerHTML = `<button id="showDoc" class="waves-effect btn">DOCUMENTOS</button>`;
                   querySelector('#showDoc').onclick = showDoc;
                 }
