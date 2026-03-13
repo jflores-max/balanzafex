@@ -369,8 +369,6 @@ case 'getLast_otros_servicios':
 $placa=posted('placa');
 $To=posted('To');
 $Chata=posted('Chata');
-
-
   if($To==1 && $Chata==0){
        $res='select T1."Name" as proveedor,T2."Name" as trasnportadora ,T3."Name" as producto,T4."Name" as destino,T5."WhsName"  AS origen, T0."U_ID_Chata" AS chata from "@BALANZA" T0
            INNER JOIN "@BAL_DETALLEOTROS" T1 ON T0."U_ID_Proveedor" = T1."Code"
