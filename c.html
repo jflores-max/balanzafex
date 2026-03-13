@@ -1576,12 +1576,11 @@
                     <option value="ORDEN DE CARGA">ORDEN DE CARGA</option>
                     ${options}
                     <option value="OTRO">OTRO</option>
-                    <option value="TRANSFERENCIAM">TRANSFERENCIAM</option>
                     </select></td><td><input type="text" id="doc${length}" class="int in-doc" placeholder="Nº Documento"></td><td><input type="text" id="peso${length}" class="float in-doc" placeholder="Peso Total"></td><td><input id="cli${length}" class="in-doc uper" type="text" autocomplete="off" placeholder="Razon Social"></td><td><input id="des${length}" class="in-doc uper" type="text" autocomplete="off" placeholder="Despachador"></td><td><input type="text" id="obs${length}" class="in-doc uper" placeholder="Observación"></td><td><button class="waves-effect btn green tiny-btn checkDoc"><i class="material-icons">check</i></button><button class="waves-effect btn blue tiny-btn saveDoc hide"><i class="material-icons">save</i></button><button class="waves-effect btn red tiny-btn closeDoc"><i class="material-icons">close</i></button></td></tr>`;
                 refresh();
                 querySelector('#tipo' + length).onchange = function () {
                   if (this.value != 'ORDEN DE CARGA') {
-                    if (this.value == 'OTRO' || this.value == 'TRANSFERENCIAM' ) {
+                    if (this.value == 'OTRO' ) {
                       querySelector('#tiper' + length).innerHTML = `<input id="tipo${length}" class="in-doc uper" type="text" autocomplete="off" placeholder="Tipo de Documento">`;
                     }
                     refresh();
