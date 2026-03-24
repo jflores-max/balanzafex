@@ -866,6 +866,17 @@ break;
             echo json_encode($res);
             break;
 
+
+  case 'getPlacaCPM':
+            $placa=posted('placa');
+            $idSesion=posted('idSesion');
+            $res=hanaquery("select \"Code\",\"U_NroTicket\",\"U_Marca\",\"U_Color\",
+            \"U_NombreChofer\", \"U_Sucursal\", \"U_Origen\" ,\"U_CI_Chofer\",\"U_OrigenDoc\",\"U_Estado\" from \"@BALANZA\"
+             where  \"U_Origen\" in(''CREDITO'',''OTROS SERVICIOS'', ''TRANSFERENCIAM'') and    \"U_Placa\"=''$placa''  ORDER BY \"Code\" DESC");
+            echo json_encode($res);
+            break;
+
+
 case 'getNit':
 $placa=posted('nit');
 $res=hanaquery('select "U_RazonSocial" from "@BALANZA" where "U_NIT" = \'\''.$placa.'\'\' order by "U_NroTicket" desc limit 1');
